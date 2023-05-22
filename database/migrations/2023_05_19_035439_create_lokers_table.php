@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('lokers', function (Blueprint $table) {
             $table->id();
-            $table->string("loker_kd")->unique();
+            $table->string("loker_kd", 15)->unique();
             $table->string("loker_nm");
             $table->string("loker_ket");
             $table->dateTime("loker_exp");

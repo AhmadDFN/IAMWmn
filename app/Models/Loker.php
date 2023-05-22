@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Loker extends Model
 {
     use HasFactory;
+    protected $table = 'lokers';
+    protected $guarded = ['id'];
 }

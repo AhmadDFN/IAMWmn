@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class JenisLoker extends Model
 {
     use HasFactory;
+    protected $table = 'jenis_lokers';
+    protected $guarded = ['id'];
 }
