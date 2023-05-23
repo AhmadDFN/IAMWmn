@@ -5,9 +5,10 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Mahasiswa;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Str;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Seeder;
+use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 

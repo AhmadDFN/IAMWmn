@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berkas;
+use App\Models\Mahasiswa;
+use Exception;
 use Illuminate\Http\Request;
 
 class BerkasController extends Controller
@@ -12,31 +14,77 @@ class BerkasController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            "title" => "Data Berkas",
+            'page' => 'Data Berkas Alumni Wearnes Madiun',
+            "berkas" => Berkas::All()
+        ];
+        return view('berkas.data', $data);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($req)
     {
-        //
+        $data = [
+            "title" => "Berkas",
+            'page' => 'Form Data Berkas',
+            "dtJurusan" => Mahasiswa::All(),
+            "berkas" => Berkas::find($req->id),
+        ];
+
+        return view("berkas.form", $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $req)
     {
-        //
+        try {
+            // Save
+            Berkas::updateOrCreate(
+                [
+                    "id" => $req->input("id")
+                ],
+                [
+                    "berkas_kd" => $req->input("berkas_kd"),
+                    "berkas_skck" => $req->input("berkas_skck"),
+                    "berkas_kk" => $req->input("berkas_kk"),
+                    "berkas_cv" => $req->input("berkas_cv"),
+                    "berkas_ijazah" => $req->input("berkas_ijazah"),
+                    "berkas_NIM" => $req->input("berkas_NIM"),
+                ]
+            );
+
+            // Notif 
+            $notif = [
+                "type" => "success",
+                "text" => "Data Berhasil Disimpan !"
+            ];
+        } catch (Exception $err) {
+            $notif = [
+                "type" => "danger",
+                "text" => "Data Gagal Disimpan !" . $err->getMessage()
+            ];
+        }
+
+        return redirect('berkas')->with($notif);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Berkas $berkas)
+    public function show(Berkas $req)
     {
-        //
+        $data = [
+            "title" => berkas::find($req->berkas_nm),
+            'page' => "Profil Berkas " . berkas::find($req->berkas_nm),
+            'berkas' => berkas::find($req->id),
+        ];
+
+        return view("berkas.single", $data);
     }
 
     /**
@@ -58,8 +106,24 @@ class BerkasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Berkas $berkas)
+    public function destroy(Berkas $id)
     {
-        //
+        try {
+            // Save
+            Berkas::where("id", $id)->delete();
+
+            // Notif 
+            $notif = [
+                "type" => "success",
+                "text" => "Data Berhasil Dihapus !"
+            ];
+        } catch (Exception $err) {
+            $notif = [
+                "type" => "danger",
+                "text" => "Data Gagal Dihapus !" . $err->getMessage()
+            ];
+        }
+
+        return redirect('berkas')->with($notif);
     }
 }
