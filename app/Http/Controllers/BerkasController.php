@@ -42,6 +42,14 @@ class BerkasController extends Controller
      */
     public function store(Request $req)
     {
+        if ($req->file("berkas_foto")) {
+            $fileName = time() . '.' . $req->file("berkas_foto")->extension();
+            $result = $req->file("foto")->move(public_path('uploads/berkas/foto'), $fileName);
+            $berkas_foto = "uploads/berkas/foto" . $fileName;
+        } else {
+            $berkas_foto = $req->input("old_foto");
+        }
+
         try {
             // Save
             Berkas::updateOrCreate(
