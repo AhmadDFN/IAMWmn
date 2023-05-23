@@ -69,7 +69,7 @@ class LokerController extends Controller
             ];
         } catch (Exception $err) {
             $notif = [
-                "type" => "success",
+                "type" => "danger",
                 "text" => "Data Gagal Disimpan !" . $err->getMessage()
             ];
         }
