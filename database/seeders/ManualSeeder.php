@@ -15,6 +15,9 @@ class ManualSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $faker = fake('id_ID');
+
         // Data User
         DB::table('users')->insert([
             "username" => "superadmin",
@@ -79,12 +82,12 @@ class ManualSeeder extends Seeder
 
         // Data Berkas
         DB::table('berkas')->insert([
-            "berkas_kd" => Str::random(10),
-            "berkas_skck" => "None",
-            "berkas_kk" => "None",
-            "berkas_ijazah" => "None",
-            "berkas_foto" => "None",
-            "berkas_cv" => "None",
+            "berkas_kd" => $faker->isbn13(),
+            "berkas_skck" => $faker->uuid(),
+            "berkas_kk" => $faker->uuid(),
+            "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "berkas_cv" => $faker->uuid(),
+            "berkas_ijazah" => $faker->uuid(),
             "berkas_NIM" => "2022320164",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
