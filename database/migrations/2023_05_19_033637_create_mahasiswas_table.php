@@ -26,8 +26,6 @@ return new class extends Migration
             $table->string("mhs_kota", 50);
             $table->integer("mhs_tb")->nullable();
             $table->integer("mhs_bb")->nullable();
-            $table->text("mhs_foto")->nullable();
-            $table->text("mhs_cv")->nullable();
             $table->string("mhs_kd_jurusan")->nullable();
             $table->integer("mhs_id_user")->nullable();
             $table->timestamps();

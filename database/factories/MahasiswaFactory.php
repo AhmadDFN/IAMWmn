@@ -37,6 +37,7 @@ class MahasiswaFactory extends Factory
             "mhs_alamat" => $faker->address(),
             "mhs_kota" => $faker->city(),
             "mhs_tb" => $faker->numberBetween($min = 150, $max = 190),
+            "mhs_bb" => $faker->numberBetween($min = 30, $max = 70),
             "mhs_kd_jurusan" => $kd_jurusan,
         ];
     }

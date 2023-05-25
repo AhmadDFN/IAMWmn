@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 ->create([
                     'email' => $mahasiswa->mhs_email,
                     'password' => md5($mahasiswa->mhs_NIM),
-                    'nama' => $mahasiswa->mhs_nm,
+                    'name' => $mahasiswa->mhs_nm,
                 ]);
         };
     }

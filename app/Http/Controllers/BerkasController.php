@@ -50,6 +50,38 @@ class BerkasController extends Controller
             $berkas_foto = $req->input("old_foto");
         }
 
+        if ($req->file("berkas_cv")) {
+            $fileName = time() . '.' . $req->file("berkas_cv")->extension();
+            $result = $req->file("cv")->move(public_path('uploads/berkas/cv'), $fileName);
+            $berkas_cv = "uploads/berkas/cv" . $fileName;
+        } else {
+            $berkas_cv = $req->input("old_cv");
+        }
+
+        if ($req->file("berkas_skck")) {
+            $fileName = time() . '.' . $req->file("berkas_skck")->extension();
+            $result = $req->file("skck")->move(public_path('uploads/berkas/skck'), $fileName);
+            $berkas_skck = "uploads/berkas/skck" . $fileName;
+        } else {
+            $berkas_skck = $req->input("old_skck");
+        }
+
+        if ($req->file("berkas_kk")) {
+            $fileName = time() . '.' . $req->file("berkas_kk")->extension();
+            $result = $req->file("kk")->move(public_path('uploads/berkas/kk'), $fileName);
+            $berkas_kk = "uploads/berkas/kk" . $fileName;
+        } else {
+            $berkas_kk = $req->input("old_kk");
+        }
+
+        if ($req->file("berkas_ijazah")) {
+            $fileName = time() . '.' . $req->file("berkas_ijazah")->extension();
+            $result = $req->file("ijazah")->move(public_path('uploads/berkas/ijazah'), $fileName);
+            $berkas_ijazah = "uploads/berkas/ijazah" . $fileName;
+        } else {
+            $berkas_ijazah = $req->input("old_ijazah");
+        }
+
         try {
             // Save
             Berkas::updateOrCreate(
@@ -58,10 +90,10 @@ class BerkasController extends Controller
                 ],
                 [
                     "berkas_kd" => $req->input("berkas_kd"),
-                    "berkas_skck" => $req->input("berkas_skck"),
-                    "berkas_kk" => $req->input("berkas_kk"),
-                    "berkas_cv" => $req->input("berkas_cv"),
-                    "berkas_ijazah" => $req->input("berkas_ijazah"),
+                    "berkas_skck" => $berkas_skck,
+                    "berkas_kk" => $berkas_kk,
+                    "berkas_cv" => $berkas_cv,
+                    "berkas_ijazah" => $berkas_ijazah,
                     "berkas_NIM" => $req->input("berkas_NIM"),
                 ]
             );

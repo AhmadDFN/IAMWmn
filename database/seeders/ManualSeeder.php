@@ -17,12 +17,25 @@ class ManualSeeder extends Seeder
     {
         // Data User
         DB::table('users')->insert([
+            "username" => "superadmin",
+            "email" => "superadmin@gmail.com",
+            "email_verified_at" => date("Y-m-d h:i:s"),
+            "password" => Hash::make("admin"),
+            "nama" => "SuperAdministrator",
+            "role" => "SuperAdmin",
+            "Status" => 1,
+            "remember_token" => Str::random(10),
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
+
+        DB::table('users')->insert([
             "username" => "admin",
             "email" => "admin@gmail.com",
             "email_verified_at" => date("Y-m-d h:i:s"),
             "password" => Hash::make("admin"),
             "nama" => "Administrator",
-            "role" => "SuperAdmin",
+            "role" => "Admin",
             "Status" => 1,
             "remember_token" => Str::random(10),
             "created_at" => date("Y-m-d h:i:s"),
@@ -63,8 +76,6 @@ class ManualSeeder extends Seeder
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
-
-        // tb_mahasiswa::factory(10)->create();
 
         // Data Berkas
         DB::table('berkas')->insert([
