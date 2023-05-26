@@ -28,7 +28,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Start -->
     <div class="content">
         @include('layouts.navbar')
-        <!-- Sale & Revenue Start -->
+        {{--  Header Start  --}}
         <div class="content-header">
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-0 bg-secondary">
@@ -58,32 +58,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </div>
         </div>
-        <!-- Sale & Revenue End -->
+        {{--  Header End  --}}
 
-        <!-- Sales Chart Start -->
+        <!-- Content Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Worldwide Sales</h6>
-                            <a href="">Show All</a>
-                        </div>
-                        <canvas id="worldwide-sales"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Salse & Revenue</h6>
-                            <a href="">Show All</a>
-                        </div>
-                        <canvas id="salse-revenue"></canvas>
-                    </div>
-                </div>
+                @yield('content')
             </div>
         </div>
-        <!-- Sales Chart End -->
+        <!-- Content End -->
 
         <!-- Footer Start -->
         <div class="container-fluid pt-4 px-4 mt-auto">

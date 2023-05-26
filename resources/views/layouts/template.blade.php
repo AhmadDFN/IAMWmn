@@ -28,60 +28,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Content Start -->
     <div class="content">
         @include('layouts.navbar')
-        <!-- Sale & Revenue Start -->
-        <div class="container-fluid pt-4 px-4">
-            <div class="row g-0 bg-secondary">
-                <div class="col-sm-4">
-                    <div class="d-flex align-items-center justify-content-between p-4">
-                        <h1 class="m-0">@yield('page-title')</h1>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="d-flex align-items-center justify-content-between p-4">
-                    {{-- Notif --}}
-                    @if (session("mess"))
-                        <div class="alert alert-{{ session("type") }} text-center" style="width: 300px;" role="alert">
-                            {{ session("mess") }}
+        {{--  Header Start  --}}
+        <div class="content-header">
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-0 bg-secondary">
+                    <div class="col-sm-4">
+                        <div class="d-flex align-items-center justify-content-between p-4">
+                            <h3 class="m-0">@yield('page-title')</h3>
                         </div>
-                    @endif
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="d-flex align-items-center justify-content-between p-4">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
-                        </ol>
+                    <div class="col-sm-4">
+                        <div class="d-flex align-items-center justify-content-between p-4">
+                        {{-- Notif --}}
+                        @if (session("mess"))
+                            <div class="alert alert-{{ session("type") }} text-center" style="width: 300px;" role="alert">
+                                {{ session("mess") }}
+                            </div>
+                        @endif
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="d-flex align-items-center justify-content-end p-4">
+                            <ol class="breadcrumb float-lg-right m-0">
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                                <li class="breadcrumb-item active">Starter Page</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Sale & Revenue End -->
+        {{--  Header End  --}}
 
-        <!-- Sales Chart Start -->
+        <!-- Content Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Worldwide Sales</h6>
-                            <a href="">Show All</a>
-                        </div>
-                        <canvas id="worldwide-sales"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-secondary text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Salse & Revenue</h6>
-                            <a href="">Show All</a>
-                        </div>
-                        <canvas id="salse-revenue"></canvas>
-                    </div>
-                </div>
+                @yield('content')
             </div>
         </div>
-        <!-- Sales Chart End -->
+        <!-- Content End -->
 
         <!-- Footer Start -->
         <div class="container-fluid pt-4 px-4 mt-auto">
@@ -104,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up-short"></i></a>
 </div>
 @include('layouts.sc_footer')
 

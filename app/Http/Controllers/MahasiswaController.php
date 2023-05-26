@@ -16,7 +16,7 @@ class MahasiswaController extends Controller
     {
         $data = [
             "title" => "Data Mahasiswa",
-            'page' => 'Data Mahasiswa Alumni Wearnes Madiun',
+            'page' => 'Mahasiswa ALUMNI WEC',
             "mahasiswas" => Mahasiswa::All()
         ];
         return view('mahasiswa.data', $data);
@@ -34,7 +34,7 @@ class MahasiswaController extends Controller
             "mahasiswa" => Mahasiswa::find($req->mhs_NIM),
         ];
 
-        return view("mahasiswa.form", $data);
+        return view("mahasiswa.data", $data);
     }
 
     /**

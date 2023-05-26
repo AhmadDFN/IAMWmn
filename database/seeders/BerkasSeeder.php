@@ -20,6 +20,7 @@ class BerkasSeeder extends Seeder
                 ->count(1)
                 ->create([
                     'berkas_NIM' => $mahasiswa->mhs_NIM,
+                    'berkas_foto' => $mahasiswa->mhs_foto,
                 ]);
         };
     }
