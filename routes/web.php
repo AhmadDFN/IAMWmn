@@ -18,9 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::controller(MahasiswaController::class)->group(function () {
-    Route::get("mahasiswa", "index");
-    Route::get("mahasiswa/form/{id_mahasiswa?}", "create");
-    Route::get("mahasiswa/delete/{id_mahasiswa}", "destroy");
-    Route::post("mahasiswa/save", "store");
-});
+
+Route::resource('mahasiswa', MahasiswaController::class);
+// Route::get('mahasiswa/form', [MahasiswaController::class, "create"]);
+
+// Route::controller(MahasiswaController::class)->group(function () {
+//     Route::get("mahasiswa", "index");
+//     Route::get("mahasiswa/form/{id_mahasiswa?}", "create");
+//     Route::post("mahasiswa/delete/{id_mahasiswa}", "destroy");
+//     Route::post("mahasiswa/save", "store");
+// });

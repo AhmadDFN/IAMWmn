@@ -6,12 +6,21 @@
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
+            @if({{@Auth::user()->foto}})   
+                @if(file_exists({{@Auth::user()->foto}}))                         
+                    <img class="rounded-circle" src="{{ asset(@Auth::user()->foto) }}" alt="" style="width: 40px; height: 40px;">
+                    <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                @else
+                    <img class="rounded-circle" src="{{ asset('img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
+                    <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                @endif
+            @else
                 <img class="rounded-circle" src="{{ asset('img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-            </div>
+            @endif
             <div class="ms-3">
-                <h6 class="mb-0">Ahmad Dany FN</h6>
-                <span>Mahasiswa</span>
+                <h6 class="mb-0">{{@Auth::user()->name}}</h6>
+                <span>{{@Auth::user()->role}}</span>
             </div>
         </div>
         @if (@$title)
@@ -25,7 +34,13 @@
         @endif
         <div class="navbar-nav w-100">
             <a href="{{ url('/') }}" class="nav-item nav-link {{ ($title!='Mahasiswa') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            <a href="{{ url('mahasiswa') }}" class="nav-item nav-link {{ ($title=='Mahasiswa') ? 'active' : '' }}"><i class="fa fa-laptop me-2"></i>Mahasiswa</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle {{ ($title=='Mahasiswa') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Mahasiswa</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ url('mahasiswa') }}" class="dropdown-item">Data Mahasiswa</a>
+                    <a href="{{ url('mahasiswa/create') }}" class="dropdown-item">Tambah Baru</a>
+                </div>
+            </div>
             <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
             <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
             <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>

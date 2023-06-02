@@ -15,7 +15,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $data = [
-            "title" => "Data Mahasiswa",
+            "title" => "Mahasiswa",
             'page' => 'Mahasiswa ALUMNI WEC',
             "mahasiswas" => Mahasiswa::All()
         ];
@@ -25,16 +25,17 @@ class MahasiswaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($req)
+    public function create()
     {
         $data = [
             "title" => "Mahasiswa",
-            'page' => 'Form Data Mahasiswa',
+            'page' => 'Form Input data Mahasiswa',
             "dtJurusan" => Jurusan::All(),
-            "mahasiswa" => Mahasiswa::find($req->mhs_NIM),
+            'num' => 1,
+            'pos' => 'New'
         ];
 
-        return view("mahasiswa.data", $data);
+        return view("mahasiswa.form", $data);
     }
 
     /**
@@ -159,11 +160,11 @@ class MahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($mhs_NIM)
+    public function destroy($id)
     {
         try {
             // Save
-            Mahasiswa::where("mhs_NIM", $mhs_NIM)->delete();
+            Mahasiswa::where("id", $id)->delete();
 
             // Notif 
             $notif = [

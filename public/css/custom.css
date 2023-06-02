@@ -20,3 +20,22 @@
     -o-object-fit: cover;
     -o-object-position: top center;
 }
+
+#dtTable_paginate .page-item.disabled .page-link {
+    color: #6c757d !important;
+    pointer-events: none;
+    background-color: black !important;
+    border-color: #dee2e6 !important;
+}
+
+#dtTable_paginate .page-item .page-link {
+    color: white !important;
+    background-color: black !important;
+    border-color: #dee2e6;
+}
+
+#dtTable_paginate .page-item.active .page-link {
+    color: black !important;
+    background-color: white !important;
+    border-color: #dee2e6;
+}
