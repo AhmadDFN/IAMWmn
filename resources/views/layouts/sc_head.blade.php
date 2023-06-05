@@ -1,9 +1,9 @@
 {{-- CDN --}}
 
 <!-- Google Web Fonts -->
+<link href="{{ asset('font/opensans.css')}}" rel="stylesheet"> 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="{{ asset('font/opensans.css')}}" rel="stylesheet"> 
 
 <!-- Icon Font Stylesheet -->
 {{--  <link href="{{asset('css/all.min.css')}}" rel="stylesheet">

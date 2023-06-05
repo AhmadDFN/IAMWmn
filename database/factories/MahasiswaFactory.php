@@ -27,7 +27,7 @@ class MahasiswaFactory extends Factory
             // "mhs_NIM" => $faker->unique()->$th_masuk . $kd_jurusan . rand($minra = 1, $maxra = 999),
             "mhs_NIM" => $th_masuk . $kd_jurusan . strval(rand(111, 999)),
             "mhs_nm" => $faker->name($gender),
-            "mhs_email" => $faker->email(),
+            "mhs_email" => $faker->email($gender),
             "mhs_jk" => $gender == "male" ? 1 : 2,
             "mhs_notelp" => $faker->e164PhoneNumber(),
             "mhs_th_masuk" => $th_masuk,

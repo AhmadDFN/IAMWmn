@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
+use App\Models\province;
+use App\Models\regencie;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -30,11 +32,12 @@ class MahasiswaController extends Controller
         $data = [
             "title" => "Mahasiswa",
             'page' => 'Form Input data Mahasiswa',
-            "dtJurusan" => Jurusan::All(),
-            'num' => 1,
-            'pos' => 'New'
+            "jurusans" => Jurusan::All(),
+            "kotas" => regencie::all(),
+            "provinsis" => province::all(),
+            'pos' => 'New',
+            // 'mahasiswa' => Mahasiswa::where('id', $req->id)->first(),
         ];
-
         return view("mahasiswa.form", $data);
     }
 
@@ -77,8 +80,8 @@ class MahasiswaController extends Controller
 
         if ($req->file("mhs_foto")) {
             $fileName = time() . '.' . $req->file("mhs_foto")->extension();
-            $result = $req->file("foto")->move(public_path('uploads/menu'), $fileName);
-            $mhs_foto = "uploads/menu/" . $fileName;
+            $result = $req->file("foto")->move(public_path('uploads/berkas/foto'), $fileName);
+            $mhs_foto = "uploads/berkas/foto" . $fileName;
         } else {
             $mhs_foto = $req->input("old_foto");
         }
@@ -146,7 +149,19 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        $data = [
+            "title" => "Mahasiswa",
+            'page' => 'Form Edit data Mahasiswa',
+            'jurusans' => Jurusan::All(),
+            "kotas" => regencie::all(),
+            "provinsis" => province::all(),
+            'pos' => 'Edit',
+            "mahasiswa" => Mahasiswa::where("id", $mahasiswa->id)->first()
+        ];
+
+        // dd($data);
+
+        return view("mahasiswa.form", $data);
     }
 
     /**

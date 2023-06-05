@@ -33,10 +33,15 @@
                     <tr>
                         <td>
                             @if($mahasiswa->mhs_foto!="")                                
-                                    <img class="thumb-menu" src="{{ asset(str_replace("public/","",$mahasiswa->mhs_foto)) }}" alt="{{ $mahasiswa->mhs_nm }}">
+                                    <img class="thumb-menu" src="{{ asset($mahasiswa->mhs_foto) }}" alt="{{ $mahasiswa->mhs_nm }}">
                                 @else
                                     <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}" alt="{{ $mahasiswa->mhs_nm }}">
                                 @endif
+                            {{--  @if($mahasiswa->mhs_foto!="")                                
+                                    <img class="thumb-menu" src="{{ asset(str_replace("public/","",$mahasiswa->mhs_foto)) }}" alt="{{ $mahasiswa->mhs_nm }}">
+                                @else
+                                    <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}" alt="{{ $mahasiswa->mhs_nm }}">
+                                @endif  --}}
                         </td>
                         <td>{{ $mahasiswa->mhs_NIM }}</td>
                         <td>{{ $mahasiswa->mhs_nm }}</td>
@@ -46,7 +51,7 @@
                         <td>
                             <form action="{{ route('mahasiswa.destroy',$mahasiswa->id) }}" method="post">
                                 <a href="{{ route('mahasiswa.edit',$mahasiswa->id) }}"><i class="text-warning fas fa-user-edit"></i></a>
-                                <a href="{{ route('mahasiswa.show',$mahasiswa->mhs_NIM) }}"><i class="text-success fas fa-eye"></i></a><br>
+                                <a href="{{ route('mahasiswa.show',$mahasiswa->id) }}"><i class="text-success fas fa-eye"></i></a><br>
                                 
                                 @csrf
                                 @method('DELETE')
