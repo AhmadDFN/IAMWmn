@@ -26,6 +26,14 @@ class DatabaseSeeder extends Seeder
         $this->call(ManualSeeder::class);
         $this->call(LokerSeeder::class);
 
+        DB::table('berkas')
+            ->where('berkas_foto', 'LIKE', 'public/%')
+            ->update(['berkas_foto' => DB::raw("REPLACE(berkas_foto, 'public/', '')")]);
+
+        DB::table('mahasiswas')
+            ->where('mhs_foto', 'LIKE', 'public/%')
+            ->update(['mhs_foto' => DB::raw("REPLACE(mhs_foto, 'public/', '')")]);
+
 
 
 

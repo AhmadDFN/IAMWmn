@@ -38,3 +38,10 @@ function getKota(element, url) {
         $("#mhs_kota").append(data);
     });
 }
+
+// Inisialisasi date picker pada input
+// var datePicker = document.querySelector(".date");
+// var datepicker = new Datepicker(datePicker, {
+//     format: "yyyy-mm-dd",
+//     autoclose: true,
+// });

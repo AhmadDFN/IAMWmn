@@ -21,7 +21,7 @@ return new class extends Migration
             $table->year("mhs_th_masuk");
             $table->year("mhs_th_lulus");
             $table->string("mhs_kota_lahir", 50);
-            $table->dateTime("mhs_tanggal_lahir");
+            $table->Date("mhs_tanggal_lahir");
             $table->string("mhs_alamat", 100);
             $table->string("mhs_kota", 50);
             $table->integer("mhs_tb")->nullable();

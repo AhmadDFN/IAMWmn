@@ -18,8 +18,14 @@
 <script src="{{ asset ('lib/tempusdominus/js/moment.min.js') }}"></script>
 <script src="{{ asset ('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
 <script src="{{ asset ('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+
+
 {{-- End Link Local --}}
 
 {{-- Custom JS --}}
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+
+<!-- Bootstrap Datepicker JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
