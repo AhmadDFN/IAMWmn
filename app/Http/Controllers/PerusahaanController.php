@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Jurusan;
 use App\Models\Kota;
-use App\Models\province;
-use App\Models\regencie;
 use App\Models\Perusahaan;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
@@ -20,7 +18,7 @@ class PerusahaanController extends Controller
     public function index()
     {
         $data = [
-            "title" => "perusahaan",
+            "title" => "Perusahaan",
             'page' => 'DataPerusahaan Alumni Wearnes Madiun',
             "perusahaans" => Perusahaan::All()
         ];
@@ -49,8 +47,9 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         perusahaan::create($request->all());
-        return redirect("perusahaan.index");
+        return redirect()->route('perusahaan.index');
     }
 
     /**
@@ -83,10 +82,10 @@ class PerusahaanController extends Controller
             'page' => 'Form Data Perusahaan',
             "perusahaan" => $perusahaan,
             "idprof" => $idprof,
-            "kotas" => Kota::all(),
+            "kotas" => Kota::where("province_id", $idprof[0]->province_id)->get(),
             "provinsis" => Provinsi::all(),
         ];
-        // dd($data);
+        // dd($data->kotas[0]);
 
         return view("perusahaan.form", $data);
     }
@@ -99,7 +98,7 @@ class PerusahaanController extends Controller
         $perusahaan->fill(($request->all()));
         $perusahaan->save();
 
-        return redirect("perusahaan.index");
+        return redirect()->route('perusahaan.index');
     }
 
     /**
@@ -108,6 +107,6 @@ class PerusahaanController extends Controller
     public function destroy(Perusahaan $perusahaan)
     {
         $perusahaan->delete();
-        return redirect("perusahaan.index");
+        return redirect()->route('perusahaan.index');
     }
 }

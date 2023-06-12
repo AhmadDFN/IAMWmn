@@ -17,7 +17,7 @@ class kotaController extends Controller
         $kota = "";
 
         foreach ($kotaList as $k) {
-            $kota .= "<option value='" . $k->id . "'>" . $k->name . "</option>";
+            $kota .= "<option value='" . $k->name . "'>" . $k->name . "</option>";
         }
 
         //return response()->json($kotaList);

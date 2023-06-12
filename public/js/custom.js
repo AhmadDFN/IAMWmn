@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    $("#mhs_provinsi").change(function () {
+    $("#provinsiup").change(function () {
         var provinsiId = $(this).val();
 
         // Hapus opsi kota sebelumnya
-        $("#mhs_kota").empty();
+        $("#kotaup").empty();
 
         // Kirim permintaan Ajax ke server
         // $.ajax({
@@ -33,9 +33,10 @@ $(document).ready(function () {
 });
 
 function getKota(element, url) {
-    let idProv = $(element).val();
+    const idProv = $(element).val();
+    console.log(`${url}/${idProv}`);
     $.get(url + "/" + idProv, function (data) {
-        $("#mhs_kota").append(data);
+        $("#kotaup").append(data);
     });
 }
 

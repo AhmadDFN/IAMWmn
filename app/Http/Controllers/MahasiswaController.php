@@ -80,13 +80,13 @@ class MahasiswaController extends Controller
         // Proses Upload
         // dd($request->file("foto"));
 
-        // if ($request->file("mhs_foto")) {
-        //     $fileName = time() . '.' . $request->file("mhs_foto")->extension();
-        //     $result = $request->file("foto")->move(public_path('uploads/berkas/foto'), $fileName);
-        //     $mhs_foto = "uploads/berkas/foto" . $fileName;
-        // } else {
-        //     $mhs_foto = $request->input("old_foto");
-        // }
+        if ($request->file("mhs_foto")) {
+            $fileName = time() . $request->input("mhs_NIM") . '.' . $request->file("mhs_foto")->extension();
+            $result = $request->file("mhs_foto")->move(public_path('uploads/berkas/foto'), $fileName);
+            $mhs_foto = "uploads/berkas/foto/" . $fileName;
+        } else {
+            $mhs_foto = $request->input("old_foto");
+        }
 
         // Proses Simpan
         try {
@@ -111,18 +111,18 @@ class MahasiswaController extends Controller
                     // "mhs_bb" => @$request->input("mhs_bb"),
                     "mhs_kd_jurusan" => $request->input("mhs_kd_jurusan"),
                     "mhs_id_user" => $request->input("mhs_id_user"),
-                    "mhs_foto" => $request->input("mhs_foto"),
+                    "mhs_foto" => $mhs_foto,
                 ]
             );
 
-            dd('kesimpen');
+            // dd('kesimpen');
             // Notif 
             $notif = [
                 "type" => "success",
                 "text" => "Data Berhasil Disimpan !"
             ];
         } catch (Exception $err) {
-            dd($err);
+            // dd($err);
             $notif = [
                 "type" => "danger",
                 "text" => "Data Gagal Disimpan !" . $err->getMessage()
@@ -131,7 +131,7 @@ class MahasiswaController extends Controller
 
         // dd($request);
 
-        // return redirect()->route('mahasiswa.index')->with($notif);
+        return redirect()->route('mahasiswa.index')->with($notif);
     }
 
     /**
@@ -160,18 +160,19 @@ class MahasiswaController extends Controller
                 JOIN provinsis AS p ON k.province_id = p.id
                 WHERE m.id = $mahasiswa->id");
 
+        // dd($idprof);
+
         $data = [
             "title" => "Mahasiswa",
             'page' => 'Form Edit data Mahasiswa',
             'jurusans' => Jurusan::All(),
-            "kotas" => Kota::all(),
             "provinsis" => Provinsi::all(),
             "idprof" => $idprof,
+            "kotas" => Kota::where("province_id", $idprof[0]->province_id)->get(),
             'pos' => 'Edit',
             "mahasiswa" => Mahasiswa::where("id", $mahasiswa->id)->first()
         ];
 
-        // dd(Mahasiswa::find($mahasiswa->id));
         return view("mahasiswa.form", $data);
     }
 

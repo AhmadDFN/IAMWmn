@@ -24,8 +24,9 @@
             @endphp
         @endif
         <div class="navbar-nav w-100">
-            <a href="{{ url('/') }}" class="nav-item nav-link {{ ($title!='Mahasiswa') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <a href="{{ url('/') }}" class="nav-item nav-link {{ ($title!='Mahasiswa' AND $title!='Perusahaan') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ url('mahasiswa') }}" class="nav-item nav-link {{ ($title=='Mahasiswa') ? 'active' : '' }}"><i class="fa fa-laptop me-2"></i>Mahasiswa</a>
+            <a href="{{ url('perusahaan') }}" class="nav-item nav-link {{ ($title=='Perusahaan') ? 'active' : '' }}"><i class="fa fa-laptop me-2"></i>Perusahaan</a>
             <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
             <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
             <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
