@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\BerkasController;
+use App\Http\Controllers\JenisLokerController;
 use App\Http\Controllers\kotaController;
+use App\Http\Controllers\LokerController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PerusahaanController;
-use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,19 +19,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Route::group(["middleware" => "auth"], function () {
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('perusahaan', PerusahaanController::class);
+Route::resource('berkas', BerkasController::class);
+Route::resource('jenisloker', JenisLokerController::class);
+Route::resource('loker', LokerController::class);
 Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
-
-// Route::get('mahasiswa/form', [MahasiswaController::class, "create"]);
-
-// Route::controller(MahasiswaController::class)->group(function () {
-//     Route::get("mahasiswa", "index");
-//     Route::get("mahasiswa/form/{id_mahasiswa?}", "create");
-//     Route::post("mahasiswa/delete/{id_mahasiswa}", "destroy");
-//     Route::post("mahasiswa/save", "store");
 // });
+
+// Auth
+Route::get("auth/login", [AuthCtrl::class, "login"])->name("login"); // Dengan nama route
+Route::post("auth/login", [AuthCtrl::class, "cek_login"]);
+Route::get("auth/registrasi", [AuthCtrl::class, "registrasi"])->name("signup"); // Dengan nama route
+Route::post("auth/registrasi", [AuthCtrl::class, "save_registrasi"]);

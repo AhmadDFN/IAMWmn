@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Jurusan;
 use App\Models\Kota;
-use App\Models\province;
-use App\Models\regencie;
 use App\Models\Mahasiswa;
 use App\Models\Provinsi;
 use Illuminate\Http\Request;
