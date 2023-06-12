@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class BerkasController extends Controller
 {
-    protected $view = 'berkas.';
+    protected $view = 'mahasiswa.berkas.';
     protected function route(Mahasiswa $mahasiswa)
     {
-        return '/berkas/' . $mahasiswa->mhs_NIM . '/pemberkasan/';
+        return '/mahasiswa/berkas/' . $mahasiswa->mhs_NIM . '/berkas/';
     }
     /**
      * Display a listing of the resource.
@@ -23,9 +23,10 @@ class BerkasController extends Controller
         $data = [
             "title" => "Berkas",
             'page' => 'Data Berkas Alumni Wearnes Madiun',
-            "berkas" => Berkas::All()
+            "berkas" => Berkas::where('berkas_NIM', $mahasiswa->mhs_NIM)->get()
         ];
-        return view('berkas.data', $data);
+
+        return view($this->view . "data", $data);
     }
 
     /**
@@ -36,16 +37,16 @@ class BerkasController extends Controller
         $data = [
             "title" => "Berkas",
             'page' => 'Form Data Berkas',
-            "dtJurusan" => Mahasiswa::All(),
+            "mahasiswas" => Mahasiswa::All(),
         ];
 
-        return view("berkas.form", $data);
+        return view($this->view . "form", $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Mahasiswa $mahasiswa)
     {
         if ($request->file("berkas_foto")) {
             $fileName = time() . '.' . $request->file("berkas_foto")->extension();
@@ -122,7 +123,7 @@ class BerkasController extends Controller
             ];
         }
 
-        return redirect('berkas')->with($notif);
+        return redirect($this->route($mahasiswa))->with($notif);
     }
 
     /**
@@ -136,7 +137,7 @@ class BerkasController extends Controller
             'berkas' => berkas::find($berkas->id),
         ];
 
-        return view("berkas.single", $data);
+        return view($this->view . "single", $data);
     }
 
     /**
@@ -158,13 +159,13 @@ class BerkasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Berkas $berkas)
+    public function destroy(Berkas $berkas, Mahasiswa $mahasiswa)
     {
         $notif = [
             "type" => "success",
             "text" => "Data Berhasil Dihapus !"
         ];
         $berkas->delete();
-        return redirect('berkas')->with($notif);
+        return redirect($this->route($mahasiswa))->with($notif);
     }
 }

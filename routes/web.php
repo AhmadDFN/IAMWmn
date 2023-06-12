@@ -27,7 +27,8 @@ Route::get('/', function () {
 
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('perusahaan', PerusahaanController::class);
-Route::resource('berkas', BerkasController::class);
+// Route::resource('berkas', BerkasController::class);
+Route::resource('/mahasiswa/berkas/{mahasiswas}/berkas', BerkasController::class);
 Route::resource('jenisloker', JenisLokerController::class);
 Route::resource('loker', LokerController::class);
 Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');

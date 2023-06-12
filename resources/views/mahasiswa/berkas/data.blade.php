@@ -12,7 +12,7 @@
                     <h5 class="mb-4 text-primary">@yield('title')</h5>
                 </div>
                 <div class="card-tools text-right mb-2 mr-2 col-4 align-items-center justify-content-end d-flex">
-                    <a href="{{ route('mahasiswa.create') }}" class="btn btn-outline-primary btn-sm">Tambah Mahasiswa</a>
+                    <a href="{{ route('berkas.create') }}" class="btn btn-outline-primary btn-sm">Tambah Mahasiswa</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -21,40 +21,37 @@
                         <tr>
                             <th scope="col">Foto</th>
                             <th scope="col">NIM</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Alamat</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Tahun Lulus</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">kd</th>
+                            <th scope="col">skck</th>
+                            <th scope="col">kk</th>
+                            <th scope="col">cv</th>
+                            <th scope="col">ijazah</th>
+                            <th scope="col">action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($mahasiswas as $mahasiswa)
+                        @foreach ($berkas as $item)
                             <tr>
                                 <td>
-                                    @if ($mahasiswa->mhs_foto != '')
-                                        <img class="thumb-menu" src="{{ asset($mahasiswa->mhs_foto) }}"
-                                            alt="{{ $mahasiswa->mhs_nm }}">
+                                    @if ($item->berkas_foto != '')
+                                        <img class="thumb-menu" src="{{ asset($item->berkas_foto) }}"
+                                            alt="{{ $item->berkas_nm }}">
                                     @else
                                         <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}"
-                                            alt="{{ $mahasiswa->mhs_nm }}">
+                                            alt="{{ $item->berkas_nm }}">
                                     @endif
-                                    {{--  @if ($mahasiswa->mhs_foto != '')                                
-                                    <img class="thumb-menu" src="{{ asset(str_replace("public/","",$mahasiswa->mhs_foto)) }}" alt="{{ $mahasiswa->mhs_nm }}">
-                                @else
-                                    <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}" alt="{{ $mahasiswa->mhs_nm }}">
-                                @endif  --}}
                                 </td>
-                                <td>{{ $mahasiswa->mhs_NIM }}</td>
-                                <td>{{ $mahasiswa->mhs_nm }}</td>
-                                <td>{!! $mahasiswa->mhs_alamat . ', ' . $mahasiswa->mhs_kota . '</br>' . $mahasiswa->mhs_notelp !!}</td>
-                                <td>{{ $mahasiswa->mhs_jk == 1 ? 'Laki-Laki' : 'Perempuan' }}</td>
-                                <td>{{ $mahasiswa->mhs_th_lulus }}</td>
+                                <td>{{ $item->berkas_NIM }}</td>
+                                <td>{{ $item->berkas_kd }}</td>
+                                <td>{{ $item->berkas_skck }}</td>
+                                <td>{{ $item->berkas_kk }}</td>
+                                <td>{{ $item->berkas_cv }}</td>
+                                <td>{{ $item->berkas_ijazah }}</td>
                                 <td>
-                                    <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="post">
-                                        <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}"><i
+                                    <form action="{{ route('berkas.destroy', $item->id) }}" method="post">
+                                        <a href="{{ route('berkas.edit', $item->id) }}"><i
                                                 class="text-warning fas fa-user-edit"></i></a>
-                                        <a href="{{ route('mahasiswa.show', $mahasiswa->id) }}"><i
+                                        <a href="{{ route('berkas.show', $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
 
                                         @csrf
