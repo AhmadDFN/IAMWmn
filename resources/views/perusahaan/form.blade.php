@@ -12,147 +12,75 @@
         </div>
     @endif
 </div>
-<form action="{{ route('mahasiswa.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('perusahaan.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="container-fluid pt-1 px-0">
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="bg-secondary rounded p-4">
-                        @if(@$mahasiswa->mhs_foto)
-                            @if(file_exists($mahasiswa->mhs_foto))
-                                <img class="thumb-menu-big" src="{{ asset(@$mahasiswa->mhs_foto) }}" alt="{{ @$mahasiswa->mhs_nm }}">
-                            @else
-                                <img class="thumb-menu-big" src="{{ asset('img/no-image.webp') }}" alt="{{ @$mahasiswa->mhs_nm }}">
-                            @endif
-                        @else
-                            <img class="thumb-menu-big" src="{{ asset('img/no-image.webp') }}" alt="{{ @$mahasiswa->mhs_nm }}">
-                        @endif
-                        <div class="mb-3">
-                            <input
-                                class="form-control form-control-sm bg-dark mt-2"
-                                id="mhs_foto"
-                                type="file"
-                                name="mhs_foto"
-                            />
-                        </div>
-                        {{--  <input type="file" class="mt-2" name="foto" id="foto">  --}}
-                        <input type="hidden" name="old_foto" value="{{ @$mahasiswa->foto }}">
-                        @error('foto')
-                            <div id="foto" class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                </div>
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="bg-secondary rounded h-100 p-4">                
                     <div class="form-floating mb-3">
-                        <input type="hidden" name="id" value="{{ @$mahasiswa->id }}">
-                        <input type="text" class="form-control @error('mhs_NIM') is-invalid @enderror" id="mhs_NIM" name="mhs_NIM"
-                            placeholder="Masukkan NIM 10 Digit" value="{{@$mahasiswa->mhs_NIM}}">
-                        <label for="mhs_NIM">NIM</label>
+                        <input type="hidden" name="id" value="{{ @$perusahaan->id }}">
+                        <input type="text" class="form-control @error('perusahaan_nm') is-invalid @enderror" id="perusahaan_nm" name="perusahaan_nm"
+                            placeholder="Nama Perusahaan" value="{{@$perusahaan->perusahaan_nm}}">
+                        <label for="perusahaan_nm">Nama Perusahaan</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="mhs_nm" nama="mhs_nm"
-                            placeholder="Nama Anda" value="{{@$mahasiswa->mhs_nm}}">
-                        <label for="mhs_nm">Nama</label>
+                        <input type="text" class="form-control" id="perusahaan_alamat" nama="perusahaan_alamat"
+                            placeholder="Alamat Perusahaan" value="{{@$perusahaan->perusahaan_alamat}}">
+                        <label for="perusahaan_alamat">Alamat Perusahaan</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="mhs_email" name="mhs_email"
-                            placeholder="name@google.com" value="{{@$mahasiswa->mhs_email}}">
-                        <label for="mhs_email">Email</label>
+                        <input type="email" class="form-control" id="perusahaan_email" name="perusahaan_email"
+                            placeholder="name@google.com" value="{{@$perusahaan->perusahaan_email}}">
+                        <label for="perusahaan_email">Email Perusahaan</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="mhs_notelp" name="mhs_email"
-                            placeholder="No Telpon" value="{{@$mahasiswa->mhs_notelp}}">
-                        <label for="mhs_notelp">No Telp</label>
+                        <input type="text" class="form-control" id="perusahaan_notelp" name="perusahaan_notelp"
+                            placeholder="No Telp Perusahaan" value="{{@$perusahaan->perusahaan_notelp}}">
+                        <label for="perusahaan_notelp">No Telp Perusahaan</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="mhs_tanggal_lahir" name="mhs_tanggal_lahir" value="{{@$mahasiswa->mhs_tanggal_lahir}}">
-                        <label for="mhs_tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                        <input type="text" class="form-control" id="perusahaan_website" nama="perusahaan_website"
+                            placeholder="Website Perusahaan" value="{{@$perusahaan->perusahaan_website}}">
+                        <label for="perusahaan_website">Website Perusahaan</label>
                     </div>
-                    {{--  <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="mhs_password"
-                            placeholder="Password" value="{{@$mahasiswa->mhs_pass}}">
-                        <label for="mhs_password">Password</label>
-                    </div>  --}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-secondary rounded h-100 p-4">
                     <div class="form-floating mb-3">
-                        <select class="form-select" id="mhs_jurusan"
-                            aria-label="Jurusan" style="height: 70px; color: white;">
-                            <option selected>Pilih</option>
-                            @foreach ($jurusans as $jurusan)
-                                <option style="color: white" value="{{ $jurusan->jurusan_kd }}" {{ @$mahasiswa->mhs_kd_jurusan==$jurusan->jurusan_kd ? "selected" : "" }}>{{ $jurusan->jurusan_nm }}</option>
-                            @endforeach
-                        </select>
-                        <label for="mhs_jurusan">Jurusan</label>
-                    </div>
-                    <div class="form-floating mb-3 ps-1">
-                        <fieldset class="row mb-3">
-                            <legend class="col-form-label col-sm-2 pt-0">Jenis Kelamin</legend>
-                            <div class="col-sm-10">
-                                <div class="form-check">
-                                <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="mhs_jk"
-                                    id="l"
-                                    value="1"
-                                    {{ @$mahasiswa->mhs_jk == 1 ? 'checked' : '' }}
-                                />
-                                <label class="form-check-label" for="l" style="color: white;">
-                                    Laki - Laki
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="mhs_jk"
-                                    id="p"
-                                    value="2"
-                                    {{ @$mahasiswa->mhs_jk == 2 ? 'checked' : '' }}
-                                />
-                                <label class="form-check-label" for="p" style="color: white;">
-                                    Perempuan
-                                </label>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="mhs_tahun_masuk"
-                            aria-label="Tahun Masuk" style="height: 70px; color: white;">
-                            <option selected>Tahun</option>
-                            @for ($i = 2009; $i < 2030; $i++)
-                                <option style="color: white" value="{{ $i }}" {{ @$mahasiswa->mhs_th_masuk == $i ? "selected" : "" }}>{{ $i }}</option>
-                            @endfor
-                        </select>
-                        <label for="mhs_tahun_masuk">Tahun Masuk</label>
-                    </div>
-                    
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="mhs_provinsi"
+                        <select class="form-select" id="perusahaan_provinsi"
                             aria-label="Provinsi" style="height: 70px; color: white;" onchange="getKota(this,'{{ route("kota") }}')">
                             <option selected>Pilih Provinsi</option>
                                 @foreach ($provinsis as $provinsi)
                                     <option style="color: white" value="{{ @$provinsi->id }}" {{ @$idprof[0]->province_id==$provinsi->id ? "selected" : "" }}>{{ @$provinsi->name }}</option>
                                 @endforeach
                         </select>
-                        <label for="mhs_provinsi">Provinsi</label>
+                        <label for="perusahaan_provinsi">Provinsi</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <select class="form-select" id="mhs_kota"
+                        <select class="form-select" id="perusahaan_kota" name="perusahaan_kota"
                             aria-label="Kota" style="height: 70px; color: white;">
                             <option selected>Pilih Kota</option>
-                            @if (@$mahasiswa->id)
-                            @foreach ($kotas as $kota)
-                                <option style="color: white" value="{{ @$kota->name }}" {{ @$mahasiswa->mhs_kota==$kota->name ? "selected" : "" }}>{{ $kota->name }}</option>
-                            @endforeach
+                            @if (@$perusahaan->id)
+                                @foreach ($kotas as $kota)
+                                    <option style="color: white" value="{{ @$kota->name }}" {{ @$perusahaan->perusahaan_kota==$kota->name ? "selected" : "" }}>{{ $kota->name }}</option>
+                                @endforeach
                             @else
                                 <option style="color: white" value="" ></option>
                             @endif
                         </select>
-                        <label for="mhs_kota">kota</label>
+                        <label for="perusahaan_kota">kota</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="perusahaan_cp_nama" name="perusahaan_cp_nama"
+                            placeholder="Nama CP Perusahaan" value="{{@$perusahaan->perusahaan_cp_nama}}">
+                        <label for="perusahaan_cp_nama">Nama CP Perusahaan</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="perusahaan_cp_notelp" name="perusahaan_cp_notelp"
+                            placeholder="No Telpon CP" value="{{@$perusahaan->perusahaan_cp_notelp}}">
+                        <label for="perusahaan_cp_notelp">No Telpon CP</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>

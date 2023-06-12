@@ -63,7 +63,7 @@
                         <label for="mhs_email">Email</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="mhs_notelp" name="mhs_email"
+                        <input type="text" class="form-control" id="mhs_notelp" name="mhs_notelp"
                             placeholder="No Telpon" value="{{@$mahasiswa->mhs_notelp}}">
                         <label for="mhs_notelp">No Telp</label>
                     </div>
@@ -141,7 +141,7 @@
                         <label for="mhs_provinsi">Provinsi</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <select class="form-select" id="mhs_kota"
+                        <select class="form-select" id="mhs_kota" name="mhs_kota"
                             aria-label="Kota" style="height: 70px; color: white;">
                             <option selected>Pilih Kota</option>
                             @if (@$mahasiswa->id)

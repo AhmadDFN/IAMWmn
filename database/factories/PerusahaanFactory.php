@@ -25,7 +25,7 @@ class PerusahaanFactory extends Factory
             // "mhs_NIM" => $faker->unique()->$th_masuk . $kd_jurusan . rand($minra = 1, $maxra = 999),
             "perusahaan_nm" => $nama1 . " " . $nama2 . " " . $nama3,
             "perusahaan_alamat" => $faker->address(),
-            "perusahaan_kota" => $faker->city(),
+            "perusahaan_kota" => strtoupper($faker->city()),
             "perusahaan_notelp" => $faker->phoneNumber(),
             "perusahaan_email" => $faker->companyEmail(),
             "perusahaan_website" => $nama1 . $nama2 . ".com",

@@ -12,46 +12,35 @@
                 <h5 class="mb-4 text-primary">@yield('title')</h5>
             </div>
             <div class="card-tools text-right mb-2 mr-2 col-4 align-items-center justify-content-end d-flex">
-                <a href="{{ route('mahasiswa.create') }}" class="btn btn-outline-primary btn-sm">Tambah Mahasiswa</a>
+                <a href="{{ route('perusahaan.create') }}" class="btn btn-outline-primary btn-sm">Tambah Perusahaan</a>
             </div>
         </div>
         <div class="table-responsive">
             <table id="dtTable" class="table compact table-dark dtTable">
                 <thead>
                     <tr>
-                        <th scope="col">Foto</th>
-                        <th scope="col">NIM</th>
-                        <th scope="col">Nama</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nama Perusahaan</th>
                         <th scope="col">Alamat</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Tahun Lulus</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Website</th>
+                        <th scope="col">Contect Person</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mahasiswas as $mahasiswa)
+                    @foreach ($perusahaans as $perusahaan)
                     <tr>
+                        <td>{{ $perusahaan->id }}</td>
+                        <td>{{ $perusahaan->perusahaan_nm }}</td>
+                        <td>{!! $perusahaan->perusahaan_alamat.", ".$perusahaan->perusahaan_kota."</br>".$perusahaan->perusahaan_notelp !!}</td>
+                        <td>{{ $perusahaan->perusahaan_email }}</td>
+                        <td>{{ $perusahaan->perusahaan_website }}</td>
+                        <td>{!! $perusahaan->perusahaan_cp_nama."</br>".$perusahaan->perusahaan_cp_notelp !!}</td>
                         <td>
-                            @if($mahasiswa->mhs_foto!="")                                
-                                    <img class="thumb-menu" src="{{ asset($mahasiswa->mhs_foto) }}" alt="{{ $mahasiswa->mhs_nm }}">
-                                @else
-                                    <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}" alt="{{ $mahasiswa->mhs_nm }}">
-                                @endif
-                            {{--  @if($mahasiswa->mhs_foto!="")                                
-                                    <img class="thumb-menu" src="{{ asset(str_replace("public/","",$mahasiswa->mhs_foto)) }}" alt="{{ $mahasiswa->mhs_nm }}">
-                                @else
-                                    <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}" alt="{{ $mahasiswa->mhs_nm }}">
-                                @endif  --}}
-                        </td>
-                        <td>{{ $mahasiswa->mhs_NIM }}</td>
-                        <td>{{ $mahasiswa->mhs_nm }}</td>
-                        <td>{!! $mahasiswa->mhs_alamat.", ".$mahasiswa->mhs_kota."</br>".$mahasiswa->mhs_notelp !!}</td>
-                        <td>{{ $mahasiswa->mhs_jk==1 ? "Laki-Laki" : "Perempuan" }}</td>
-                        <td>{{ $mahasiswa->mhs_th_lulus }}</td>
-                        <td>
-                            <form action="{{ route('mahasiswa.destroy',$mahasiswa->id) }}" method="post">
-                                <a href="{{ route('mahasiswa.edit',$mahasiswa->id) }}"><i class="text-warning fas fa-user-edit"></i></a>
-                                <a href="{{ route('mahasiswa.show',$mahasiswa->id) }}"><i class="text-success fas fa-eye"></i></a><br>
+                            <form action="{{ route('perusahaan.destroy',$perusahaan->id) }}" method="post">
+                                <a href="{{ route('perusahaan.edit',$perusahaan->id) }}"><i class="text-warning fas fa-user-edit"></i></a>
+                                <a href="{{ route('perusahaan.show',$perusahaan->id) }}"><i class="text-success fas fa-eye"></i></a><br>
                                 
                                 @csrf
                                 @method('DELETE')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kota;
 use App\Models\regencie;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class kotaController extends Controller
     {
         $provinsiId = $request->id_prov;
 
-        $kotaList = regencie::where('province_id', $provinsiId)->get();
+        $kotaList = Kota::where('province_id', $provinsiId)->get();
 
         $kota = "";
 

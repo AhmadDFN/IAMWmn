@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\kotaController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\PerusahaanController;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::resource('mahasiswa', MahasiswaController::class);
+Route::resource('perusahaan', PerusahaanController::class);
 Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
 
 // Route::get('mahasiswa/form', [MahasiswaController::class, "create"]);

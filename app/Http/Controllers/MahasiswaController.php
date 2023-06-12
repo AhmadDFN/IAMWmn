@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Jurusan;
+use App\Models\Kota;
 use App\Models\province;
 use App\Models\regencie;
 use App\Models\Mahasiswa;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,10 +36,9 @@ class MahasiswaController extends Controller
             "title" => "Mahasiswa",
             'page' => 'Form Input data Mahasiswa',
             "jurusans" => Jurusan::All(),
-            "kotas" => regencie::all(),
-            "provinsis" => province::all(),
+            "kotas" => Kota::all(),
+            "provinsis" => Provinsi::all(),
             'pos' => 'New',
-            // 'mahasiswa' => Mahasiswa::where('id', $req->id)->first(),
         ];
         return view("mahasiswa.form", $data);
     }
@@ -155,22 +156,22 @@ class MahasiswaController extends Controller
         $idprof =
             DB::select("SELECT * 
                 FROM mahasiswas AS m
-                JOIN regencies AS k ON m.mhs_kota = k.name
-                JOIN provinces AS p ON k.province_id = p.id
+                JOIN kotas AS k ON m.mhs_kota = k.name
+                JOIN provinsis AS p ON k.province_id = p.id
                 WHERE m.id = $mahasiswa->id");
 
         $data = [
             "title" => "Mahasiswa",
             'page' => 'Form Edit data Mahasiswa',
             'jurusans' => Jurusan::All(),
-            "kotas" => regencie::all(),
-            "provinsis" => province::all(),
+            "kotas" => Kota::all(),
+            "provinsis" => Provinsi::all(),
             "idprof" => $idprof,
             'pos' => 'Edit',
             "mahasiswa" => Mahasiswa::where("id", $mahasiswa->id)->first()
         ];
 
-        dd(Mahasiswa::find($mahasiswa->id));
+        // dd(Mahasiswa::find($mahasiswa->id));
         return view("mahasiswa.form", $data);
     }
 
