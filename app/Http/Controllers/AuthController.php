@@ -21,10 +21,10 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    function cek_login(Request $req)
+    function cek_login(Request $request)
     {
         // Validasi
-        $req->validate(
+        $request->validate(
             [
                 "email" => "required",
                 "password" => "required"
@@ -36,8 +36,8 @@ class AuthController extends Controller
         );
 
         // Cek Login
-        if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
-            $req->session()->regenerate();
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $request->session()->regenerate();
             return redirect('/'); // Dashboard
         }
 
@@ -55,7 +55,7 @@ class AuthController extends Controller
         return view("auth.register");
     }
 
-    function save_registrasi(Request $req)
+    function save_registrasi(Request $request)
     {
         // Validasi
         // $req->validate(
@@ -76,9 +76,9 @@ class AuthController extends Controller
         try {
             // Save
             User::create([
-                "name" => $req->name,
-                "email" => $req->email,
-                "password" => Hash::make($req->password),
+                "name" => $request->name,
+                "email" => $request->email,
+                "password" => Hash::make($request->password),
                 "role" => "Mahasiswa",
                 "status" => 1,
                 "remember_token" => Str::random(10),
@@ -100,11 +100,11 @@ class AuthController extends Controller
         return redirect("auth/login")->with($mess);
     }
 
-    function logout(Request $req)
+    function logout(Request $request)
     {
         Auth::logout();
-        $req->session()->invalidate();
-        $req->session()->regenerateToken();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('auth/login');
     }
 }

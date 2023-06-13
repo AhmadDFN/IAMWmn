@@ -26,7 +26,7 @@ class ManualSeeder extends Seeder
             "password" => Hash::make("admin"),
             "name" => "SuperAdministrator",
             "role" => "SuperAdmin",
-            "Status" => 1,
+            "status" => 1,
             "remember_token" => Str::random(10),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")

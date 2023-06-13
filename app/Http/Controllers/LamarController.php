@@ -2,129 +2,110 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Lamar;
 use App\Models\Loker;
 use App\Models\Mahasiswa;
-use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LamarController extends Controller
 {
+    protected $view = 'lamar.';
+    protected $route = '/lamar/';
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = [
-            "title" => "Data Lamar",
-            'page' => 'Data Lamar Alumni Wearnes Madiun',
-            "lamars" => Lamar::All()
+        $routes = (object)[
+            'index' => $this->route,
+            'add' => $this->route . 'create',
         ];
-        return view('lamar.data', $data);
+        $lamars = DB::table('lamars')
+            ->join('lokers', 'lamars.lamar_id_loker', '=', 'lokers.id')
+            ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
+            ->select('lamars.*', 'lokers.loker_nm', 'perusahaans.perusahaan_nm')
+            ->get();
+        $data = (object)[
+            "title" => "Lamar",
+            'page' => 'Lamar Account',
+        ];
+        // dd($lamars);
+        $title = $data->title;
+        return view($this->view . 'data', compact('lamars', 'routes', 'data', 'title'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($req)
+    public function create()
     {
-        $data = [
-            "title" => "Lamar",
-            'page' => 'Form Data Lamar',
-            "dtMahasiswa" => Mahasiswa::All(),
-            "dtLoker" => Loker::All(),
-            "lamar" => Lamar::find($req->id),
+        $routes = (object)[
+            'index' => $this->route,
+            'save' => $this->route,
+            'is_update' => false,
         ];
-
-        return view("lamar.form", $data);
+        $data = (object)[
+            "title" => "Lamar",
+            'page' => 'Lamar Account',
+        ];
+        $title = $data->title;
+        return view($this->view . 'form', compact('routes', 'data', 'title'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $req)
+    public function store(Request $request)
     {
-        // Proses Simpan
-        try {
-            // Save
-            Mahasiswa::updateOrCreate(
-                [
-                    "id" => $req->input("id")
-                ],
-                [
-                    "lamar_kd" => $req->input("lamar_kd"),
-                    "lamar_nm" => $req->input("lamar_nm"),
-                    "lamar_NIM" => $req->input("lamar_NIM"),
-                    "lamar_id_loker" => $req->input("lamar_id_loker"),
-                ]
-            );
-
-            // Notif 
-            $notif = [
-                "type" => "success",
-                "text" => "Data Berhasil Disimpan !"
-            ];
-        } catch (Exception $err) {
-            $notif = [
-                "type" => "danger",
-                "text" => "Data Gagal Disimpan !" . $err->getMessage()
-            ];
-        }
-
-        return redirect('mahasiswa')->with($notif);
+        lamar::create($request->all());
+        return redirect($this->route);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Lamar $req)
+    public function show(lamar $lamar)
     {
-        $data = [
-            "title" => lamar::find($req->lamar_nm),
-            'page' => "Profil Lamaran Pekerjaan " . lamar::find($req->lamar_nm),
-            'lamar' => lamar::find($req->id),
-        ];
-
-        return view("lamar.single", $data);
+        return view($this->view . 'show', compact('lamar'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Lamar $lamar)
+    public function edit(lamar $lamar)
     {
-        //
+        $routes = (object)[
+            'index' => $this->route,
+            'save' => $this->route . $lamar->id,
+            'is_update' => true,
+        ];
+        $data = (object)[
+            "title" => "Lamar",
+            'page' => 'Lamar Account',
+        ];
+        $title = $data->title;
+        return view($this->view . 'form', compact('lamar', 'routes', 'data', 'title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Lamar $lamar)
+    public function update(Request $request, lamar $lamar)
     {
-        //
+        $lamar->fill($request->all());
+        $lamar->save();
+        return redirect($this->route);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Lamar $id)
+    public function destroy(lamar $lamar)
     {
-        try {
-            // Save
-            Lamar::where("id", $id)->delete();
-
-            // Notif 
-            $notif = [
-                "type" => "success",
-                "text" => "Data Berhasil Dihapus !"
-            ];
-        } catch (Exception $err) {
-            $notif = [
-                "type" => "danger",
-                "text" => "Data Gagal Dihapus !" . $err->getMessage()
-            ];
-        }
-
-        return redirect('lamar')->with($notif);
+        $lamar->delete();
+        return redirect($this->route);
     }
 }

@@ -11,9 +11,6 @@
                 <div class="col-8">
                     <h5 class="mb-4 text-primary">@yield('title')</h5>
                 </div>
-                <div class="card-tools text-right mb-2 mr-2 col-4 align-items-center justify-content-end d-flex">
-                    <a href="{{ route('berkas.create') }}" class="btn btn-outline-primary btn-sm">Tambah Mahasiswa</a>
-                </div>
             </div>
             <div class="table-responsive">
                 <table id="dtTable" class="table compact table-dark dtTable">
@@ -45,13 +42,14 @@
                                 <td>{{ $item->berkas_kd }}</td>
                                 <td>{{ $item->berkas_skck }}</td>
                                 <td>{{ $item->berkas_kk }}</td>
-                                <td>{{ $item->berkas_cv }}</td>
+                                {{--  <td>{{ $item->berkas_cv }}</td>  --}}
+                                <td><a href="{{ asset('cvku.pdf') }}">Download PDF</a></td>
                                 <td>{{ $item->berkas_ijazah }}</td>
                                 <td>
-                                    <form action="{{ route('berkas.destroy', $item->id) }}" method="post">
-                                        <a href="{{ route('berkas.edit', $item->id) }}"><i
+                                    <form action="{{ url($index . $item->id) }}" method="post">
+                                        <a href="{{ url($index . $item->id) . '/edit' }}"><i
                                                 class="text-warning fas fa-user-edit"></i></a>
-                                        <a href="{{ route('berkas.show', $item->id) }}"><i
+                                        <a href="{{ url($index . $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
 
                                         @csrf

@@ -46,6 +46,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         // Validasi
         // $request->validate(
         //     [
@@ -76,7 +77,7 @@ class MahasiswaController extends Controller
         // );
 
         // Proses Upload
-        // dd($request->file("foto"));
+        // dd($request);
 
         if ($request->file("mhs_foto")) {
             $fileName = time() . $request->input("mhs_NIM") . '.' . $request->file("mhs_foto")->extension();
@@ -113,18 +114,26 @@ class MahasiswaController extends Controller
                 ]
             );
 
+            if ($request->input("id")) {
+                DB::table('berkas')
+                    ->where('berkas_NIM', $request->input("mhs_NIM"))
+                    ->update(['berkas_foto' => $mhs_foto]);
+            };
+
             // dd('kesimpen');
             // Notif 
             $notif = [
                 "type" => "success",
                 "text" => "Data Berhasil Disimpan !"
             ];
+            // dd($notif);
         } catch (Exception $err) {
-            // dd($err);
+            dd($err);
             $notif = [
                 "type" => "danger",
                 "text" => "Data Gagal Disimpan !" . $err->getMessage()
             ];
+            // dd($notif);
         }
 
         // dd($request);

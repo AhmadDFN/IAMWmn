@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('name');
             $table->enum("role", ["SuperAdmin", "Admin", "Mahasiswa", "Perusahaan"]);
-            $table->integer("Status")->default(1);
+            $table->integer("status")->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

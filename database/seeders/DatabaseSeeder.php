@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(ManualSeeder::class);
         $this->call(LokerSeeder::class);
+        $this->call(LamarSeeder::class);
 
         DB::table('berkas')
             ->where('berkas_foto', 'LIKE', 'public/%')

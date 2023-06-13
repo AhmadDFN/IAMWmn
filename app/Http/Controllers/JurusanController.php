@@ -8,78 +8,61 @@ use Illuminate\Http\Request;
 
 class JurusanController extends Controller
 {
+    protected $index = 'jurusan.index';
+    protected $route = 'jurusan.';
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $data = [
-            "title" => "Data Jurusan",
-            'page' => 'Data Jurusan Alumni Wearnes Madiun',
-            "jurusans" => Jurusan::All()
+            "title" => "Jurusan",
+            'page' => 'Data Jurusan Wearnes Madiun',
+            "jurusans" => Jurusan::All(),
+            'add' => $this->route . "create",
+            'index' => $this->route,
         ];
-        return view('jurusan.data', $data);
+        return view($this->route . "data", $data);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create($req)
+    public function create()
     {
         $data = [
             "title" => "Jurusan",
             'page' => 'Form Data Jurusan',
-            "jurusan" => Jurusan::find($req->id),
+            'save' => $this->route . "store",
+            'index' => $this->route,
+            'is_update' => false,
         ];
 
-        return view("jurusan.form", $data);
+        return view($this->route . "form", $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $req)
+    public function store(Request $request)
     {
-        // Proses Simpan
-        try {
-            // Save
-            Jurusan::updateOrCreate(
-                [
-                    "id" => $req->input("id")
-                ],
-                [
-                    "jurusan_kd" => $req->input("jurusan_kd"),
-                    "jurusan_nm" => $req->input("jurusan_nm"),
-                ]
-            );
-
-            // Notif 
-            $notif = [
-                "type" => "success",
-                "text" => "Data Berhasil Disimpan !"
-            ];
-        } catch (Exception $err) {
-            $notif = [
-                "type" => "danger",
-                "text" => "Data Gagal Disimpan !" . $err->getMessage()
-            ];
-        }
-
-        return redirect('mahasiswa')->with($notif);
+        Jurusan::create($request->all());
+        return redirect()->route($this->index);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Jurusan $req)
+    public function show(Jurusan $jurusan)
     {
         $data = [
-            "title" => jurusan::find($req->jurusan_nm),
-            'page' => "Profil Jurusan " . jurusan::find($req->jurusan_nm),
-            'jurusan' => jurusan::find($req->id),
+            "title" => jurusan::find($jurusan->jurusan_nm),
+            'page' => "Profil Jurusan " . jurusan::find($jurusan->jurusan_nm),
+            'jurusan' => jurusan::find($jurusan->id),
         ];
 
-        return view("jurusan.single", $data);
+        return view($this->route . "single", $data);
     }
 
     /**
@@ -87,7 +70,15 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        //
+        $data = [
+            "title" => "Jurusan",
+            'page' => 'Form Data Jurusan',
+            'jurusan' => $jurusan,
+            'save' => $this->route . "update",
+            'index' => $this->route,
+            'is_update' => true,
+        ];
+        return view($this->route . "form", $data);
     }
 
     /**
@@ -95,30 +86,17 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        //
+        $jurusan->fill($request->all());
+        $jurusan->save();
+        return redirect()->route($this->index);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jurusan $id)
+    public function destroy(Jurusan $jurusan)
     {
-        try {
-            // Save
-            Jurusan::where("id", $id)->delete();
-
-            // Notif 
-            $notif = [
-                "type" => "success",
-                "text" => "Data Berhasil Dihapus !"
-            ];
-        } catch (Exception $err) {
-            $notif = [
-                "type" => "danger",
-                "text" => "Data Gagal Dihapus !" . $err->getMessage()
-            ];
-        }
-
-        return redirect('jurusan')->with($notif);
+        $jurusan->delete();
+        return redirect()->route($this->index);
     }
 }
