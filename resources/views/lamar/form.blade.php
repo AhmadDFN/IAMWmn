@@ -22,11 +22,13 @@
                 <div class="col-md">
                     <div class="bg-secondary rounded h-100 p-4">
                         <div class="form-floating mb-3">
-                            <input type="hidden" name="id" value="{{ @$jenisloker->id }}">
-                            <input type="text" class="form-control @error('jenis_loker_nm') is-invalid @enderror"
-                                id="jenis_loker_nm" name="jenis_loker_nm" placeholder="jenis_loker_nm"
-                                value="{{ @$jenisloker->jenis_loker_nm }}">
-                            <label for="jenis_loker_nm">Jenis Loker</label>
+                            <input type="hidden" name="id" value="{{ @$lamar->id }}">
+                            <input type="hidden" name="id" value="{{ @$lamar->lamar_kd }}">
+                            <input type="hidden" name="id" value="{{ @$lamar->lamar_NIM }}">
+                            <input type="hidden" name="id" value="{{ @$lamar->lamar_id_loker }}">
+                            <input type="text" class="form-control @error('lamar_nm') is-invalid @enderror"
+                                id="lamar_nm" name="lamar_nm" placeholder="lamar_nm" value="{{ @$lamar->lamar_nm }}">
+                            <label for="lamar_nm">Nama Lamaran</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>

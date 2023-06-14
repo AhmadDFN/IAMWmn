@@ -4,99 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    protected $view = 'dashboard.';
-    protected $route = '/dashboard/';
+    protected $view = 'layDashboard';
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $routes = (object)[
-            'index' => $this->route,
-            'add' => $this->route . 'create',
-        ];
-        $users = Mahasiswa::all();
+        $user = DB::select("SELECT COUNT(*) AS total_user FROM users");
+        // $monthInc = DB::select("SELECT SUM(trans_gtotal) AS gtotal FROM transactions WHERE YEAR(trans_tgl) = YEAR(NOW()) AND MONTH(trans_tgl) = MONTH(NOW())");
+        // $yearInc = DB::select("SELECT SUM(trans_gtotal) AS gtotal FROM transactions WHERE YEAR(trans_tgl) = YEAR(NOW())");
+
         $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
+            "title" => "Dashboard",
+            'page' => 'Dashboard Account',
         ];
+        $dash1 = $user;
         $title = $data->title;
-        return view($this->view . 'data', compact('users', 'routes', 'data', 'title'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $routes = (object)[
-            'index' => $this->route,
-            'save' => $this->route,
-            'is_update' => false,
-        ];
-        $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
-        ];
-        $title = $data->title;
-        return view($this->view . 'form', compact('routes', 'data', 'title'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        mahasiswa::create($request->all());
-        return redirect($this->route);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(mahasiswa $mahasiswa)
-    {
-        return view($this->view . 'show', compact('mahasiswa'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(mahasiswa $mahasiswa)
-    {
-        $routes = (object)[
-            'index' => $this->route,
-            'save' => $this->route . $mahasiswa->id,
-            'is_update' => true,
-        ];
-        $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
-        ];
-        $title = $data->title;
-        return view($this->view . 'form', compact('user', 'routes', 'data', 'title'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, mahasiswa $mahasiswa)
-    {
-        $mahasiswa->fill($request->all());
-        $mahasiswa->save();
-        return redirect($this->route);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(mahasiswa $mahasiswa)
-    {
-        $mahasiswa->delete();
-        return redirect($this->route);
+        // dd($dash1);
+        return view($this->view, compact('data', 'title', 'dash1'));
     }
 }

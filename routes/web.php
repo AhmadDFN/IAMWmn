@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BerkasController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisLokerController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\kotaController;
@@ -24,9 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::group(["middleware" => "auth"], function () {
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('perusahaan', PerusahaanController::class);

@@ -12,7 +12,7 @@
                     <h5 class="mb-4 text-primary">@yield('title')</h5>
                 </div>
                 <div class="card-tools text-right mb-2 mr-2 col-4 align-items-center justify-content-end d-flex">
-                    <a href="{{ url($routes->add) }}" class="btn btn-outline-primary btn-sm">Tambah {{ $data->title }}</a>
+                    {{--  <a href="{{ url($routes->add) }}" class="btn btn-outline-primary btn-sm">Tambah {{ $data->title }}</a>  --}}
                 </div>
             </div>
             <div class="table-responsive">
