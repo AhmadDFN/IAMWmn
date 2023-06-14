@@ -4,21 +4,44 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Mahasiswa;
-use Illuminate\Support\Str;
-use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Seeder;
 use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
+    protected function hapusdirectory()
+    {
+        $folderPath = public_path('uploads');
+
+        if (File::exists($folderPath)) {
+            File::deleteDirectory($folderPath);
+        }
+    }
+
+    protected function buatdirectory()
+    {
+        $baseFolderPath = public_path('uploads/berkas');
+
+        $subfolders = ['foto', 'cv', 'pdf', 'ijazah', 'kk', 'skck'];
+
+        foreach ($subfolders as $subfolder) {
+            $folderPath = $baseFolderPath . '/' . $subfolder;
+
+            if (!File::exists($folderPath)) {
+                File::makeDirectory($folderPath, 0755, true);
+            }
+        }
+    }
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
+        $this->hapusdirectory();
+        $this->buatdirectory();
+
         $this->call(MahasiswaSeeder::class);
         $this->call(PerusahaanSeeder::class);
         $this->call(BerkasSeeder::class);

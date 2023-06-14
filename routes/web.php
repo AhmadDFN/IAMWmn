@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerkasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisLokerController;
@@ -40,7 +41,7 @@ Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->na
 // });
 
 // Auth
-// Route::get("auth/login", [AuthCtrl::class, "login"])->name("login"); // Dengan nama route
-// Route::post("auth/login", [AuthCtrl::class, "cek_login"]);
-// Route::get("auth/registrasi", [AuthCtrl::class, "registrasi"])->name("signup"); // Dengan nama route
-// Route::post("auth/registrasi", [AuthCtrl::class, "save_registrasi"]);
+Route::get("auth/login", [AuthController::class, "login"])->name("login"); // Dengan nama route
+Route::post("auth/login", [AuthController::class, "cek_login"]);
+Route::get("auth/registrasi", [AuthController::class, "registrasi"])->name("signup"); // Dengan nama route
+Route::post("auth/registrasi", [AuthController::class, "save_registrasi"]);

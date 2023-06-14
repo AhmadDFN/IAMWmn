@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.template2')
 
 @section('title', 'Dashboard')
 @section('page-title', 'Dashboard')
@@ -11,54 +11,71 @@
             {{ session('text') }}
         </div>
     @endif
-    <div class="row">
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{ $dash1[0]->total_user }}</h3>
-
-                    <p>Daily Income</p>
+    <!-- Sale & Revenue Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-line fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Total User</p>
+                        <h6 class="mb-0">{{ @$users->count() }}</h6>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Total Sale</p>
+                        <h6 class="mb-0">$1234</h6>
+                    </div>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-area fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Today Revenue</p>
+                        <h6 class="mb-0">$1234</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Total Revenue</p>
+                        <h6 class="mb-0">$1234</h6>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>20</h3>
-
-                    <p>Monthly</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>20</h3>
-
-                    <p>Yearly</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-
-        <!-- ./col -->
     </div>
-    <!-- /.row -->
+    <!-- Sale & Revenue End -->
+
+    <!-- Sales Chart Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Worldwide Sales</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <canvas id="worldwide-sales"></canvas>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Salse & Revenue</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <canvas id="salse-revenue"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sales Chart End -->
 @endsection

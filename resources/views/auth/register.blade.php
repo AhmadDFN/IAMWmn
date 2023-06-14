@@ -14,22 +14,25 @@
     <!--<link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">-->
     <!-- Theme style -->
     <!--<link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">-->
-    <link rel="stylesheet" href="{{ asset('dist/css/registerku.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/registerku.css') }}">
 </head>
 
 <body>
     <div class="box">
         {{-- Alert --}}
-        @if (session("text"))
-            <script>alert("{{ session('text') }}");</script>
+        @if (session('text'))
+            <script>
+                alert("{{ session('text') }}");
+            </script>
         @endif
         {{-- End Alert --}}
-        <form action="{{ route("signup") }}" method="post">
+        <form action="{{ route('signup') }}" method="post">
             @csrf
             <div class="form">
                 <h2>Register a new account</h2>
                 <div class="inputbox">
-                    <input type="name" name="name" required="required" autocomplete="chrome-off" class="form-control @error("name") is-invalid @enderror">
+                    <input type="name" name="name" required="required" autocomplete="chrome-off"
+                        class="form-control @error('name') is-invalid @enderror">
                     <span>Full Name</span>
                     <i></i>
                     @error('name')
@@ -39,7 +42,8 @@
                     @enderror
                 </div>
                 <div class="inputbox">
-                    <input type="email" name="email" required="required" autocomplete="chrome-off" class="form-control @error("email") is-invalid @enderror">
+                    <input type="email" name="email" required="required" autocomplete="chrome-off"
+                        class="form-control @error('email') is-invalid @enderror">
                     <span>Email@example.com</span>
                     <i></i>
                     @error('email')
@@ -49,7 +53,8 @@
                     @enderror
                 </div>
                 <div class="inputbox">
-                    <input type="Password" required="required" name="password" autocomplete="chrome-off" class="form-control @error("password") is-invalid @enderror">
+                    <input type="Password" required="required" name="password" autocomplete="chrome-off"
+                        class="form-control @error('password') is-invalid @enderror">
                     <span>Password</span>
                     <i></i>
                     @error('password')
@@ -60,19 +65,20 @@
                 </div>
                 <div class="links">
                     <a href="#">Lupa Password</a>
-                    <a href="{{ url("auth/login") }}">Sudah Punya akun? Login disini</a>
+                    <a href="{{ url('auth/login') }}">Sudah Punya akun? Login disini</a>
                 </div>
                 <input type="submit" value="Daftar">
             </div>
         </form>
     </div>
- <!--jQuery -->
-<!--<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>-->
- <!--Bootstrap 4 -->
-<!--<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>-->
- <!--AdminLTE App -->
-<!--<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>-->
+    <!--jQuery -->
+    <!--<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>-->
+    <!--Bootstrap 4 -->
+    <!--<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>-->
+    <!--AdminLTE App -->
+    <!--<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>-->
 </body>
+
 </html>
 </body>
 
