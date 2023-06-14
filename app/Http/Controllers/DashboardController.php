@@ -28,6 +28,6 @@ class DashboardController extends Controller
 
         $title = $data->title;
         // dd($dash1);
-        return view($this->view, compact('data', 'title', 'user'));
+        return view($this->view, compact('data', 'title', 'users'));
     }
 }
