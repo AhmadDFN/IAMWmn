@@ -17,7 +17,8 @@ class LokerFactory extends Factory
     public function definition(): array
     {
         $faker = fake('id_ID');
-        $kd_jurusan = $faker->randomElement(["310", "320", "330", "340", "350", "360"], rand(1, 6));
+        $kd_jurusan = ["310", "320", "330", "340", "350", "360"];
+        $jurusanloker = $faker->randomElements($kd_jurusan, $faker->numberBetween(1, 5));
         $randomjns = $faker->randomElement(['1', '2', '3']);
 
         return [
@@ -25,7 +26,7 @@ class LokerFactory extends Factory
             "loker_nm" => $faker->name(),
             "loker_ket" => $faker->realText($maxNbChars = 200, $indexSize = 2),
             "loker_exp" => $faker->dateTimeThisMonth('+14 days'),
-            "loker_kd_jurusan" => $kd_jurusan,
+            "loker_kd_jurusan" => implode(' ', $jurusanloker),
             "loker_status" => 1,
             "loker_id_perusahaan" => $faker->randomNumber(2),
             "loker_id_jnsloker" => $randomjns,

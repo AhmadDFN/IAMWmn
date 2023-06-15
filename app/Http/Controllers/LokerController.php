@@ -99,7 +99,10 @@ class LokerController extends Controller
             'page' => 'Loker Account',
         ];
         $title = $data->title;
-        return view($this->view . 'form', compact('loker', 'routes', 'data', 'title'));
+        $jurusans = Jurusan::all();
+        $perusahaans = Perusahaan::all();
+        $jenislokers = JenisLoker::all();
+        return view($this->view . 'form', compact('loker', 'routes', 'data', 'title', 'jurusans', 'perusahaans', 'jenislokers'));
     }
 
     /**

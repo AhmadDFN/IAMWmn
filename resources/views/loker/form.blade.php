@@ -67,7 +67,8 @@
                                 @foreach ($jurusans as $jurusan)
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="loker_kd_jurusan"
-                                            name="loker_kd_jurusan[]" value="{{ @$jurusan->jurusan_kd }}" />
+                                            name="loker_kd_jurusan[]" value="{{ @$jurusan->jurusan_kd }}"
+                                            {{ @$loker->loker_kd_jurusan == $jurusan->jurusan_kd ? 'checked' : '' }} />
                                         <label class="form-check-label" for="loker_kd_jurusan" style="color: white">
                                             {{ @$jurusan->jurusan_nm }}
                                         </label>

@@ -153,7 +153,7 @@ class ManualSeeder extends Seeder
         ]);
         DB::table('jurusans')->insert([
             "jurusan_kd" => "350",
-            "jurusan_nm" => "Komputer Pajar",
+            "jurusan_nm" => "Komputer Pajak",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);

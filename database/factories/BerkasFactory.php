@@ -23,7 +23,7 @@ class BerkasFactory extends Factory
             "berkas_kd" => $faker->isbn13(),
             "berkas_skck" => $faker->uuid(),
             "berkas_kk" => $faker->uuid(),
-            "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            // "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
             "berkas_cv" => $faker->uuid(),
             "berkas_ijazah" => $faker->uuid(),
         ];
