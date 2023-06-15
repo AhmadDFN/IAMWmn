@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\loker;
-use Exception;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use App\Helpers\CodeGenerator;
+use App\Models\JenisLoker;
+use App\Models\Perusahaan;
+use Illuminate\Support\Facades\Validator;
 
 class LokerController extends Controller
 {
@@ -22,8 +26,8 @@ class LokerController extends Controller
         ];
         $lokers = loker::all();
         $data = (object)[
-            "title" => "loker",
-            'page' => 'loker Account',
+            "title" => "Loker",
+            'page' => 'Loker Account',
         ];
         $title = $data->title;
         return view($this->view . 'data', compact('lokers', 'routes', 'data', 'title'));
@@ -37,14 +41,18 @@ class LokerController extends Controller
         $routes = (object)[
             'index' => $this->route,
             'save' => $this->route,
-            'is_update' => false,
+            // 'is_update' => false,
         ];
         $data = (object)[
-            "title" => "loker",
-            'page' => 'loker Account',
+            "title" => "Loker",
+            'page' => 'Loker Account',
         ];
+        $jurusans = Jurusan::all();
+        $perusahaans = Perusahaan::all();
+        $jenislokers = JenisLoker::all();
+        $code = CodeGenerator::generateUniqueCode();
         $title = $data->title;
-        return view($this->view . 'form', compact('routes', 'data', 'title'));
+        return view($this->view . 'form', compact('routes', 'data', 'title', 'code', 'jurusans', 'perusahaans', 'jenislokers'));
     }
 
     /**
@@ -52,7 +60,19 @@ class LokerController extends Controller
      */
     public function store(Request $request)
     {
-        loker::create($request->all());
+        $mergedOptions = implode(' ', $request->input('loker_kd_jurusan'));
+
+        $requestData = $request->all();
+        $requestData["loker_kd_jurusan"] = $mergedOptions;
+
+        $validator = Validator::make($requestData, [
+            'loker_kd_jurusan' => 'required|unique:lokers',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        loker::create($requestData);
         return redirect($this->route);
     }
 
@@ -75,8 +95,8 @@ class LokerController extends Controller
             'is_update' => true,
         ];
         $data = (object)[
-            "title" => "loker",
-            'page' => 'loker Account',
+            "title" => "Loker",
+            'page' => 'Loker Account',
         ];
         $title = $data->title;
         return view($this->view . 'form', compact('loker', 'routes', 'data', 'title'));

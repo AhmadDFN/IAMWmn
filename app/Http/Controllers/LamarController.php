@@ -45,7 +45,7 @@ class LamarController extends Controller
         $routes = (object)[
             'index' => $this->route,
             'save' => $this->route,
-            'is_update' => false,
+            // 'is_update' => false,
         ];
         $data = (object)[
             "title" => "Lamar",

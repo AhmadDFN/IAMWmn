@@ -36,7 +36,7 @@ class JurusanController extends Controller
             'page' => 'Form Data Jurusan',
             'save' => $this->route . "store",
             'index' => $this->route,
-            'is_update' => false,
+            // 'is_update' => false,
         ];
 
         return view($this->route . "form", $data);
