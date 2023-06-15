@@ -2,8 +2,9 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -42,7 +43,12 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+            // dd($e->errorInfo[1]);
+
+            // if ($e->errorInfo[1] == 1049) {
+            //     Artisan::call('migrate', ['--seed' => true]);
+            //     return redirect()->back()->with('message', 'Database has been migrated and seeded successfully.');
+            // }
         });
     }
 }

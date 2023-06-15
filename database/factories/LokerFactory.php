@@ -21,6 +21,7 @@ class LokerFactory extends Factory
         $jurusanloker = $faker->randomElements($kd_jurusan, $faker->numberBetween(1, 5));
         $randomjns = $faker->randomElement(['1', '2', '3']);
 
+
         return [
             "loker_kd" => $faker->isbn13(),
             "loker_nm" => $faker->name(),
