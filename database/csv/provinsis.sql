@@ -15,7 +15,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- membuang struktur untuk table iamwmdn.perusahaans
-DROP TABLE IF EXISTS `perusahaans`;
 CREATE TABLE IF NOT EXISTS `perusahaans` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `perusahaan_nm` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,

@@ -42,6 +42,9 @@ class DatabaseSeeder extends Seeder
         $this->hapusdirectory();
         $this->buatdirectory();
 
+        $this->call(provinsisCSV::class);
+        $this->call(kotasCSV::class);
+        $this->call(kecamatansCSV::class);
         $this->call(MahasiswaSeeder::class);
         $this->call(PerusahaanSeeder::class);
         $this->call(BerkasSeeder::class);

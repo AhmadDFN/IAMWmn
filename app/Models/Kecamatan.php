@@ -10,4 +10,5 @@ class Kecamatan extends Model
     use HasFactory;
     protected $table = 'kecamatans';
     protected $guarded = ['id'];
+    public $timestamps = false;
 }

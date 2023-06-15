@@ -10,4 +10,5 @@ class Kota extends Model
     use HasFactory;
     protected $table = 'kotas';
     protected $guarded = ['id'];
+    public $timestamps = false;
 }
