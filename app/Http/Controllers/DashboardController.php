@@ -25,8 +25,9 @@ class DashboardController extends Controller
         $perusahaans = Perusahaan::all();
         $lokers = Loker::all();
 
-        $lamaract = Loker::where('loker_status' , 1)->get()->first();
-
+        $lamaract = Loker::where('loker_status', 1)->get();
+        $mhsact = Mahasiswa::where('mhs_th_masuk', date("Y"))->get();
+        // dd($mhsact);
         // $monthInc = DB::select("SELECT SUM(trans_gtotal) AS gtotal FROM transactions WHERE YEAR(trans_tgl) = YEAR(NOW()) AND MONTH(trans_tgl) = MONTH(NOW())");
         // $yearInc = DB::select("SELECT SUM(trans_gtotal) AS gtotal FROM transactions WHERE YEAR(trans_tgl) = YEAR(NOW())");
 
@@ -37,6 +38,6 @@ class DashboardController extends Controller
 
         $title = $data->title;
         // dd($dash1);
-        return view($this->view, compact('data', 'title', 'users' ,'mahasiswas','perusahaans','lokers','lamaract'));
+        return view($this->view, compact('data', 'title', 'users', 'mahasiswas', 'perusahaans', 'lokers', 'lamaract', 'mhsact'));
     }
 }

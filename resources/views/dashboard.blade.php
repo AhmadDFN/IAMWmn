@@ -19,7 +19,7 @@
                     <i class="fa fa-chart-line fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Total User</p>
-                        <h6 class="mb-0">{{ @$users->count() }}</h6>
+                        <h1 class="mb-0">{{ @$users->count() }}</h1>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <i class="fa fa-chart-bar fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Total Mahasiswa</p>
-                        <h6 class="mb-0">{{ @$mahasiswas->count() }}</h6>
+                        <h1 class="mb-0">{{ @$mahasiswas->count() }}</h1>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <i class="fa fa-chart-area fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Perusahaan</p>
-                        <h6 class="mb-0">{{ @$perusahaans->count() }}</h6>
+                        <h1 class="mb-0">{{ @$perusahaans->count() }}</h1>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Total Loker</p>
-                        <h6 class="mb-0">{{ @$lokers->count() }}</h6>
+                        <h1 class="mb-0">{{ @$lokers->count() }}</h1>
                     </div>
                 </div>
             </div>
@@ -56,39 +56,21 @@
     <!-- Sale & Revenue Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-line fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Total User</p>
-                        <h6 class="mb-0">{{ @$users->count() }}</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Total Mahasiswa</p>
-                        <h6 class="mb-0">{{ @$mahasiswas->count() }}</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-6">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-area fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Perusahaan</p>
-                        <h6 class="mb-0">{{ @$perusahaans->count() }}</h6>
+                        <p class="mb-2">Mahasiswa sekarang</p>
+                        <h1 class="mb-0">{{ @$mhsact->count() }}</h1>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-6">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">loker Aktif</p>
-                        <h6 class="mb-0">{{ @$lamaract->count() }}</h6>
+                        <h1 class="mb-0">{{ @$lamaract->count() }}</h1>
                     </div>
                 </div>
             </div>
@@ -102,8 +84,8 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Worldwide Sales</h6>
-                        <a href="">Show All</a>
+                        <h1 class="mb-0">Worldwide Sales</h1>
+                        <a href="#">Show All</a>
                     </div>
                     <canvas id="worldwide-sales"></canvas>
                 </div>
@@ -111,8 +93,8 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Salse & Revenue</h6>
-                        <a href="">Show All</a>
+                        <h1 class="mb-0">Salse & Revenue</h1>
+                        <a href="#">Show All</a>
                     </div>
                     <canvas id="salse-revenue"></canvas>
                 </div>

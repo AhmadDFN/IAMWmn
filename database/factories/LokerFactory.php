@@ -27,7 +27,7 @@ class LokerFactory extends Factory
             "loker_nm" => $faker->name(),
             "loker_ket" => $faker->realText($maxNbChars = 200, $indexSize = 2),
             "loker_exp" => $faker->dateTimeThisMonth('+14 days'),
-            "loker_kd_jurusan" => implode(' ', $jurusanloker),
+            "loker_kd_jurusan" => implode(',', $jurusanloker),
             "loker_status" => 1,
             "loker_id_perusahaan" => $faker->randomNumber(2),
             "loker_id_jnsloker" => $randomjns,

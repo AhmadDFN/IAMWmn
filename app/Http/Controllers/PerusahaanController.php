@@ -19,7 +19,7 @@ class PerusahaanController extends Controller
     {
         $data = [
             "title" => "Perusahaan",
-            'page' => 'DataPerusahaan Alumni Wearnes Madiun',
+            'page' => 'DataPerusahaan Colabs Wearnes Madiun',
             "perusahaans" => Perusahaan::All()
         ];
 
@@ -76,6 +76,12 @@ class PerusahaanController extends Controller
             JOIN kotas AS k ON m.perusahaan_kota = k.name
             JOIN provinsis AS p ON k.province_id = p.id
             WHERE m.id = $perusahaan->id");
+
+        if ($idprof == []) {
+            $idprof[0] = (object)[
+                'province_id' => 11
+            ];
+        }
 
         $data = [
             "title" => "Perusahaan",

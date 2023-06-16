@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Helpers\CodeGenerator;
 use App\Models\JenisLoker;
 use App\Models\Perusahaan;
+use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\Validator;
 
 class LokerController extends Controller
@@ -24,7 +25,12 @@ class LokerController extends Controller
             'index' => $this->route,
             'add' => $this->route . 'create',
         ];
-        $lokers = loker::all();
+        $lokers = Loker::all();
+        // Loker::join('jurusans', 'lokers.loker_kd_jurusan', '=', 'jurusans.jurusan_kd')
+        //     ->select('lokers.*', 'jurusans.jurusan_nm')
+        //     ->get();
+        dd($lokers[0]->loker_kd_jurusan);
+        
         $data = (object)[
             "title" => "Loker",
             'page' => 'Loker Account',
@@ -60,7 +66,7 @@ class LokerController extends Controller
      */
     public function store(Request $request)
     {
-        $mergedOptions = implode(' ', $request->input('loker_kd_jurusan'));
+        $mergedOptions = implode(',', $request->input('loker_kd_jurusan'));
 
         $requestData = $request->all();
         $requestData["loker_kd_jurusan"] = $mergedOptions;
