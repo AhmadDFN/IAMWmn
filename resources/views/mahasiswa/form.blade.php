@@ -128,7 +128,7 @@
                                 <option selected>Pilih Provinsi</option>
                                 @foreach ($provinsis as $provinsi)
                                     <option style="color: white" value="{{ @$provinsi->id }}"
-                                        {{ @$idprof[0]->province_id == $provinsi->id ? 'selected' : '' }}>
+                                        {{ @$idprof[0]->province_id == @$provinsi->id ? 'selected' : '' }}>
                                         {{ @$provinsi->name }}</option>
                                 @endforeach
                             </select>

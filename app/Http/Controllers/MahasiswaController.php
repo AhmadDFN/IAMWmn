@@ -167,8 +167,13 @@ class MahasiswaController extends Controller
                 JOIN provinsis AS p ON k.province_id = p.id
                 WHERE m.id = $mahasiswa->id");
 
-        // dd($idprof);
+        if($idprof == []){
+            $idprof[0] = (object)[
+                'province_id' => 11
+            ];
+        }
 
+        // dd($idprof[0]);
         $data = [
             "title" => "Mahasiswa",
             'page' => 'Form Edit data Mahasiswa',

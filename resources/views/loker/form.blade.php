@@ -23,7 +23,7 @@
                     <div class="bg-secondary rounded h-100 p-4">
                         <div class="form-floating mb-3">
                             <input type="hidden" id="id" name="id" value="{{ @$loker->id }}">
-                            <input type="hidden" id="loker_status" name="loker_status" value=1>
+                            {{-- <input type="hidden" id="loker_status" name="loker_status" value=1> --}}
                             <input type="hidden" id="loker_kd" name="loker_kd"
                                 value="{{ isset($is_update) ? @$loker->loker_kd : @$code }}">
                             <input type="text" class="form-control @error('loker_nm') is-invalid @enderror"
@@ -75,6 +75,27 @@
                                     </div>
                                 @endforeach
                             </div>
+                        </div>
+                        <div class="form-floating mb-3 ps-1">
+                            <fieldset class="row mb-3">
+                                <legend class="col-form-label col-sm-2 pt-0">Jenis Kelamin</legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="loker_status" id="avaible"
+                                            value="1" {{ @$loker->loker_status == 1 ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="avaible" style="color: white;">
+                                            Active
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="loker_status" id="notavaible"
+                                            value="2" {{ @$loker->loker_status == 2 ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="notavaible" style="color: white;">
+                                            Not Active
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">Keterangan Lowongan Pekerjaan</span>
