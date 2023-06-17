@@ -26,17 +26,20 @@ class LokerController extends Controller
             'add' => $this->route . 'create',
         ];
         $lokers = Loker::all();
-        // Loker::join('jurusans', 'lokers.loker_kd_jurusan', '=', 'jurusans.jurusan_kd')
-        //     ->select('lokers.*', 'jurusans.jurusan_nm')
-        //     ->get();
-        dd($lokers[0]->loker_kd_jurusan);
-        
+        $jurusans  = Jurusan::all();
+
+        // foreach ($lokers as $key => $loker) {
+        //     $lokers[$key]->loker_kd_jurusan = explode(',', $loker->loker_kd_jurusan);
+        // }
+
+        // dd($lokers);
+
         $data = (object)[
             "title" => "Loker",
             'page' => 'Loker Account',
         ];
         $title = $data->title;
-        return view($this->view . 'data', compact('lokers', 'routes', 'data', 'title'));
+        return view($this->view . 'data', compact('lokers', 'jurusans', 'routes', 'data', 'title'));
     }
 
     /**

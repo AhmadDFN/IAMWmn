@@ -36,6 +36,11 @@
                                 <td>{{ $item->loker_ket }}</td>
                                 <td>{{ $item->loker_exp }}</td>
                                 <td>{{ $item->loker_kd_jurusan }}</td>
+                                {{--  <td>
+                                    @foreach ($item->loker_kd_jurusan as $kd_jurusan)
+
+                                    @endforeach
+                                </td>  --}}
                                 <td>{{ $item->loker_status }}</td>
                                 <td>
                                     <form action="{{ url($routes->index . $item->id) }}" method="post">

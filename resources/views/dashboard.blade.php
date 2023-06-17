@@ -60,7 +60,7 @@
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-area fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Mahasiswa sekarang</p>
+                        <p class="mb-2">Mahasiswa Tahunini</p>
                         <h1 class="mb-0">{{ @$mhsact->count() }}</h1>
                     </div>
                 </div>
