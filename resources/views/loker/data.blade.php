@@ -20,11 +20,11 @@
                     <thead>
                         <tr>
                             <th scope="col">Loker KD</th>
-                            <th scope="col">Nama Loker</th>
-                            <th scope="col">Keterangan Loker</th>
-                            <th scope="col">Loker Expired</th>
+                            <th scope="col"width="15%">Nama Loker</th>
+                            <th scope="col" width="30%">Keterangan Loker</th>
+                            <th scope="col">Loker Exp</th>
                             <th scope="col">Jurusan Loker</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Stats</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -35,7 +35,11 @@
                                 <td>{{ $item->loker_nm }}</td>
                                 <td>{{ $item->loker_ket }}</td>
                                 <td>{{ $item->loker_exp }}</td>
-                                <td>{{ $item->loker_kd_jurusan }}</td>
+                                <td>
+                                    @foreach ($item->jurusans as $jurusan)
+                                        {!! '-' . $jurusan->jurusan_nm . '</br>' !!}
+                                    @endforeach
+                                </td>
                                 {{--  <td>
                                     @foreach ($item->loker_kd_jurusan as $kd_jurusan)
 

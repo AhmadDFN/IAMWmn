@@ -13,8 +13,8 @@
                 </div>
             </div>
             <div class="ms-3">
-                <h6 class="mb-0">Ahmad Dany FN</h6>
-                <span>Mahasiswa</span>
+                <h6 class="mb-0">{{ @Auth::user()->name }}</h6>
+                <span>{{ @Auth::user()->role }}</span>
             </div>
         </div>
         @if (@$title)

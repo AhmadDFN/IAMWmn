@@ -30,6 +30,10 @@
             @csrf
             <div class="form">
                 <h2>Register a new account</h2>
+                <br>
+                <a href="{{ url('/') }}" style="text-align:center;">
+                    <img src="{{ asset('img/logo_wearnes.png') }}" alt="" style="width: 70%">
+                </a>
                 <div class="inputbox">
                     <input type="name" name="name" required="required" autocomplete="chrome-off"
                         class="form-control @error('name') is-invalid @enderror">

@@ -70,7 +70,7 @@
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">loker Aktif</p>
-                        <h1 class="mb-0">{{ @$lamaract->count() }}</h1>
+                        <h1 class="mb-0">{{ @$lokeract->count() }}</h1>
                     </div>
                 </div>
             </div>
@@ -78,28 +78,87 @@
     </div>
     <!-- Sale & Revenue End -->
 
-    <!-- Sales Chart Start -->
+    <!-- Recent Sales Start -->
     <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-            <div class="col-sm-12 col-xl-6">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0">Worldwide Sales</h1>
-                        <a href="#">Show All</a>
-                    </div>
-                    <canvas id="worldwide-sales"></canvas>
-                </div>
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Record Pelamar Terbaru</h6>
+                <a href="{{ url('lamar') }}">Show All</a>
             </div>
-            <div class="col-sm-12 col-xl-6">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h1 class="mb-0">Salse & Revenue</h1>
-                        <a href="#">Show All</a>
-                    </div>
-                    <canvas id="salse-revenue"></canvas>
-                </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-white">
+                            <th scope="col">Lamaran</th>
+                            <th scope="col">NIM</th>
+                            <th scope="col">Nama Mahasiswa</th>
+                            <th scope="col">Perusahaan</th>
+                            <th scope="col">Tanggal - Jam</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($lamars as $lamar)
+                            <tr>
+                                <td>{{ @$lamar->lamar_nm }}</td>
+                                <td>{{ @$lamar->lamar_NIM }}</td>
+                                <td>{{ @$lamar->mhs_nm }}</td>
+                                <td>{{ @$lamar->perusahaan_nm }}</td>
+                                <td>{{ @$lamar->created_at }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" href="{{ url('lamar/' . @$lamar->id) }}">Detail</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <!-- Sales Chart End -->
+    <!-- Recent Sales End -->
+
+    <!-- Recent Sales Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Lowongan Terbaru</h6>
+                <a href="{{ url('loker') }}">Show All</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-white">
+                            <th scope="col">Loker KD</th>
+                            <th scope="col">Nama Loker</th>
+                            {{--  <th scope="col" width="30%">Keterangan Loker</th>  --}}
+                            <th scope="col">Loker Exp</th>
+                            <th scope="col">Jurusan Loker</th>
+                            <th scope="col">Stats</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($lokers as $loker)
+                            <tr>
+                                <td>{{ @$loker->loker_kd }}</td>
+                                <td>{{ @$loker->loker_nm }}</td>
+                                {{--  <td>{{ $loker->loker_ket }}</td>  --}}
+                                <td>{{ @$loker->loker_exp }}</td>
+                                <td>
+                                    @foreach (@$loker->jurusans as $jurusan)
+                                        {!! '-' . @$jurusan->jurusan_nm . '</br>' !!}
+                                    @endforeach
+                                </td>
+                                <td>{{ @$loker->loker_status }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" href="{{ url('loker/' . @$loker->id) }}">Detail</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Recent Sales End -->
 @endsection

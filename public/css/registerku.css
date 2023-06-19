@@ -1,46 +1,46 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #23242a;
 }
-.box{
+.box {
     position: relative;
     width: 380px;
-    height: 520px;
+    height: 620px;
     background-color: #1c1c1c;
     border-radius: 10px;
     overflow: hidden;
 }
-.box::before{
-    content: '';
+.box::before {
+    content: "";
     position: absolute;
     top: -50%;
     left: -50%;
     width: 380px;
-    height: 420px;
-    background: linear-gradient(0deg,transparent,#eb7126,#eb7126);
+    height: 620px;
+    background: linear-gradient(0deg, transparent, #eb7126, #eb7126);
     transform-origin: bottom right;
     animation: animate 6s linear infinite;
-    animation-delay: -3s ;
+    animation-delay: -3s;
 }
 
 @keyframes animate {
-    0%{
+    0% {
         transform: rotate(0deg);
     }
-    100%{
+    100% {
         transform: rotate(360deg);
     }
 }
-.form{
+.form {
     position: absolute;
     inset: 2px;
     border-radius: 10px;
@@ -50,18 +50,18 @@ body{
     display: flex;
     flex-direction: column;
 }
-.form h2{
+.form h2 {
     color: #e48919;
     font-weight: 500;
     text-align: center;
     letter-spacing: 0.1em;
 }
-.inputbox{
+.inputbox {
     position: relative;
     width: 300px;
     margin-top: 50px;
 }
-.inputbox input{
+.inputbox input {
     position: relative;
     width: 100%;
     padding: 20px 10px 10px;
@@ -73,7 +73,7 @@ body{
     letter-spacing: 0.05em;
     z-index: 10;
 }
-.inputbox span{
+.inputbox span {
     position: absolute;
     left: 0;
     padding: 20px 10px 10px;
@@ -88,12 +88,12 @@ body{
     background: transparent !important;
 }
 .inputbox input:valid ~ span,
-.inputbox input:focus ~ span{
+.inputbox input:focus ~ span {
     color: #e48919;
     transform: translateX(0) translateY(-34px);
     font-size: 0.75em;
 }
-.inputbox i{
+.inputbox i {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -104,25 +104,25 @@ body{
     transition: 0.5s;
     pointer-events: none;
 }
-.inputbox input:valid ~i,
-.inputbox input:focus ~i{
+.inputbox input:valid ~ i,
+.inputbox input:focus ~ i {
     height: 44px;
 }
-.links{
+.links {
     display: flex;
     justify-content: space-between;
 }
-.links a{
+.links a {
     margin: 10px 0;
     font-size: 0.75em;
     color: #8f8f8f;
     text-decoration: none;
 }
 .links a:hover,
-.links a:nth-child(2){
+.links a:nth-child(2) {
     color: #e48919;
 }
-input[type="submit"]{
+input[type="submit"] {
     border: none;
     outline: none;
     background: #e48919;
@@ -133,6 +133,6 @@ input[type="submit"]{
     font-weight: 600;
     cursor: pointer;
 }
-input[type="submit"]:active{
+input[type="submit"]:active {
     opacity: 0.8;
 }

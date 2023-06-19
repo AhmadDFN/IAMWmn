@@ -66,10 +66,11 @@
                             <div class="col-sm-10">
                                 @foreach ($jurusans as $jurusan)
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="loker_kd_jurusan"
+                                        <input class="form-check-input" type="checkbox" id="{{ @$jurusan->jurusan_kd }}"
                                             name="loker_kd_jurusan[]" value="{{ @$jurusan->jurusan_kd }}"
                                             {{ strpos(@$loker->loker_kd_jurusan, @$jurusan->jurusan_kd) !== false ? 'checked' : '' }} />
-                                        <label class="form-check-label" for="loker_kd_jurusan" style="color: white">
+                                        <label class="form-check-label" for="{{ @$jurusan->jurusan_kd }}"
+                                            style="color: white">
                                             {{ @$jurusan->jurusan_nm }}
                                         </label>
                                     </div>

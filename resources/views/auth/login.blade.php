@@ -31,6 +31,10 @@
             @csrf
             <div class="form">
                 <h2>Sign in</h2>
+                <br>
+                <a href="{{ url('/') }}" style="text-align:center;">
+                    <img src="{{ asset('img/logo_wearnes.png') }}" alt="" style="width: 70%">
+                </a>
                 <div class="inputbox">
                     <input type="email" name="email" required="required" autocomplete="chrome-off"
                         class="form-control @error('email') is-invalid @enderror">

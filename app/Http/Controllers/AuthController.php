@@ -15,7 +15,7 @@ class AuthController extends Controller
     {
         // Jika sudah login akan langsung ke Dashboard
         if (Auth::check()) {
-            return redirect("/");
+            return redirect("/dashboard");
         }
 
         return view('auth.login');
@@ -38,7 +38,7 @@ class AuthController extends Controller
         // Cek Login
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect('/'); // Dashboard
+            return redirect('/dashboard'); // Dashboard
         }
 
         // Jika user dan password salah maka Kembali ke form Login
@@ -105,6 +105,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('auth/login');
+        return redirect('/');
     }
 }

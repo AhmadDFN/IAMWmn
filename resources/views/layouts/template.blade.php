@@ -27,7 +27,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Spinner End -->
 
         @include('layouts.sidebar')
+        @if (session('mess'))
+            <div class="col-sm-4">
+                <div class="d-flex align-items-center justify-content-between p-4">
+                    {{-- Notif --}}
 
+                    <div class="alert alert-{{ session('type') }} text-center" style="width: 300px;" role="alert">
+                        {{ session('mess') }}
+                    </div>
+
+                </div>
+            </div>
+        @endif
         <!-- Content Start -->
         <div class="content">
             @include('layouts.navbar')
@@ -35,20 +46,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid pt-4 px-4">
                     <div class="row g-0 bg-secondary">
-                        <div class="col-sm-4">
+                        <div class="col-sm-8">
                             <div class="d-flex align-items-center justify-content-between p-4">
                                 <h3 class="m-0">@yield('page-title')</h3>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="d-flex align-items-center justify-content-between p-4">
-                                {{-- Notif --}}
-                                @if (session('mess'))
-                                    <div class="alert alert-{{ session('type') }} text-center" style="width: 300px;"
-                                        role="alert">
-                                        {{ session('mess') }}
-                                    </div>
-                                @endif
                             </div>
                         </div>
                         <div class="col-sm-4">
