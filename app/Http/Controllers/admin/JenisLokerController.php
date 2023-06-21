@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Models\User;
+use Exception;
+use App\Models\JenisLoker;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class JenisLokerController extends Controller
 {
-    protected $view = 'user.';
-    protected $route = '/user/';
+    protected $view = 'admin.jenisloker.';
+    protected $route = '/jenisloker/';
 
     /**
      * Display a listing of the resource.
@@ -19,13 +21,13 @@ class UserController extends Controller
             'index' => $this->route,
             'add' => $this->route . 'create',
         ];
-        $users = user::all();
+        $jenislokers = JenisLoker::all();
         $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
+            "title" => "Jenis Loker",
+            'page' => 'Jenis Loker Account',
         ];
         $title = $data->title;
-        return view($this->view . 'data', compact('users', 'routes', 'data', 'title'));
+        return view($this->view . 'data', compact('jenislokers', 'routes', 'data', 'title'));
     }
 
     /**
@@ -39,8 +41,8 @@ class UserController extends Controller
             // 'is_update' => false,
         ];
         $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
+            "title" => "Jenis Loker",
+            'page' => 'Jenis Loker Account',
         ];
         $title = $data->title;
         return view($this->view . 'form', compact('routes', 'data', 'title'));
@@ -51,52 +53,52 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        user::create($request->all());
+        JenisLoker::create($request->all());
         return redirect($this->route);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(user $user)
+    public function show(JenisLoker $jenisloker)
     {
-        return view($this->view . 'show', compact('user'));
+        return view($this->view . 'show', compact('JenisLoker'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(user $user)
+    public function edit(jenisloker $jenisloker)
     {
         $routes = (object)[
             'index' => $this->route,
-            'save' => $this->route . $user->id,
+            'save' => $this->route . $jenisloker->id,
             'is_update' => true,
         ];
         $data = (object)[
-            "title" => "User",
-            'page' => 'User Account',
+            "title" => "Jenis Loker",
+            'page' => 'Jenis Loker Account',
         ];
         $title = $data->title;
-        return view($this->view . 'form', compact('user', 'routes', 'data', 'title'));
+        return view($this->view . 'form', compact('jenisloker', 'routes', 'data', 'title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, user $user)
+    public function update(Request $request, jenisloker $jenisloker)
     {
-        $user->fill($request->all());
-        $user->save();
+        $jenisloker->fill($request->all());
+        $jenisloker->save();
         return redirect($this->route);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user $user)
+    public function destroy(jenisloker $jenisloker)
     {
-        $user->delete();
+        $jenisloker->delete();
         return redirect($this->route);
     }
 }

@@ -1,15 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Models\JenisLoker;
 use Exception;
+use App\Models\Lamar;
+use App\Models\Loker;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
-class JenisLokerController extends Controller
+class LamarController extends Controller
 {
-    protected $view = 'jenisloker.';
-    protected $route = '/jenisloker/';
+    protected $view = 'admin.lamar.';
+    protected $route = '/lamar/';
 
     /**
      * Display a listing of the resource.
@@ -20,13 +24,18 @@ class JenisLokerController extends Controller
             'index' => $this->route,
             'add' => $this->route . 'create',
         ];
-        $jenislokers = JenisLoker::all();
+        $lamars = DB::table('lamars')
+            ->join('lokers', 'lamars.lamar_id_loker', '=', 'lokers.id')
+            ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
+            ->select('lamars.*', 'lokers.loker_nm', 'perusahaans.perusahaan_nm')
+            ->get();
         $data = (object)[
-            "title" => "Jenis Loker",
-            'page' => 'Jenis Loker Account',
+            "title" => "Lamar",
+            'page' => 'Lamar Account',
         ];
+        // dd($lamars);
         $title = $data->title;
-        return view($this->view . 'data', compact('jenislokers', 'routes', 'data', 'title'));
+        return view($this->view . 'data', compact('lamars', 'routes', 'data', 'title'));
     }
 
     /**
@@ -40,8 +49,8 @@ class JenisLokerController extends Controller
             // 'is_update' => false,
         ];
         $data = (object)[
-            "title" => "Jenis Loker",
-            'page' => 'Jenis Loker Account',
+            "title" => "Lamar",
+            'page' => 'Lamar Account',
         ];
         $title = $data->title;
         return view($this->view . 'form', compact('routes', 'data', 'title'));
@@ -52,52 +61,52 @@ class JenisLokerController extends Controller
      */
     public function store(Request $request)
     {
-        JenisLoker::create($request->all());
+        lamar::create($request->all());
         return redirect($this->route);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(JenisLoker $jenisloker)
+    public function show(lamar $lamar)
     {
-        return view($this->view . 'show', compact('JenisLoker'));
+        return view($this->view . 'show', compact('lamar'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(jenisloker $jenisloker)
+    public function edit(lamar $lamar)
     {
         $routes = (object)[
             'index' => $this->route,
-            'save' => $this->route . $jenisloker->id,
+            'save' => $this->route . $lamar->id,
             'is_update' => true,
         ];
         $data = (object)[
-            "title" => "Jenis Loker",
-            'page' => 'Jenis Loker Account',
+            "title" => "Lamar",
+            'page' => 'Lamar Account',
         ];
         $title = $data->title;
-        return view($this->view . 'form', compact('jenisloker', 'routes', 'data', 'title'));
+        return view($this->view . 'form', compact('lamar', 'routes', 'data', 'title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, jenisloker $jenisloker)
+    public function update(Request $request, lamar $lamar)
     {
-        $jenisloker->fill($request->all());
-        $jenisloker->save();
+        $lamar->fill($request->all());
+        $lamar->save();
         return redirect($this->route);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(jenisloker $jenisloker)
+    public function destroy(lamar $lamar)
     {
-        $jenisloker->delete();
+        $lamar->delete();
         return redirect($this->route);
     }
 }

@@ -2,16 +2,27 @@
     "use strict";
 
     $(document).ready(function () {
-        $(".dtTable").DataTable({
-            paging: true,
-            lengthChange: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: true,
-            pagingType: "full_numbers",
-        });
+        $("#dtTable")
+            .DataTable({
+                buttons: [
+                    {
+                        extend: "collection",
+                        text: "Export",
+                        buttons: ["excel", "pdf"],
+                    },
+                ],
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                responsive: true,
+                pagingType: "full_numbers",
+            })
+            .buttons()
+            .container()
+            .appendTo(".card-tools");
     });
 
     // Spinner

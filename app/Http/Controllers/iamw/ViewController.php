@@ -5,7 +5,6 @@ namespace App\Http\Controllers\iamw;
 use DateTime;
 use App\Models\Jurusan;
 use App\Helpers\getDateNow;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
@@ -26,6 +25,7 @@ class ViewController extends Controller
             ->join('jenis_lokers', 'lokers.loker_id_jnsloker', '=', 'jenis_lokers.id')
             ->select('lokers.*', 'perusahaans.perusahaan_nm', 'jenis_lokers.jenis_loker_nm')
             ->orderBy('lokers.id', 'desc')
+            // ->limit('5')
             ->get();
         foreach ($lokers as $key => $loker) {
             $lokers[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lokers[$key]->loker_kd_jurusan))->get();

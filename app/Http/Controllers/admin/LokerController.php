@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Models\loker;
 use App\Models\Jurusan;
@@ -10,11 +10,12 @@ use Illuminate\Http\Request;
 use App\Helpers\CodeGenerator;
 use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class LokerController extends Controller
 {
-    protected $view = 'loker.';
+    protected $view = 'admin.loker.';
     protected $route = '/loker/';
 
     /**

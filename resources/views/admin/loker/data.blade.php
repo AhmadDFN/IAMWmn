@@ -8,7 +8,7 @@
     <div class="col-12">
         <div class="bg-secondary rounded h-100 p-4">
             <div class="row">
-                <div class="col-8">
+                <div class="col-8" id="tambahan">
                     <h5 class="mb-4 text-primary">@yield('title')</h5>
                 </div>
                 <div class="card-tools text-right mb-2 mr-2 col-4 align-items-center justify-content-end d-flex">

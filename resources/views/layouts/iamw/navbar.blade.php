@@ -7,16 +7,26 @@
             <span class="oi oi-menu"></span> Menu
         </button>
 
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item cta mr-md-1"><a href="{{ url('auth/login') }}" class="nav-link"><i
-                            class="fas fa-sign-in-alt"></i>
-                        Masuk</a></li>
-                <li class="nav-item cta cta-colored"><a href="{{ url('auth/register') }}" class="nav-link"><i
-                            class="fas fa-user-plus"></i>
-                        Daftar</a></li>
-            </ul>
-        </div>
+        @if (@Auth::user())
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item cta mr-md-1"><a href="{{ url('dashboard') }}" class="nav-link"><i
+                                class="fas fa-tachometer-alt mr-1"></i>
+                            {{ @Auth::user()->name . ' - Dashboard' }}</a></li>
+                </ul>
+            </div>
+        @else
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item cta mr-md-1"><a href="{{ url('auth/login') }}" class="nav-link"><i
+                                class="fas fa-sign-in-alt"></i>
+                            Masuk</a></li>
+                    <li class="nav-item cta cta-colored"><a href="{{ url('auth/register') }}" class="nav-link"><i
+                                class="fas fa-user-plus"></i>
+                            Daftar</a></li>
+                </ul>
+            </div>
+        @endif
     </div>
 </nav>
 <!-- END nav -->

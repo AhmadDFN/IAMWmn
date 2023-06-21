@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Exception;
-use App\Models\Jurusan;
 use App\Models\Kota;
-use App\Models\Perusahaan;
+use App\Models\Jurusan;
 use App\Models\Provinsi;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class PerusahaanController extends Controller
 {
@@ -23,7 +24,7 @@ class PerusahaanController extends Controller
             "perusahaans" => Perusahaan::All()
         ];
 
-        return view('perusahaan.data', $data);
+        return view('admin.perusahaan.data', $data);
     }
 
     /**
@@ -39,7 +40,7 @@ class PerusahaanController extends Controller
             "provinsis" => Provinsi::all(),
         ];
 
-        return view("perusahaan.form", $data);
+        return view("admin.perusahaan.form", $data);
     }
 
     /**
@@ -62,7 +63,7 @@ class PerusahaanController extends Controller
             'page' => "Profil perusahaan " . perusahaan::find($perusahaan->perusahaan_nm),
             'perusahaan' => perusahaan::find($perusahaan->id),
         ];
-        return view("perusahaan.sigle", $data);
+        return view("admin.perusahaan.sigle", $data);
     }
 
     /**
@@ -93,7 +94,7 @@ class PerusahaanController extends Controller
         ];
         // dd($data->kotas[0]);
 
-        return view("perusahaan.form", $data);
+        return view("admin.perusahaan.form", $data);
     }
 
     /**

@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use Exception;
 use App\Models\Berkas;
 use App\Models\Mahasiswa;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class BerkasController extends Controller
 {
-    protected $view = 'mahasiswa.berkas.';
+    protected $view = 'admin.mahasiswa.berkas.';
     protected function route(Mahasiswa $mahasiswa)
     {
         return '/mahasiswa/' . $mahasiswa->id . '/berkas/';

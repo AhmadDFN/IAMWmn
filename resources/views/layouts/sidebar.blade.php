@@ -27,7 +27,7 @@
             @endphp
         @endif
         <div class="navbar-nav w-100">
-            <a href="{{ url('/') }}" class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}"><i
+            <a href="{{ url('dashboard') }}" class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ url('mahasiswa') }}"
                 class="nav-item nav-link {{ ($title == 'Mahasiswa' or $title == 'Berkas') ? 'active' : '' }}"><i

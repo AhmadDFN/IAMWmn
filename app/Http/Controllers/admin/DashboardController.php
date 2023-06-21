@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Models\User;
 use App\Models\Lamar;
@@ -10,12 +10,13 @@ use App\Models\Mahasiswa;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     // protected $view = 'layDashboard';
-    protected $view = 'dashboard';
+    protected $view = 'admin.dashboard';
 
     /**
      * Display a listing of the resource.

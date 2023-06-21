@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Models\Jurusan;
 use Exception;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class JurusanController extends Controller
 {
     protected $index = 'jurusan.index';
     protected $route = 'jurusan.';
+    protected $view = 'admin.jurusan.';
 
     /**
      * Display a listing of the resource.
@@ -23,7 +25,7 @@ class JurusanController extends Controller
             'add' => $this->route . "create",
             'index' => $this->route,
         ];
-        return view($this->route . "data", $data);
+        return view($this->view . "data", $data);
     }
 
     /**
@@ -39,7 +41,7 @@ class JurusanController extends Controller
             // 'is_update' => false,
         ];
 
-        return view($this->route . "form", $data);
+        return view($this->view . "form", $data);
     }
 
     /**
@@ -62,7 +64,7 @@ class JurusanController extends Controller
             'jurusan' => jurusan::find($jurusan->id),
         ];
 
-        return view($this->route . "single", $data);
+        return view($this->view . "single", $data);
     }
 
     /**
@@ -78,7 +80,7 @@ class JurusanController extends Controller
             'index' => $this->route,
             'is_update' => true,
         ];
-        return view($this->route . "form", $data);
+        return view($this->view . "form", $data);
     }
 
     /**

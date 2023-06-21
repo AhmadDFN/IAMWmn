@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Exception;
-use App\Models\Jurusan;
 use App\Models\Kota;
-use App\Models\Mahasiswa;
+use App\Models\Jurusan;
 use App\Models\Provinsi;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class MahasiswaController extends Controller
 {
@@ -22,7 +23,7 @@ class MahasiswaController extends Controller
             'page' => 'Mahasiswa ALUMNI WEC',
             "mahasiswas" => Mahasiswa::All()
         ];
-        return view('mahasiswa.data', $data);
+        return view('admin.mahasiswa.data', $data);
     }
 
     /**
@@ -38,7 +39,7 @@ class MahasiswaController extends Controller
             "provinsis" => Provinsi::all(),
             'pos' => 'New',
         ];
-        return view("mahasiswa.form", $data);
+        return view("admin.mahasiswa.form", $data);
     }
 
     /**
@@ -152,7 +153,7 @@ class MahasiswaController extends Controller
             'mahasiswa' => Mahasiswa::find($mahasiswa->mhs_NIM),
         ];
 
-        return view("mahasiswa.single", $data);
+        return view("admin.mahasiswa.single", $data);
     }
 
     /**
@@ -167,7 +168,7 @@ class MahasiswaController extends Controller
                 JOIN provinsis AS p ON k.province_id = p.id
                 WHERE m.id = $mahasiswa->id");
 
-        if($idprof == []){
+        if ($idprof == []) {
             $idprof[0] = (object)[
                 'province_id' => 11
             ];
@@ -185,7 +186,7 @@ class MahasiswaController extends Controller
             "mahasiswa" => Mahasiswa::where("id", $mahasiswa->id)->first()
         ];
 
-        return view("mahasiswa.form", $data);
+        return view("admin.mahasiswa.form", $data);
     }
 
     /**
