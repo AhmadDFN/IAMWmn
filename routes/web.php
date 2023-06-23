@@ -30,9 +30,10 @@ Route::get("auth/login", [IndexController::class, "show_login"])->name("login");
 Route::post("auth/login", [IndexController::class, "login"]);
 Route::get("auth/register", [IndexController::class, "show_register"])->name("signup"); // Dengan nama route
 Route::post("auth/register", [IndexController::class, "register"]);
+// Kota - Provinsi
+Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
 
 /** User Controller */
-Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
 
 
 
