@@ -35,34 +35,34 @@
                     <img src="{{ asset('img/logo_wearnes.png') }}" alt="" style="width: 70%">
                 </a>
                 <div class="inputbox">
-                    <input type="name" name="name" required="required" autocomplete="chrome-off"
-                        class="form-control @error('name') is-invalid @enderror">
-                    <span>Full Name</span>
+                    <input type="text" name="mhs_NIM" required="required" autocomplete="chrome-off"
+                        class="form-control @error('mhs_NIM') is-invalid @enderror">
+                    <span>NIM Mahasiswa</span>
                     <i></i>
-                    @error('name')
-                        <div id="name" class="invalid-feedback">
+                    @error('mhs_NIM')
+                        <div id="mhs_NIM" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
                 <div class="inputbox">
-                    <input type="email" name="email" required="required" autocomplete="chrome-off"
-                        class="form-control @error('email') is-invalid @enderror">
-                    <span>Email@example.com</span>
+                    <input type="email" name="mhs_email" required="required" autocomplete="chrome-off"
+                        class="form-control @error('mhs_email') is-invalid @enderror">
+                    <span>email@example.com</span>
                     <i></i>
-                    @error('email')
-                        <div id="email" class="invalid-feedback">
+                    @error('mhs_email')
+                        <div id="mhs_email" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
                 <div class="inputbox">
-                    <input type="Password" required="required" name="password" autocomplete="chrome-off"
-                        class="form-control @error('password') is-invalid @enderror">
-                    <span>Password</span>
+                    <input type="date" name="mhs_tanggal_lahir" required="required" autocomplete="chrome-off"
+                        class="form-control @error('mhs_tanggal_lahir') is-invalid @enderror">
+                    <span>Tanggal Lahir</span>
                     <i></i>
-                    @error('password')
-                        <div id="password" class="invalid-feedback">
+                    @error('mhs_tanggal_lahir')
+                        <div id="mhs_tanggal_lahir" class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror

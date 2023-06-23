@@ -20,7 +20,6 @@ class ManualSeeder extends Seeder
 
         // Data User
         DB::table('users')->insert([
-            "username" => "superadmin",
             "email" => "superadmin@gmail.com",
             "email_verified_at" => date("Y-m-d h:i:s"),
             "password" => Hash::make("admin"),
@@ -33,7 +32,6 @@ class ManualSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            "username" => "admin",
             "email" => "admin@gmail.com",
             "email_verified_at" => date("Y-m-d h:i:s"),
             "password" => Hash::make("admin"),
@@ -46,12 +44,12 @@ class ManualSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            "username" => "fian",
             "email" => "fian@gmail.com",
             "email_verified_at" => date("Y-m-d h:i:s"),
             "password" => Hash::make("fian123"),
             "name" => "Allifian",
             "role" => "Mahasiswa",
+            "reff" => "2022320164",
             "Status" => 1,
             "remember_token" => Str::random(10),
             "created_at" => date("Y-m-d h:i:s"),
@@ -68,16 +66,15 @@ class ManualSeeder extends Seeder
             "mhs_notelp" => "0895215354845",
             "mhs_th_masuk" => "2022",
             "mhs_th_lulus" => "2023",
-            "mhs_kota_lahir" => "KOTA MADIUN",
+            "mhs_kota_lahir" => "MADIUN",
             "mhs_tanggal_lahir" => date("2002-11-27"),
             "mhs_alamat" => "Kedunggalar Ngawi",
-            "mhs_kota" => "KOTA MADIUN",
-            "mhs_status" => 1,
+            "mhs_kota" => "MADIUN",
+            "mhs_status" => 2,
             "mhs_tb" => "178",
             "mhs_bb" => "60",
             "mhs_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
             "mhs_kd_jurusan" => "330",
-            "mhs_id_user" => 2,
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);

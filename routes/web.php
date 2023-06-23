@@ -1,11 +1,12 @@
 <?php
 
 
-use App\Http\Controllers\admin;
-use App\Http\Controllers\user;
 use App\Http\Controllers\iamw;
+use App\Http\Controllers\user;
+use App\Http\Controllers\admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\kotaController;
 
 
 /*
@@ -21,7 +22,7 @@ use App\Http\Controllers\AuthController;
 
 
 // Route::view('/', 'welcome');
-Route::get('/', [iamw\ViewController::class, 'index']);
+Route::get('/', [iamw\ViewController::class, 'index'])->name("home");
 
 // Auth
 Route::get("auth/login", [AuthController::class, "login"])->name("login"); // Dengan nama route
@@ -30,6 +31,7 @@ Route::get("auth/register", [AuthController::class, "registrasi"])->name("signup
 Route::post("auth/register", [AuthController::class, "save_registrasi"]);
 
 /** User Controller */
+Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
 
 
 
@@ -43,6 +45,8 @@ Route::group(["middleware" => "auth"], function () {
     Route::get('dashboard', [admin\DashboardController::class, 'index'])->name('dashboard');
     // Route::get('/test', [textCTRL::class, 'run']);
 
+    Route::get('verif', [admin\VerifController::class, 'index'])->name('verif');
+    Route::get("verif/{mahasiswa}/{status}", [admin\VerifController::class, "update_status"]);
     Route::resource('mahasiswa', admin\MahasiswaController::class);
     Route::resource('perusahaan', admin\PerusahaanController::class);
     // Route::resource('berkas', BerkasController::class);
@@ -52,7 +56,6 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('loker', admin\LokerController::class);
     Route::resource('lamar', admin\LamarController::class);
     Route::resource('user', admin\UserController::class);
-    Route::get('/kota/{id_prov?}', [admin\kotaController::class, 'getKotaByProvinsi'])->name('kota');
 
     // Logout
     Route::get("auth/logout", [AuthController::class, "logout"])->name("signout"); // Dengan nama route 

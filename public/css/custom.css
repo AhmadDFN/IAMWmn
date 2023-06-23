@@ -21,21 +21,48 @@
     -o-object-position: top center;
 }
 
-#dtTable_paginate .page-item.disabled .page-link {
+/* Data Table */
+#dtTable_paginate .page-item.disabled .page-link,
+.pagination .page-item.disabled .page-link {
     color: #6c757d !important;
     pointer-events: none;
     background-color: black !important;
     border-color: #dee2e6 !important;
 }
 
-#dtTable_paginate .page-item .page-link {
+#dtTable_paginate .page-item .page-link,
+.pagination .page-item .page-link {
     color: white !important;
     background-color: black !important;
     border-color: #dee2e6;
 }
 
-#dtTable_paginate .page-item.active .page-link {
+#dtTable_paginate .page-item .page-link:hover,
+.pagination .page-item .page-link:hover {
+    color: white !important;
+    background-color: red !important;
+    border-color: #dee2e6;
+}
+
+#dtTable_paginate .page-item.active .page-link,
+.pagination .page-item.active .page-link {
     color: black !important;
     background-color: white !important;
     border-color: #dee2e6;
 }
+
+/* End Data Table */
+
+/* .pagination-dark .page-link {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.pagination-dark .page-link:hover {
+    background-color: #495057;
+}
+
+.pagination-dark .page-item.active .page-link {
+    background-color: #ffc107;
+    border-color: #ffc107;
+} */

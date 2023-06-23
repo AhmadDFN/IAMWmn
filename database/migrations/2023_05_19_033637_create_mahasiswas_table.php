@@ -29,9 +29,8 @@ return new class extends Migration
             $table->integer("mhs_status")->default(0);
             $table->string("mhs_foto")->nullable();
             $table->string("mhs_kd_jurusan")->nullable();
-            $table->integer("mhs_id_user")->nullable();
             $table->timestamps();
-            $table->index(['mhs_kd_jurusan', 'mhs_id_user']);
+            $table->index(['mhs_kd_jurusan']);
         });
     }
 

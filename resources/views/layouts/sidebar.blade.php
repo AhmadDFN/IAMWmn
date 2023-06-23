@@ -29,10 +29,13 @@
         <div class="navbar-nav w-100">
             <a href="{{ url('dashboard') }}" class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <a href="{{ url('verif') }}" class="nav-item nav-link {{ $title == 'Verif' ? 'active' : '' }}"><i
+                    class="fa fa-laptop me-2"></i>Verif Akun</a>
             <a href="{{ url('mahasiswa') }}"
                 class="nav-item nav-link {{ ($title == 'Mahasiswa' or $title == 'Berkas') ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Mahasiswa</a>
-            <a href="{{ url('perusahaan') }}" class="nav-item nav-link {{ $title == 'Perusahaan' ? 'active' : '' }}"><i
+            <a href="{{ url('perusahaan') }}"
+                class="nav-item nav-link {{ $title == 'Perusahaan' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Perusahaan</a>
             <a href="{{ url('jurusan') }}" class="nav-item nav-link {{ $title == 'Jurusan' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Jurusan</a>

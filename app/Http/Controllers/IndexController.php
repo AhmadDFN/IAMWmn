@@ -23,7 +23,7 @@ class IndexController extends Controller
                 'view' => 'register',
                 'route' => 'register/',
             ],
-            'user_akun' => (object)[
+            'mahasiswa_akun' => (object)[
                 'view' => 'akun',
                 'route' => 'akun/',
             ],
@@ -31,13 +31,29 @@ class IndexController extends Controller
                 'view' => 'admin.akun',
                 'route' => 'admin/akun/',
             ],
-            'user_home' => (object)[
-                'view' => 'user.home',
+            'superadmin_akun' => (object)[
+                'view' => 'superadmin.akun',
+                'route' => 'superadmin/akun/',
+            ],
+            'perusahaan_akun' => (object)[
+                'view' => 'perusahaan.akun',
+                'route' => 'perusahaan/akun/',
+            ],
+            'mahasiswa_home' => (object)[
+                'view' => 'mahasiswa.home',
                 'route' => 'home/',
             ],
             'admin_home' => (object)[
                 'view' => 'admin.home',
                 'route' => 'admin/'
+            ],
+            'superadmin_home' => (object)[
+                'view' => 'superadmin.home',
+                'route' => 'superadmin/'
+            ],
+            'perusahaan_home' => (object)[
+                'view' => 'perusahaan.home',
+                'route' => 'perusahaan/'
             ],
             'about' => (object)[
                 'view' => 'about',
@@ -91,14 +107,17 @@ class IndexController extends Controller
             $request->session()->regenerate();
 
             switch (Auth::user()->role) {
-                case 0:
-                    return redirect()->intended($this->routes->home->route);
+                case "SuperAdmin":
+                    return redirect()->intended($this->routes->superadmin_home->route);
                     break;
-                case 1:
-                    return redirect()->intended($this->routes->home->route);
-                    break;
-                case 2:
+                case "Admin":
                     return redirect()->intended($this->routes->admin_home->route);
+                    break;
+                case "Perusahaan":
+                    return redirect()->intended($this->routes->perusahaan_home->route);
+                    break;
+                case "Mahasiswa":
+                    return redirect()->intended($this->routes->mahasiswa_home->route);
                     break;
                 default:
                     return redirect()->intended($this->routes->home->route);
