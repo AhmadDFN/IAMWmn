@@ -69,7 +69,7 @@
                 </div>
                 <div class="links">
                     <a href="#">Lupa Password</a>
-                    <a href="{{ url('auth/login') }}">Sudah Punya akun? Login disini</a>
+                    <a href="{{ route('login') }}">Sudah Punya akun? Login disini</a>
                 </div>
                 <input type="submit" value="Daftar">
             </div>

@@ -15,10 +15,11 @@
                                 <tr>
                                     <th scope="col" class="text-center">NIM</th>
                                     <th scope="col">Nama</th>
-                                    <th scope="col">Alamat</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col" class="text-center">Gender</th>
                                     <th scope="col" class="text-center">Tahun Lulus</th>
                                     <th scope="col" class="text-center">Status</th>
+                                    <th scope="col" class="text-center" width="5%">Act</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,16 +27,22 @@
                                     <tr>
                                         <td>{{ $mahasiswa->mhs_NIM }}</td>
                                         <td>{{ $mahasiswa->mhs_nm }}</td>
-                                        <td>{!! $mahasiswa->mhs_alamat . ', ' . $mahasiswa->mhs_kota . '</br>' . $mahasiswa->mhs_notelp !!}</td>
+                                        <td>{{ $mahasiswa->mhs_email }}</td>
                                         <td>{{ $mahasiswa->mhs_jk == 1 ? 'Laki-Laki' : 'Perempuan' }}
                                         </td>
                                         <td class="text-center">{{ $mahasiswa->mhs_th_lulus }}</td>
                                         <td class="text-center">
                                             @if ($mahasiswa->mhs_status == 1)
-                                                <span class="badge rounded-pill bg-warning text-dark">Belum Daftar</span>
+                                                <span class="badge rounded-pill bg-warning text-dark">Belum Verif</span>
                                             @endif
                                             @if ($mahasiswa->mhs_status == 2)
-                                                <span class="badge rounded-pill bg-success">Sudah Daftar</span>
+                                                <span class="badge rounded-pill bg-success">Sudah Verif</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($mahasiswa->mhs_status == 1)
+                                                <a href="{{ url('verif/' . $mahasiswa->id . '/acc') }}"><i
+                                                        class="text-success fas fa-check"></i></a>
                                             @endif
                                         </td>
                                     </tr>

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     // protected $view = 'layDashboard';
-    protected $view = 'admin.dashboard';
+    protected $view = 'admin.home';
 
     /**
      * Display a listing of the resource.

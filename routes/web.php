@@ -6,6 +6,7 @@ use App\Http\Controllers\user;
 use App\Http\Controllers\admin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\kotaController;
 
 
@@ -25,10 +26,10 @@ use App\Http\Controllers\kotaController;
 Route::get('/', [iamw\ViewController::class, 'index'])->name("home");
 
 // Auth
-Route::get("auth/login", [AuthController::class, "login"])->name("login"); // Dengan nama route
-Route::post("auth/login", [AuthController::class, "cek_login"]);
-Route::get("auth/register", [AuthController::class, "registrasi"])->name("signup"); // Dengan nama route
-Route::post("auth/register", [AuthController::class, "save_registrasi"]);
+Route::get("auth/login", [IndexController::class, "show_login"])->name("login"); // Dengan nama route
+Route::post("auth/login", [IndexController::class, "login"]);
+Route::get("auth/register", [IndexController::class, "show_register"])->name("signup"); // Dengan nama route
+Route::post("auth/register", [IndexController::class, "register"]);
 
 /** User Controller */
 Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
@@ -42,11 +43,11 @@ Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->na
 
 /** Admin Controller */
 Route::group(["middleware" => "auth"], function () {
-    Route::get('dashboard', [admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('admin/', [admin\DashboardController::class, 'index'])->name('dashboard');
     // Route::get('/test', [textCTRL::class, 'run']);
 
     Route::get('verif', [admin\VerifController::class, 'index'])->name('verif');
-    Route::get("verif/{mahasiswa}/{status}", [admin\VerifController::class, "update_status"]);
+    Route::get("verif/{mahasiswa}/acc", [admin\VerifController::class, "update_status"]);
     Route::resource('mahasiswa', admin\MahasiswaController::class);
     Route::resource('perusahaan', admin\PerusahaanController::class);
     // Route::resource('berkas', BerkasController::class);
@@ -58,5 +59,5 @@ Route::group(["middleware" => "auth"], function () {
     Route::resource('user', admin\UserController::class);
 
     // Logout
-    Route::get("auth/logout", [AuthController::class, "logout"])->name("signout"); // Dengan nama route 
+    Route::get("auth/logout", [IndexController::class, "logout"])->name("signout"); // Dengan nama route 
 });

@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
@@ -16,12 +21,12 @@ class IndexController extends Controller
                 'route' => '/',
             ],
             'login' => (object)[
-                'view' => 'login',
-                'route' => 'login/',
+                'view' => 'auth.login',
+                'route' => 'auth/login/',
             ],
             'register' => (object)[
-                'view' => 'register',
-                'route' => 'register/',
+                'view' => 'auth.register',
+                'route' => 'auth/register/',
             ],
             'mahasiswa_akun' => (object)[
                 'view' => 'akun',
@@ -47,10 +52,6 @@ class IndexController extends Controller
                 'view' => 'admin.home',
                 'route' => 'admin/'
             ],
-            'superadmin_home' => (object)[
-                'view' => 'superadmin.home',
-                'route' => 'superadmin/'
-            ],
             'perusahaan_home' => (object)[
                 'view' => 'perusahaan.home',
                 'route' => 'perusahaan/'
@@ -70,12 +71,12 @@ class IndexController extends Controller
     /**
      * Display a welcome page.
      */
-    public function index()
+    public function show_login()
     {
         if (Auth::check()) {
-            return view($this->routes->user_home->view);
+            return redirect($this->routes->home->route);
         }
-        return view($this->routes->home->view);
+        return view($this->routes->login->view);
     }
 
     /**
@@ -94,13 +95,15 @@ class IndexController extends Controller
      */
     public function login(Request $request)
     {
+        // dd($request);
         $logged = false;
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $logged = true;
-        } elseif (Auth::attempt(['nim' => $request->email, 'password' => $request->password])) {
+        } elseif (Auth::attempt(['reff' => $request->email, 'password' => $request->password])) {
             $logged = true;
         } else {
+            $logged = false;
         }
 
         if ($logged) {
@@ -108,7 +111,7 @@ class IndexController extends Controller
 
             switch (Auth::user()->role) {
                 case "SuperAdmin":
-                    return redirect()->intended($this->routes->superadmin_home->route);
+                    return redirect()->intended($this->routes->admin_home->route);
                     break;
                 case "Admin":
                     return redirect()->intended($this->routes->admin_home->route);
@@ -124,19 +127,25 @@ class IndexController extends Controller
                     break;
             }
         } else {
-            return back()->with('Gagal', 'NIM / Email dan Password salah.');
+            $mess = [
+                "type" => "danger",
+                "text" => "Maaf username atau password salah !"
+            ];
+
+            return back()->with($mess);
         }
     }
 
     /**
      * Register an account.
      */
-    public function showRegister()
+    public function show_register()
     {
+        // return view("auth.register");
         $routes = (object)[
             'register' => '/register',
         ];
-        return view($this->routes->register->view, compact('register'));
+        return view($this->routes->register->view, compact('routes'));
     }
 
     /**
@@ -144,7 +153,53 @@ class IndexController extends Controller
      */
     public function register(Request $request)
     {
-        //
+        $mess = "";
+        $hasil = Mahasiswa::where('mhs_email', '=', $request->mhs_email)
+            ->where('mhs_NIM', '=', $request->mhs_NIM)
+            ->where('mhs_tanggal_lahir', '=', $request->mhs_tanggal_lahir)
+            ->where('mhs_status', '=', 1)
+            ->get();
+
+        $hasildd = $request;
+        // dd($hasil[0]->mhs_nm);
+        // dd($hasildd);
+        // dd($request->mhs_NIM);
+
+        if ($hasil->count() > 0) {
+            try {
+                // Save
+                DB::table('users')->insert([
+                    "name" => $hasil[0]->mhs_nm,
+                    "reff" => $hasil[0]->mhs_NIM,
+                    "email" => $hasil[0]->mhs_email,
+                    "password" => Hash::make($hasil[0]->mhs_tanggal_lahir),
+                    "role" => "Mahasiswa",
+                    "Status" => 0,
+                    "remember_token" => Str::random(10),
+                    "created_at" => date("Y-m-d h:i:s"),
+                    "updated_at" => date("Y-m-d h:i:s")
+                ]);
+                $mess = [
+                    "type" => "success",
+                    "text" => "Registrasi berhasil , silahkan login !"
+                ];
+            } catch (Exception $err) {
+                $mess = [
+                    "type" => "danger",
+                    "text" => $err . "  -  " . "Registrasi gagal !"
+                ];
+            }
+
+            return redirect()->route('home')->with($mess);
+        } else {
+            // Jika hasil tidak ditemukan, lempar exception
+            $mess = [
+                "type" => "danger",
+                "text" => "NIM Belum Terdaftar !"
+            ];
+        }
+
+        return redirect($this->routes->login->route)->with($mess);
     }
 
     /**

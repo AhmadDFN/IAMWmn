@@ -35,11 +35,15 @@ class VerifController extends Controller
         return view($this->view . "index", compact('mahasiswas', 'data', 'title', 'routes'));
     }
 
-    function update_status(Request $request, Mahasiswa $mahasiswa)
+    function update_status(Mahasiswa $mahasiswa)
     {
-        dd($mahasiswa);
-        Mahasiswa::where("id", $request->id)->update([
-            "status" => $request->status
+
+        Mahasiswa::where("id", $mahasiswa->id)->update([
+            "mhs_status" => 2
+        ]);
+        User::where("reff", $mahasiswa->mhs_NIM)->update([
+            "status" => 1,
+            "email_verified_at" => date("Y-m-d h:i:s"),
         ]);
 
         return back();

@@ -27,7 +27,7 @@
             @endphp
         @endif
         <div class="navbar-nav w-100">
-            <a href="{{ url('dashboard') }}" class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}"><i
+            <a href="{{ url('admin') }}" class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ url('verif') }}" class="nav-item nav-link {{ $title == 'Verif' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Verif Akun</a>
@@ -48,6 +48,8 @@
                     class="fa fa-laptop me-2"></i>Loker</a>
             <a href="{{ url('user') }}" class="nav-item nav-link {{ $title == 'User' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>User</a>
+            <a href="{{ route('signout') }}" class="nav-item nav-link {{ $title == 'logout' ? 'active' : '' }}"><i
+                    class="fa fa-laptop me-2"></i>Logout</a>
         </div>
     </nav>
 </div>
