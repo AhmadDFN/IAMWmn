@@ -70,12 +70,13 @@ class LamarController extends Controller
      */
     public function show(lamar $lamar)
     {
+        $mahasiswa = Mahasiswa::where('mhs_NIM', $lamar->lamar_NIM)->get()->first();
         $data = (object)[
             'title' => $lamar->lamar_nm,
             'page' => "Profil lamar " . $lamar->lamar_nm,
         ];
         $title = "Lamar";
-        return view($this->view . 'show', compact('lamar', 'data', 'title'));
+        return view($this->view . 'show', compact('lamar', 'data', 'title', 'mahasiswa'));
     }
 
     /**

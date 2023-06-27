@@ -70,12 +70,35 @@ class UserController extends Controller
      */
     public function show(user $user)
     {
+        $mahasiswa = "";
+        $perusahaan = "";
         $data = (object)[
             'title' => $user->name,
             'page' => "Profil user " . $user->name,
         ];
         $title = "User";
-        return view($this->view . 'show', compact('user', 'data', 'title'));
+
+        if ($user->role == "Mahasiswa") {
+            $mahasiswa = DB::table('users')
+                ->join('mahasiswas', 'users.reff', '=', 'mahasiswas.mhs_NIM')
+                ->select('users.*', 'mahasiswas.*')
+                ->where('mahasiswas.mhs_nim', '=', $user->reff)
+                ->get()->first();
+            $mahasiswa->password = null;
+            $mahasiswa->remember_token = null;
+        }
+
+        if ($user->role == "perusahaan") {
+            $perusahaan = DB::table('users')
+                ->join('perusahaans', 'users.reff', '=', 'perusahaans.id')
+                ->select('users.*', 'perusahaans.*', 'perusahaan.id as id_perusahaan')
+                ->where('perusahaans.id', '=', $user->reff)
+                ->get()->first();
+            $perusahaan->password = null;
+            $perusahaan->remember_token = null;
+        }
+        // dd($mahasiswa);
+        return view($this->view . 'show', compact('user', 'data', 'title', 'mahasiswa', 'perusahaan'));
     }
 
     /**

@@ -91,12 +91,12 @@ class IndexController extends Controller
         return view($this->routes->login->view, compact('routes'));
     }
 
+
     /**
      * Login to an account.
      */
     public function login(Request $request)
     {
-        // dd($request);
         $logged = false;
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -108,15 +108,17 @@ class IndexController extends Controller
         }
 
         if ($logged) {
-            if (Auth::attempt(['status' => 0])) {
+
+            $request->session()->regenerate();
+            if (Auth::user()->status == 0) {
+                Auth::logout();
                 $mess = [
                     "type" => "danger",
-                    "text" => "Maaf kamu belum verifikasi !"
+                    "text" => "Maaf anda belum terverifikasi !"
                 ];
+
                 return back()->with($mess);
             }
-            $request->session()->regenerate();
-
             switch (Auth::user()->role) {
                 case "SuperAdmin":
                     return redirect()->intended($this->routes->admin_home->route);
@@ -170,7 +172,7 @@ class IndexController extends Controller
 
         $hasildd = $request;
         // dd($hasil[0]->mhs_nm);
-        // dd($hasildd);
+        // dd($cektanggal);
         // dd($request->mhs_NIM);
 
         if ($hasil->count() > 0) {
@@ -180,7 +182,7 @@ class IndexController extends Controller
                     "name" => $hasil[0]->mhs_nm,
                     "reff" => $hasil[0]->mhs_NIM,
                     "email" => $hasil[0]->mhs_email,
-                    "password" => Hash::make(str_replace("-", "", Carbon::createFromFormat('Y-m-d', $hasil[0]->mhs_tanggal_lahir)->locale('id')->isoFormat('D MMMM YYYY'))),
+                    "password" => Hash::make(str_replace("-", "", Carbon::createFromFormat('Y-m-d', $hasil[0]->mhs_tanggal_lahir)->locale('id')->isoFormat('DMMYYYY'))),
                     "role" => "Mahasiswa",
                     "status" => 0,
                     "remember_token" => Str::random(10),

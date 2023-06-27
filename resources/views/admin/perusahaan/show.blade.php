@@ -72,7 +72,7 @@
             </div>
             <div class="col-12">
                 <div class="table-responsive">
-                    <table id="dtTable" class="table compact table-dark dtTable">
+                    <table id="dtTableshow" class="table compact table-dark dtTable">
                         <thead>
                             <tr>
                                 <th scope="col">Loker KD</th>
@@ -81,6 +81,7 @@
                                 <th scope="col">Loker Exp</th>
                                 <th scope="col">Jurusan Loker</th>
                                 <th scope="col">Stats</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,11 +102,14 @@
                                         @endforeach
                                     </td>  --}}
                                     <td>{{ $item->loker_status }}</td>
+                                    <td>
+                                        <a href="{{ url('/loker/' . $item->id) }}"><i
+                                                class="text-success fas fa-eye"></i></a><br>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-    @endsection
+        @endsection

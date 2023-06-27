@@ -29,7 +29,7 @@
 
                                 <h3 class="name">{{ $mahasiswa->mhs_nm }}</h3>
                                 <span
-                                    class="online-status {{ @$mahasiswa->mhs_status == 1 ? 'status-available' : 'status-unavailable' }}">{{ @$mahasiswa->mhs_status == 1 ? 'Aktif' : 'Tidak Aktif' }}</span>
+                                    class="online-status {{ @$mahasiswa->mhs_status != 0 ? 'status-available' : 'status-unavailable' }}">{{ @$mahasiswa->mhs_status != 0 ? 'Aktif' : 'Tidak Aktif' }}</span>
                             </div>
                         </div>
                     </div>

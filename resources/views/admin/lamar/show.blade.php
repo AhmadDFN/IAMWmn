@@ -29,18 +29,16 @@
 
                                 <h3 class="name">{{ $mahasiswa->mhs_nm }}</h3>
                                 <span
-                                    class="online-status {{ @$mahasiswa->mhs_status == 1 ? 'status-available' : 'status-unavailable' }}">{{ @$mahasiswa->mhs_status == 1 ? 'Aktif' : 'Tidak Aktif' }}</span>
+                                    class="online-status {{ @$mahasiswa->mhs_status != 0 ? 'status-available' : 'status-unavailable' }}">{{ @$mahasiswa->mhs_status != 0 ? 'Aktif' : 'Tidak Aktif' }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="profile-detail">
                         <div class="profile-info">
-                            <div class="col">Jumlah Lamaran</div>
-                            <div class="col">{{ @$lamars->count() }}</div>
                         </div>
-                        <a href="{{ route('mahasiswa.index') }}" class="btn btn-primary" style="position: relative;">Back
+                        <a href="{{ route('lamar.index') }}" class="btn btn-primary" style="position: relative;">Back
                             to
-                            Mahasiswa List</a>
+                            Lamar List</a>
                     </div>
                 </div>
             </div>
@@ -76,9 +74,9 @@
                                 <div class="col-md-8">: {{ @$mahasiswa->mhs_bb . ' KG' }}</div>
                             @endif
                             <br><br>
-                            <a href="{{ url('/mahasiswa/' . $mahasiswa->id . '/berkas/' . $berkas->id) }}"
-                                class="btn btn-primary" style="position: relative;">Ke
-                                Berkas</a>
+                            <a href="{{ url('/mahasiswa/' . $mahasiswa->id) }}" class="btn btn-primary"
+                                style="position: relative;">Ke
+                                Pelamar</a>
                         </div>
                     </div>
                 </div>

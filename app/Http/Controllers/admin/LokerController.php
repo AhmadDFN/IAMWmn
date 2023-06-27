@@ -11,6 +11,7 @@ use App\Helpers\CodeGenerator;
 use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Lamar;
 use Illuminate\Support\Facades\Validator;
 
 class LokerController extends Controller
@@ -136,8 +137,10 @@ class LokerController extends Controller
             'page' => "Profil loker " . $loker->loker_nm,
             'loker' => loker::find($loker->id),
         ];
+        $perusahaan = Perusahaan::where('id', $loker->loker_id_perusahaan)->get()->first();
+        $lamars = Lamar::where('lamar_id_loker', $loker->id)->get();
         $title = "Loker";
-        return view($this->view . 'show', compact('loker', 'data', 'title'));
+        return view($this->view . 'show', compact('loker', 'data', 'title', 'perusahaan', 'lamars'));
     }
 
     /**

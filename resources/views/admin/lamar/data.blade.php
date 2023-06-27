@@ -22,7 +22,8 @@
                             <th scope="col">NIM</th>
                             <th scope="col">Kode</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Jenis Loker</th>
+                            <th scope="col">Perusahaaan</th>
+                            {{--  <th scope="col">Jenis Loker</th>  --}}
                             <th scope="col" width="12%">Action</th>
                         </tr>
                     </thead>
@@ -33,6 +34,7 @@
                                 <td>{{ $item->lamar_kd }}</td>
                                 <td>{{ $item->lamar_nm }}</td>
                                 <td>{{ $item->perusahaan_nm }}</td>
+                                {{--  <td>{{ $item->jenis_loker_nm }}</td>  --}}
                                 <td>
                                     <form action="{{ url($routes->index . $item->id) }}" method="post">
                                         <a href="{{ url($routes->index . $item->id . '/edit') }}"><i

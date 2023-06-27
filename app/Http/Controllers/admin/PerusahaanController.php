@@ -65,8 +65,13 @@ class PerusahaanController extends Controller
         ];
         $title = "Perusahaan";
         $lokers = Loker::where("loker_id_perusahaan", $perusahaan->id)->get();
+        $jurusans  = Jurusan::all();
+
+        foreach ($lokers as $key => $loker) {
+            $lokers[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lokers[$key]->loker_kd_jurusan))->get();
+        }
         // dd($lokers);
-        return view("admin.perusahaan.show", compact('data', 'perusahaan', 'title', 'lokers'));
+        return view("admin.perusahaan.show", compact('data', 'perusahaan', 'title', 'lokers', 'jurusans'));
     }
 
     /**

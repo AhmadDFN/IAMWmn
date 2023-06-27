@@ -4,31 +4,6 @@ $(document).ready(function () {
 
         // Hapus opsi kota sebelumnya
         $("#kotaup").empty();
-
-        // Kirim permintaan Ajax ke server
-        // $.ajax({
-        //     url: '{{ route("getKotaByProvinsi") }}',
-        //     method: "GET",
-        //     data: { provinsiId: provinsiId },
-        //     success: function (response) {
-        //         // Tambahkan opsi kota berdasarkan data yang diterima
-        //         if (response.length > 0) {
-        //             $.each(response, function (key, value) {
-        //                 $("#mhs_kota").append(
-        //                     '<option value="' +
-        //                         value.id +
-        //                         '">' +
-        //                         value.name +
-        //                         "</option>"
-        //                 );
-        //             });
-        //         } else {
-        //             $("#mhs_kota").append(
-        //                 '<option value="">Tidak ada kota</option>'
-        //             );
-        //         }
-        //     },
-        // });
     });
 });
 
