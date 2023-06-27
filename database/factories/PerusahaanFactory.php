@@ -31,6 +31,7 @@ class PerusahaanFactory extends Factory
             "perusahaan_website" => $nama1 . $nama2 . ".com",
             "perusahaan_cp_nama" => $faker->name(),
             "perusahaan_cp_notelp" => $faker->e164PhoneNumber(),
+            "perusahaan_foto" => $faker->image("public/uploads/perusahaan/foto", 640, 480),
         ];
     }
 }

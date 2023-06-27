@@ -20,7 +20,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Loker KD</th>
-                            <th scope="col"width="15%">Nama Loker</th>
+                            <th scope="col" width="15%">Nama Loker</th>
                             <th scope="col" width="30%">Keterangan Loker</th>
                             <th scope="col">Loker Exp</th>
                             <th scope="col">Jurusan Loker</th>

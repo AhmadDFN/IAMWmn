@@ -32,15 +32,20 @@
                                         </td>
                                         <td class="text-center">{{ $mahasiswa->mhs_th_lulus }}</td>
                                         <td class="text-center">
-                                            @if ($mahasiswa->mhs_status == 1)
+                                            @if ($mahasiswa->mhs_status == 1 and $mahasiswa->reff != null)
                                                 <span class="badge rounded-pill bg-warning text-dark">Belum Verif</span>
-                                            @endif
-                                            @if ($mahasiswa->mhs_status == 2)
-                                                <span class="badge rounded-pill bg-success">Sudah Verif</span>
+                                            @else
+                                                @if ($mahasiswa->mhs_status == 1 and $mahasiswa->status == 0)
+                                                    <span class="badge rounded-pill bg-danger text-white">Belum a
+                                                        Pengajuan</span>
+                                                @endif
+                                                @if ($mahasiswa->mhs_status == 2)
+                                                    <span class="badge rounded-pill bg-success">Sudah Verif</span>
+                                                @endif
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if ($mahasiswa->mhs_status == 1)
+                                            @if ($mahasiswa->mhs_status == 1 and $mahasiswa->reff != null)
                                                 <a href="{{ url('verif/' . $mahasiswa->id . '/acc') }}"><i
                                                         class="text-success fas fa-check"></i></a>
                                             @endif

@@ -10,7 +10,7 @@
         @if (@Auth::user())
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item cta mr-md-1"><a href="{{ url('admin') }}" class="nav-link"><i
+                    <li class="nav-item cta mr-md-1"><a href="{{ @$dashboard }}" class="nav-link"><i
                                 class="fas fa-tachometer-alt mr-1"></i>
                             {{ @Auth::user()->name . ' - Dashboard' }}</a></li>
                 </ul>

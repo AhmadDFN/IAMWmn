@@ -18,14 +18,21 @@ class BerkasFactory extends Factory
     public function definition(): array
     {
         $faker = fake('id_ID');
+        $randomisi = $faker->randomElement([null, $faker->uuid()]);
+        $ktp = $faker->randomElement([null, $faker->uuid()]);
+        $skck = $faker->randomElement([null, $faker->uuid()]);
+        $kk = $faker->randomElement([null, $faker->uuid()]);
+        $cv = $faker->randomElement([null, $faker->uuid()]);
+        $ijazah = $faker->randomElement([null, $faker->uuid()]);
 
         return [
             "berkas_kd" => $faker->isbn13(),
-            "berkas_skck" => $faker->uuid(),
-            "berkas_kk" => $faker->uuid(),
+            "berkas_ktp" => $ktp,
+            "berkas_skck" => $skck,
+            "berkas_kk" => $kk,
             // "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
-            "berkas_cv" => $faker->uuid(),
-            "berkas_ijazah" => $faker->uuid(),
+            "berkas_cv" => $cv,
+            "berkas_ijazah" => $ijazah,
         ];
     }
 }

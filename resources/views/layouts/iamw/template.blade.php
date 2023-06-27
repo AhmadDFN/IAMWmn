@@ -26,7 +26,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @include('layouts.iamw.navbar')
     {{--  Header Start  --}}
     <div class="hero-wrap img" style="background-image: url({{ asset('img/iamw/bg_1.jpg') }});">
-        <div class="overlay"></div>
+        <div class="overlay">
+            <div class="bg-secondary rounded">
+                @if (session('text'))
+                    <div class="alert alert-{{ session('type') }} text-center" style="width: 300px;" role="alert">
+                        {{ session('text') }}
+                    </div>
+                @endif
+            </div>
+        </div>
         <div class="container">
             <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-center">
                 <div class="col-md-10 d-flex align-items-center ftco-animate">

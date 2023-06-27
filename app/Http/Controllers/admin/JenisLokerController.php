@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use Exception;
+use App\Models\Lamar;
+use App\Models\Loker;
+use App\Models\Jurusan;
 use App\Models\JenisLoker;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -62,7 +65,18 @@ class JenisLokerController extends Controller
      */
     public function show(JenisLoker $jenisloker)
     {
-        return view($this->view . 'show', compact('JenisLoker'));
+        $data = (object)[
+            'title' => $jenisloker->jenisloker_nm,
+            'page' => "Profil jenisloker " . $jenisloker->jenisloker_nm,
+        ];
+        $lokers = Loker::where("loker_id_jnsloker", $jenisloker->id)->get();
+        $jurusans  = Jurusan::all();
+
+        foreach ($lokers as $key => $loker) {
+            $lokers[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lokers[$key]->loker_kd_jurusan))->get();
+        }
+        $title = "Jenis Loker";
+        return view($this->view . 'show', compact('jenisloker', 'data', 'title', 'lokers'));
     }
 
     /**

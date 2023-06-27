@@ -48,8 +48,6 @@
                     class="fa fa-laptop me-2"></i>Loker</a>
             <a href="{{ url('user') }}" class="nav-item nav-link {{ $title == 'User' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>User</a>
-            <a href="{{ route('signout') }}" class="nav-item nav-link {{ $title == 'logout' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Logout</a>
         </div>
     </nav>
 </div>

@@ -16,35 +16,28 @@
                 <table id="dtTable" class="table compact table-dark dtTable">
                     <thead>
                         <tr>
-                            <th scope="col">Foto</th>
                             <th scope="col">NIM</th>
                             <th scope="col">kd</th>
                             <th scope="col">skck</th>
+                            <th scope="col">ktp</th>
                             <th scope="col">kk</th>
                             <th scope="col">cv</th>
                             <th scope="col">ijazah</th>
                             <th scope="col">action</th>
+                            <th scope="col">Foto</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($berkas as $item)
                             <tr>
-                                <td>
-                                    @if ($item->berkas_foto != '')
-                                        <img class="thumb-menu" src="{{ asset($item->berkas_foto) }}"
-                                            alt="{{ $item->berkas_nm }}">
-                                    @else
-                                        <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}"
-                                            alt="{{ $item->berkas_nm }}">
-                                    @endif
-                                </td>
+
                                 <td>{{ $item->berkas_NIM }}</td>
                                 <td>{{ $item->berkas_kd }}</td>
-                                <td>{{ $item->berkas_skck }}</td>
-                                <td>{{ $item->berkas_kk }}</td>
-                                {{--  <td>{{ $item->berkas_cv }}</td>  --}}
-                                <td><a href="{{ asset('cvku.pdf') }}">Download PDF</a></td>
-                                <td>{{ $item->berkas_ijazah }}</td>
+                                <td>{{ pathinfo($item->berkas_skck, PATHINFO_FILENAME) }}</td>
+                                <td>{{ pathinfo($item->berkas_ktp, PATHINFO_FILENAME) }}</td>
+                                <td>{{ pathinfo($item->berkas_kk, PATHINFO_FILENAME) }}</td>
+                                <td>{{ pathinfo($item->berkas_cv, PATHINFO_FILENAME) }}</td>
+                                <td>{{ pathinfo($item->berkas_ijazah, PATHINFO_FILENAME) }}</td>
                                 <td>
                                     <form action="{{ url($index . $item->id) }}" method="post">
                                         <a href="{{ url($index . $item->id) . '/edit' }}"><i
@@ -58,6 +51,15 @@
                                                 class="text-danger fas fa-user-times"></i></button>
 
                                     </form>
+                                </td>
+                                <td>
+                                    @if ($item->berkas_foto != '')
+                                        <img class="thumb-menu" src="{{ asset($item->berkas_foto) }}"
+                                            alt="{{ $item->berkas_nm }}">
+                                    @else
+                                        <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}"
+                                            alt="{{ $item->berkas_nm }}">
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

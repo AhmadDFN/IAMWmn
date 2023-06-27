@@ -46,11 +46,11 @@ class ManualSeeder extends Seeder
         DB::table('users')->insert([
             "email" => "fian@gmail.com",
             "email_verified_at" => date("Y-m-d h:i:s"),
-            "password" => Hash::make("fian123"),
+            "password" => Hash::make("20021127"),
             "name" => "Allifian",
             "role" => "Mahasiswa",
             "reff" => "2022320164",
-            "Status" => 1,
+            "status" => 1,
             "remember_token" => Str::random(10),
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
@@ -79,6 +79,48 @@ class ManualSeeder extends Seeder
             "updated_at" => date("Y-m-d h:i:s")
         ]);
 
+        DB::table('mahasiswas')->insert([
+            "mhs_NIM" => "2022320064",
+            "mhs_nm" => "Aditya Ramatullah Yoga Pratama",
+            "mhs_email" => "rama@gmail.com",
+            "mhs_jk" => 1,
+            "mhs_notelp" => "088888888888",
+            "mhs_th_masuk" => "2023",
+            "mhs_th_lulus" => "2024",
+            "mhs_kota_lahir" => "MADIUN",
+            "mhs_tanggal_lahir" => date("2000-01-13"),
+            "mhs_alamat" => "Merak Madiun",
+            "mhs_kota" => "MADIUN",
+            "mhs_status" => 1,
+            "mhs_tb" => "148",
+            "mhs_bb" => "120",
+            "mhs_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "mhs_kd_jurusan" => "330",
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
+
+        DB::table('mahasiswas')->insert([
+            "mhs_NIM" => "2022320075",
+            "mhs_nm" => "Ahmad Dany Fathin Nawwaf",
+            "mhs_email" => "dany@gmail.com",
+            "mhs_jk" => 1,
+            "mhs_notelp" => "0895352882228",
+            "mhs_th_masuk" => "2023",
+            "mhs_th_lulus" => "2024",
+            "mhs_kota_lahir" => "MADIUN",
+            "mhs_tanggal_lahir" => date("1999-03-20"),
+            "mhs_alamat" => "JL Merak Madiun",
+            "mhs_kota" => "MADIUN",
+            "mhs_status" => 1,
+            "mhs_tb" => "168",
+            "mhs_bb" => "50",
+            "mhs_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "mhs_kd_jurusan" => "330",
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
+
         // Data Berkas
         DB::table('berkas')->insert([
             "berkas_kd" => $faker->isbn13(),
@@ -88,6 +130,28 @@ class ManualSeeder extends Seeder
             "berkas_cv" => $faker->uuid(),
             "berkas_ijazah" => $faker->uuid(),
             "berkas_NIM" => "2022320164",
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
+        DB::table('berkas')->insert([
+            "berkas_kd" => $faker->isbn13(),
+            "berkas_skck" => $faker->uuid(),
+            "berkas_kk" => $faker->uuid(),
+            "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "berkas_cv" => $faker->uuid(),
+            "berkas_ijazah" => $faker->uuid(),
+            "berkas_NIM" => "2022320064",
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
+        DB::table('berkas')->insert([
+            "berkas_kd" => $faker->isbn13(),
+            "berkas_skck" => $faker->uuid(),
+            "berkas_kk" => $faker->uuid(),
+            "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "berkas_cv" => $faker->uuid(),
+            "berkas_ijazah" => $faker->uuid(),
+            "berkas_NIM" => "2022320075",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);

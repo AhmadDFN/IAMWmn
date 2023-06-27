@@ -25,7 +25,7 @@ class LokerFactory extends Factory
         return [
             "loker_kd" => $faker->isbn13(),
             "loker_nm" => $faker->name(),
-            "loker_ket" => $faker->realText($maxNbChars = 200, $indexSize = 2),
+            "loker_ket" => $faker->realText(200, 2),
             "loker_exp" => $faker->dateTimeThisMonth('+14 days'),
             "loker_kd_jurusan" => implode(',', $jurusanloker),
             "loker_status" => 1,

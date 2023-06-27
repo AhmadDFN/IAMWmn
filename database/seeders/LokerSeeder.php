@@ -16,8 +16,8 @@ class LokerSeeder extends Seeder
     {
         $perusahaans = Perusahaan::all();
         foreach ($perusahaans as $perusahaan) {
-            $randomno = rand(1, 2);
-            if ($randomno == 1) {
+            $randomno = rand(1, 4);
+            if ($randomno != 1) {
                 Loker::factory()
                     ->count(1)
                     ->create([

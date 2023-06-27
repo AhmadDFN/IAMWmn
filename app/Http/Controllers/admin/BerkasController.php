@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Exception;
 use App\Models\Berkas;
 use App\Models\Mahasiswa;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -57,8 +58,9 @@ class BerkasController extends Controller
     {
         // dd($mahasiswa);
         // dd($request);
+        $nimterakhir = substr($mahasiswa->mhs_NIM, -3);
         if ($request->file("berkas_foto")) {
-            $fileName = time() . $mahasiswa->mhs_NIM . '.' . $request->file("berkas_foto")->extension();
+            $fileName = time() . $nimterakhir . "F-" . Str::random(6) . '.' . $request->file("berkas_foto")->extension();
             $result1 = $request->file("berkas_foto")->move(public_path('uploads/berkas/foto'), $fileName);
             $berkas_foto = "uploads/berkas/foto/" . $fileName;
         } else {
@@ -66,7 +68,7 @@ class BerkasController extends Controller
         }
 
         if ($request->file("berkas_cv")) {
-            $fileName = time() . $mahasiswa->mhs_NIM . '.' . $request->file("berkas_cv")->extension();
+            $fileName = time() . $nimterakhir . "C-" . Str::random(6) . '.' . $request->file("berkas_cv")->extension();
             $result2 = $request->file("berkas_cv")->move(public_path('uploads/berkas/cv'), $fileName);
             $berkas_cv = "uploads/berkas/cv/" . $fileName;
         } else {
@@ -74,7 +76,7 @@ class BerkasController extends Controller
         }
 
         if ($request->file("berkas_skck")) {
-            $fileName = time() . $mahasiswa->mhs_NIM . '.' . $request->file("berkas_skck")->extension();
+            $fileName = time() . $nimterakhir . "S-" . Str::random(6) . '.' . $request->file("berkas_skck")->extension();
             $result3 = $request->file("berkas_skck")->move(public_path('uploads/berkas/skck'), $fileName);
             $berkas_skck = "uploads/berkas/skck/" . $fileName;
         } else {
@@ -82,7 +84,7 @@ class BerkasController extends Controller
         }
 
         if ($request->file("berkas_kk")) {
-            $fileName = time() . $mahasiswa->mhs_NIM . '.' . $request->file("berkas_kk")->extension();
+            $fileName = time() . $nimterakhir . "K-" . Str::random(6) . '.' . $request->file("berkas_kk")->extension();
             $result4 = $request->file("berkas_kk")->move(public_path('uploads/berkas/kk'), $fileName);
             $berkas_kk = "uploads/berkas/kk/" . $fileName;
         } else {
@@ -90,11 +92,18 @@ class BerkasController extends Controller
         }
 
         if ($request->file("berkas_ijazah")) {
-            $fileName = time() . $mahasiswa->mhs_NIM . '.' . $request->file("berkas_ijazah")->extension();
+            $fileName = time() . $nimterakhir . "I-" . Str::random(6) . '.' . $request->file("berkas_ijazah")->extension();
             $result5 = $request->file("berkas_ijazah")->move(public_path('uploads/berkas/ijazah'), $fileName);
             $berkas_ijazah = "uploads/berkas/ijazah/" . $fileName;
         } else {
             $berkas_ijazah = $request->input("old_ijazah");
+        }
+        if ($request->file("berkas_ktp")) {
+            $fileName = time() . $nimterakhir . "KT-" . Str::random(6) . '.' . $request->file("berkas_ktp")->extension();
+            $result5 = $request->file("berkas_ktp")->move(public_path('uploads/berkas/ktp'), $fileName);
+            $berkas_ktp = "uploads/berkas/ktp/" . $fileName;
+        } else {
+            $berkas_ktp = $request->input("old_ktp");
         }
 
         try {
@@ -106,6 +115,7 @@ class BerkasController extends Controller
                 [
                     "berkas_kd" => $request->input("berkas_kd"),
                     "berkas_skck" => $berkas_skck,
+                    "berkas_ktp" => $berkas_ktp,
                     "berkas_kk" => $berkas_kk,
                     "berkas_cv" => $berkas_cv,
                     "berkas_ijazah" => $berkas_ijazah,
@@ -140,15 +150,34 @@ class BerkasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Berkas $berkas)
+    public function show(Mahasiswa $mahasiswa, Berkas $berka)
     {
-        $data = [
-            "title" => berkas::find($berkas->berkas_nm),
-            'page' => "Profil Berkas " . berkas::find($berkas->berkas_nm),
-            'berkas' => berkas::find($berkas->id),
+        $data = (object)[
+            'title' => $mahasiswa->mhs_nm . " Berkas",
+            'page' => "Berkas " . $mahasiswa->mhs_nm,
         ];
-
-        return view($this->view . "single", $data);
+        $berkas = $berka;
+        $progress = 0;
+        if ($berkas->berkas_kk !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_skck !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_cv !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_foto !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_ijazah !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_ktp !== null) {
+            $progress++;
+        }
+        $title = "Berkas";
+        return view($this->view . 'show', compact('berkas', 'data', 'title', 'mahasiswa', 'progress'));
     }
 
     /**

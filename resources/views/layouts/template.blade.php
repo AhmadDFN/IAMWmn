@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-sm-4">
                             <div class="d-flex align-items-center justify-content-end p-4">
                                 <ol class="breadcrumb float-lg-right m-0">
-                                    <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
                                     <li class="breadcrumb-item active">@yield('title')</li>
                                 </ol>
                             </div>

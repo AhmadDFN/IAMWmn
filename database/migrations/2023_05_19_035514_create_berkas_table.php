@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('berkas', function (Blueprint $table) {
             $table->id();
             $table->string("berkas_kd", 15)->unique();
-            $table->string("berkas_skck");
-            $table->string("berkas_kk");
-            $table->string("berkas_foto");
-            $table->string("berkas_cv");
-            $table->string("berkas_ijazah");
-            $table->string("berkas_NIM");
+            $table->string("berkas_ktp")->nullable();
+            $table->string("berkas_skck")->nullable();
+            $table->string("berkas_kk")->nullable();
+            $table->string("berkas_foto")->nullable();
+            $table->string("berkas_cv")->nullable();
+            $table->string("berkas_ijazah")->nullable();
+            $table->string("berkas_NIM")->nullable();
             $table->timestamps();
             $table->index(["berkas_NIM"]);
         });

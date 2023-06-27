@@ -70,7 +70,12 @@ class LamarController extends Controller
      */
     public function show(lamar $lamar)
     {
-        return view($this->view . 'show', compact('lamar'));
+        $data = (object)[
+            'title' => $lamar->lamar_nm,
+            'page' => "Profil lamar " . $lamar->lamar_nm,
+        ];
+        $title = "Lamar";
+        return view($this->view . 'show', compact('lamar', 'data', 'title'));
     }
 
     /**

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("mhs_nm", 80);
             $table->string("mhs_email", 50);
             $table->integer("mhs_jk")->default(1);
-            $table->string("mhs_notelp");
+            $table->string("mhs_notelp")->nullable();
             $table->year("mhs_th_masuk");
             $table->year("mhs_th_lulus");
             $table->string("mhs_kota_lahir", 50);

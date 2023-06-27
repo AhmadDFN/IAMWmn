@@ -10,6 +10,8 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Berkas;
+use App\Models\Lamar;
 
 class MahasiswaController extends Controller
 {
@@ -147,13 +149,20 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
-        $data = [
-            "title" => Mahasiswa::find($mahasiswa->mhs_nm),
-            'page' => "Profil Mahasiswa " . Mahasiswa::find($mahasiswa->mhs_nm),
-            'mahasiswa' => Mahasiswa::find($mahasiswa->mhs_NIM),
+        $data = (object)[
+            "title" => $mahasiswa->mhs_nm,
+            'page' => "Profil Mahasiswa " . $mahasiswa->mhs_nm,
         ];
-
-        return view("admin.mahasiswa.single", $data);
+        $lamars =  DB::table('lamars')
+            ->join('lokers', 'lamars.lamar_id_loker', '=', 'lokers.id')
+            ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
+            ->select('lamars.*', 'lokers.loker_nm', 'perusahaans.perusahaan_nm')
+            ->where('lamars.lamar_NIM', "=", $mahasiswa->mhs_NIM)
+            ->limit(3)
+            ->get();
+        $title = "Mahasiswa";
+        $berkas = Berkas::where("berkas_NIM", $mahasiswa->mhs_NIM)->get()->first();
+        return view("admin.mahasiswa.show", compact('data', 'mahasiswa', 'title', 'lamars', 'berkas'));
     }
 
     /**

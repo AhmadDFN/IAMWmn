@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,7 +22,14 @@ class UserController extends Controller
             'index' => $this->route,
             'add' => $this->route . 'create',
         ];
-        $users = user::all();
+        if (@Auth::user()->role == "SuperAdmin") {
+            $users = user::all();
+        } else {
+            $exceptNames = ['Admin', 'SuperAdmin'];
+            $users = DB::table('users')
+                ->whereNotIn('role', $exceptNames)
+                ->get();
+        }
         $data = (object)[
             "title" => "User",
             'page' => 'User Account',
@@ -61,7 +70,12 @@ class UserController extends Controller
      */
     public function show(user $user)
     {
-        return view($this->view . 'show', compact('user'));
+        $data = (object)[
+            'title' => $user->name,
+            'page' => "Profil user " . $user->name,
+        ];
+        $title = "User";
+        return view($this->view . 'show', compact('user', 'data', 'title'));
     }
 
     /**

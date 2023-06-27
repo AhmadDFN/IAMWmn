@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
 
 class JurusanController extends Controller
 {
@@ -58,13 +59,14 @@ class JurusanController extends Controller
      */
     public function show(Jurusan $jurusan)
     {
-        $data = [
-            "title" => jurusan::find($jurusan->jurusan_nm),
-            'page' => "Profil Jurusan " . jurusan::find($jurusan->jurusan_nm),
-            'jurusan' => jurusan::find($jurusan->id),
+        $data = (object)[
+            'title' => $jurusan->jurusan_nm,
+            'page' => "Profil jurusan " . $jurusan->jurusan_nm,
         ];
-
-        return view($this->view . "single", $data);
+        $mahasiswas = Mahasiswa::where("mhs_kd_jurusan", $jurusan->jurusan_kd)->get();
+        $title = "Jurusan";
+        // dd($mahasiswas);
+        return view($this->view . 'show', compact('jurusan', 'data', 'mahasiswas', 'title'));
     }
 
     /**

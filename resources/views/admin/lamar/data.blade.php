@@ -23,7 +23,7 @@
                             <th scope="col">Kode</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Jenis Loker</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" width="12%">Action</th>
                         </tr>
                     </thead>
                     <tbody>

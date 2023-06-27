@@ -22,7 +22,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Kode Jurusan</th>
                             <th scope="col">Nama Jurusan</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" width="12%">Action</th>
                         </tr>
                     </thead>
                     <tbody>

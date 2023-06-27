@@ -70,6 +70,11 @@
                             <input type="file" id="berkas_ijazah" name="berkas_ijazah" class="form-control bg-dark">
                             <input type="hidden" name="old_ijazah" value="{{ @$berkas->berkas_ijazah }}">
                         </div>
+                        <div class="mb-3">
+                            <label for="berkas_ktp" class="form-label text-white">KTP</label>
+                            <input type="file" id="berkas_ktp" name="berkas_ktp" class="form-control bg-dark">
+                            <input type="hidden" name="old_ktp" value="{{ @$berkas->berkas_ijazah }}">
+                        </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-success" value="SIMPAN">
                         </div>

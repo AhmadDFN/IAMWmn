@@ -23,9 +23,9 @@
                     <div class="bg-secondary rounded h-100 p-4">
                         <div class="form-floating mb-3">
                             <input type="hidden" name="id" value="{{ @$user->id }}">
-                            <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                id="username" name="username" placeholder="Username" value="{{ @$user->username }}">
-                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="reff" name="reff" placeholder="reff user"
+                                value="{{ @$user->reff }}">
+                            <label for="reff">reff user</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control" id="email" name="email"
@@ -37,20 +37,40 @@
                                 value="{{ @$user->name }}">
                             <label for="name">Nama user</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <select class="form-select" id="role" name="role" aria-label="Jurusan"
-                                style="height: 70px; color: white;">
-                                <option selected>Pilih</option>
-                                <option style="color: white" value="SuperAdmin"
-                                    {{ @$user->role == 'SuperAdmin' ? 'selected' : '' }}>SuperAdmin</option>
-                                <option style="color: white" value="Admin" {{ @$user->role == 'Admin' ? 'selected' : '' }}>
-                                    Admin</option>
-                                <option style="color: white" value="Mahasiswa"
-                                    {{ @$user->role == 'Mahasiswa' ? 'selected' : '' }}>
-                                    Mahasiswa</option>
-                            </select>
-                            <label for="role">Jurusan</label>
-                        </div>
+                        @if (@Auth::user()->role == 'SuperAdmin')
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="role" name="role" aria-label="Jurusan"
+                                    style="height: 70px; color: white;">
+                                    <option selected>Pilih</option>
+                                    <option style="color: white" value="SuperAdmin"
+                                        {{ @$user->role == 'SuperAdmin' ? 'selected' : '' }}>SuperAdmin</option>
+                                    <option style="color: white" value="Admin"
+                                        {{ @$user->role == 'Admin' ? 'selected' : '' }}>
+                                        Admin</option>
+                                    <option style="color: white" value="Perusahaan"
+                                        {{ @$user->role == 'Perusahaan' ? 'selected' : '' }}>
+                                        Perusahaan</option>
+                                    <option style="color: white" value="Mahasiswa"
+                                        {{ @$user->role == 'Mahasiswa' ? 'selected' : '' }}>
+                                        Mahasiswa</option>
+                                </select>
+                                <label for="role">Role</label>
+                            </div>
+                        @endif
+                        @if (@Auth::user()->role == 'Admin')
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="role" name="role" aria-label="Jurusan"
+                                    style="height: 70px; color: white;">
+                                    <option selected>Pilih</option>
+                                    <option style="color: white" value="Perusahaan"
+                                        {{ @$user->role == 'Perusahaan' ? 'selected' : '' }}>Perusahaan</option>
+                                    <option style="color: white" value="Mahasiswa"
+                                        {{ @$user->role == 'Mahasiswa' ? 'selected' : '' }}>
+                                        Mahasiswa</option>
+                                </select>
+                                <label for="role">Role</label>
+                            </div>
+                        @endif
                         <div class="form-floating mb-3">
                             <select class="form-select" id="status" name="status" aria-label="Jurusan"
                                 style="height: 70px; color: white;">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\User;
-use App\Models\Lamar;
 use App\Models\Loker;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
@@ -12,10 +11,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
     // protected $view = 'layDashboard';
+    // protected $view = 'admin.user.';
+    protected $route = 'update.admin';
     protected $view = 'admin.home';
 
     /**
@@ -59,5 +61,45 @@ class DashboardController extends Controller
         // dd($dash1);
         // dd(Auth::user());
         return view($this->view, compact('data', 'title', 'users', 'mahasiswas', 'perusahaans', 'lokers', 'lokeract', 'mhsact', 'lamars'));
+    }
+
+    public function profilku()
+    {
+        $user = Auth::user();
+        $routes = (object)[
+            'save' => $this->route,
+        ];
+        $data = (object)[
+            "title" => "Dashboard",
+            'page' => 'Dashboard Account',
+        ];
+        return view("admin.profilku", compact('data', 'routes', 'user'));
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+        if ($request->input('password') == $request->input('confirmpassword')) {
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            if ($request->filled('password')) {
+                $user->password = Hash::make($request->input('password'));
+            }
+            // dd($request);
+            $user->save();
+
+            $mess = [
+                "type" => "success",
+                "text" => "Profil berhasil diperbarui.!"
+            ];
+
+            return redirect()->route('edit.admin')->with($mess);
+        }
+        $mess = [
+            "type" => "danger",
+            "text" => "Failed , Profil gagal diperbarui."
+        ];
+
+        return redirect()->route('edit.admin')->with($mess);
     }
 }

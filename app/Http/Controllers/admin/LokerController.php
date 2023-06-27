@@ -131,7 +131,13 @@ class LokerController extends Controller
      */
     public function show(loker $loker)
     {
-        return view($this->view . 'show', compact('loker'));
+        $data = (object)[
+            'title' => $loker->loker_nm,
+            'page' => "Profil loker " . $loker->loker_nm,
+            'loker' => loker::find($loker->id),
+        ];
+        $title = "Loker";
+        return view($this->view . 'show', compact('loker', 'data', 'title'));
     }
 
     /**

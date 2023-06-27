@@ -45,7 +45,11 @@ Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->na
 /** Admin Controller */
 Route::group(["middleware" => "auth"], function () {
     Route::get('admin/', [admin\DashboardController::class, 'index'])->name('dashboard');
-    // Route::get('/test', [textCTRL::class, 'run']);
+    Route::get('admin/myprofile', [admin\DashboardController::class, 'profilku'])->name('edit.admin');
+    Route::put('admin/myprofile/update', [admin\DashboardController::class, 'update'])->name('update.admin');
+    Route::get('/test', function () {
+        return view("admin.blank");
+    });
 
     Route::get('verif', [admin\VerifController::class, 'index'])->name('verif');
     Route::get("verif/{mahasiswa}/acc", [admin\VerifController::class, "update_status"]);

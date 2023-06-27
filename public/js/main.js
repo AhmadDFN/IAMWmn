@@ -46,6 +46,17 @@
             .container()
             .appendTo(".card-tools");
     });
+    $(document).ready(function () {
+        $("#dtTableshow").DataTable({
+            paging: false,
+            lengthChange: true,
+            searching: false,
+            ordering: false,
+            info: false,
+            autoWidth: false,
+            responsive: true,
+        });
+    });
 
     // Spinner
     var spinner = function () {

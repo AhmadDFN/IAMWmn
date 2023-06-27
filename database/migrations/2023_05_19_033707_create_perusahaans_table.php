@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("perusahaan_website");
             $table->string("perusahaan_cp_nama")->nullable();
             $table->string("perusahaan_cp_notelp")->nullable();
+            $table->string("perusahaan_foto")->nullable();
             $table->timestamps();
         });
     }

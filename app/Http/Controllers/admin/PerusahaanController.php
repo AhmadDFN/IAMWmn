@@ -10,6 +10,7 @@ use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Loker;
 
 class PerusahaanController extends Controller
 {
@@ -58,12 +59,14 @@ class PerusahaanController extends Controller
      */
     public function show(Perusahaan $perusahaan)
     {
-        $data = [
-            "title" => perusahaan::find($perusahaan->perusahaan_nm),
-            'page' => "Profil perusahaan " . perusahaan::find($perusahaan->perusahaan_nm),
-            'perusahaan' => perusahaan::find($perusahaan->id),
+        $data = (object)[
+            'title' => $perusahaan->perusahaan_nm,
+            'page' => "Profil perusahaan " . $perusahaan->perusahaan_nm,
         ];
-        return view("admin.perusahaan.sigle", $data);
+        $title = "Perusahaan";
+        $lokers = Loker::where("loker_id_perusahaan", $perusahaan->id)->get();
+        // dd($lokers);
+        return view("admin.perusahaan.show", compact('data', 'perusahaan', 'title', 'lokers'));
     }
 
     /**

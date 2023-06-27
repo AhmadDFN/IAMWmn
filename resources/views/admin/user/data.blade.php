@@ -20,7 +20,7 @@
                     <thead>
                         <tr>
                             <th scope="col">id</th>
-                            <th scope="col">Username</th>
+                            <th scope="col">Reff</th>
                             <th scope="col">Email</th>
                             <th scope="col">Name</th>
                             <th scope="col">Role</th>
@@ -32,7 +32,7 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->reff }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->role }}</td>
@@ -47,7 +47,6 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent mt-0"><i
                                                 class="text-danger fas fa-user-times"></i></button>
-
                                     </form>
                                 </td>
                             </tr>

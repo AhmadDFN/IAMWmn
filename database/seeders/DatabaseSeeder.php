@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
     {
         $baseFolderPath = public_path('uploads/berkas');
 
-        $subfolders = ['foto', 'cv', 'pdf', 'ijazah', 'kk', 'skck'];
+        $subfolders = ['foto', 'cv', 'pdf', 'ijazah', 'kk', 'skck', 'ktp'];
 
         foreach ($subfolders as $subfolder) {
             $folderPath = $baseFolderPath . '/' . $subfolder;
@@ -32,6 +32,9 @@ class DatabaseSeeder extends Seeder
             if (!File::exists($folderPath)) {
                 File::makeDirectory($folderPath, 0755, true);
             }
+        }
+        if (!File::exists(public_path("uploads/perusahaan/foto"))) {
+            File::makeDirectory(public_path("uploads/perusahaan/foto"), 0755, true);
         }
     }
     /**

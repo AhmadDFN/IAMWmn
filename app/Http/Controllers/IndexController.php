@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Carbon\Carbon;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -107,6 +108,13 @@ class IndexController extends Controller
         }
 
         if ($logged) {
+            if (Auth::attempt(['status' => 0])) {
+                $mess = [
+                    "type" => "danger",
+                    "text" => "Maaf kamu belum verifikasi !"
+                ];
+                return back()->with($mess);
+            }
             $request->session()->regenerate();
 
             switch (Auth::user()->role) {
@@ -172,16 +180,16 @@ class IndexController extends Controller
                     "name" => $hasil[0]->mhs_nm,
                     "reff" => $hasil[0]->mhs_NIM,
                     "email" => $hasil[0]->mhs_email,
-                    "password" => Hash::make($hasil[0]->mhs_tanggal_lahir),
+                    "password" => Hash::make(str_replace("-", "", Carbon::createFromFormat('Y-m-d', $hasil[0]->mhs_tanggal_lahir)->locale('id')->isoFormat('D MMMM YYYY'))),
                     "role" => "Mahasiswa",
-                    "Status" => 0,
+                    "status" => 0,
                     "remember_token" => Str::random(10),
                     "created_at" => date("Y-m-d h:i:s"),
                     "updated_at" => date("Y-m-d h:i:s")
                 ]);
                 $mess = [
                     "type" => "success",
-                    "text" => "Registrasi berhasil , silahkan login !"
+                    "text" => "Registrasi berhasil , Silahkan tunggu maksimal 2x24 jam !"
                 ];
             } catch (Exception $err) {
                 $mess = [

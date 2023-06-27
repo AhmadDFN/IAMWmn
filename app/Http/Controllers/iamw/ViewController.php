@@ -7,6 +7,7 @@ use App\Models\Jurusan;
 use App\Helpers\getDateNow;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ViewController extends Controller
 {
@@ -35,6 +36,23 @@ class ViewController extends Controller
             $dateend = new DateTime($lokers[$key]->loker_exp);
             $lokers[$key]->loker_exp_new = $dateend;
         }
+        switch (@Auth::user()->role) {
+            case "SuperAdmin":
+                $dashboard = "admin";
+                break;
+            case "Admin":
+                $dashboard = "admin";
+                break;
+            case "Perusahaan":
+                $dashboard = "perusahaan";
+                break;
+            case "Mahasiswa":
+                $dashboard = "home";
+                break;
+            default:
+                $dashboard = "home";
+                break;
+        }
 
         $data = (object)[
             "title" => "IAMW",
@@ -42,6 +60,6 @@ class ViewController extends Controller
         ];
         // dd($lokers);
         $title = $data->title;
-        return view($this->view . 'index', compact('lokers', 'routes', 'data', 'title', 'datenow'));
+        return view($this->view . 'index', compact('lokers', 'routes', 'data', 'title', 'datenow', 'dashboard'));
     }
 }
