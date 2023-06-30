@@ -14,25 +14,7 @@
     <!-- Sale & Revenue Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-line fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Total User</p>
-                        <h1 class="mb-0">{{ @$users->count() }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Total Mahasiswa</p>
-                        <h1 class="mb-0">{{ @$mahasiswas->count() }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-4 col-xl-4">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-area fa-3x text-primary"></i>
                     <div class="ms-3">
@@ -41,22 +23,34 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-4 col-xl-4">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Total Loker</p>
-                        <h1 class="mb-0">{{ @$lokers->count() }}</h1>
+                        <p class="mb-2">Loker {{ @$mahasiswa->jurusan_nm }}</p>
+                        <h1 class="mb-0">{{ @$lokerjur->count() }}</h1>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Sale & Revenue End -->
-    <!-- Sale & Revenue Start -->
-    <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-            <div class="col-sm-6 col-xl-6">
+            <div class="col-sm-4 col-xl-4">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-area fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Perusahaan</p>
+                        <h1 class="mb-0">{{ @$perusahaans->count() }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xl-4">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Loker {{ @$mahasiswa->jurusan_nm }}</p>
+                        <h1 class="mb-0">{{ @$lokerjur->count() }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xl-4">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-area fa-3x text-primary"></i>
                     <div class="ms-3">
@@ -65,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-6">
+            <div class="col-sm-4 col-xl-4">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
@@ -82,8 +76,8 @@
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Record Pelamar Terbaru</h6>
-                <a href="{{ url('lamar') }}">Show All</a>
+                <h6 class="mb-0">Record Lamaranmu</h6>
+                <a href="{{ url('home/lamar') }}">Show All</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -106,7 +100,8 @@
                                 <td>{{ @$lamar->perusahaan_nm }}</td>
                                 <td>{{ @$lamar->created_at }}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-primary" href="{{ url('lamar/' . @$lamar->id) }}">Detail</a>
+                                    <a class="btn btn-sm btn-primary"
+                                        href="{{ url('home/lamar/' . @$lamar->id) }}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -121,8 +116,8 @@
     <div class="container-fluid pt-4 px-4">
         <div class="bg-secondary text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Lowongan Terbaru</h6>
-                <a href="{{ url('loker') }}">Show All</a>
+                <h6 class="mb-0">Lowongan Jurusanmu Terbaru</h6>
+                <a href="{{ url('home/loker') }}">Show All</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -133,7 +128,7 @@
                             {{--  <th scope="col" width="30%">Keterangan Loker</th>  --}}
                             <th scope="col">Loker Exp</th>
                             <th scope="col">Jurusan Loker</th>
-                            <th scope="col">Stats</th>
+                            {{--  <th scope="col">Stats</th>  --}}
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -149,9 +144,10 @@
                                         {!! '-' . @$jurusan->jurusan_nm . '</br>' !!}
                                     @endforeach
                                 </td>
-                                <td>{{ @$loker->loker_status }}</td>
+                                {{--  <td>{{ @$loker->loker_status }}</td>  --}}
                                 <td>
-                                    <a class="btn btn-sm btn-primary" href="{{ url('loker/' . @$loker->id) }}">Detail</a>
+                                    <a class="btn btn-sm btn-primary"
+                                        href="{{ url('home/loker/' . @$loker->id) }}">Detail</a>
                                 </td>
                             </tr>
                         @endforeach

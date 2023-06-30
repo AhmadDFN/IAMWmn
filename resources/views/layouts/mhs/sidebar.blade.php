@@ -29,12 +29,13 @@
         <div class="navbar-nav w-100">
             <a href="{{ url('home') }}" class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            <a href="{{ url('home/loker') }}" class="nav-item nav-link {{ $title == 'Loker' ? 'active' : '' }}"><i
+                    class="fa fa-laptop me-2"></i>Semua Loker</a>
+            <a href="{{ url('home/lokerku') }}" class="nav-item nav-link {{ $title == 'Lokerku' ? 'active' : '' }}"><i
+                    class="fa fa-laptop me-2"></i>Loker Jurusanmu</a>
             <a href="{{ url('home/perusahaan') }}"
                 class="nav-item nav-link {{ $title == 'Perusahaan' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Perusahaan</a>
-            <a href="{{ url('home/jenisloker') }}"
-                class="nav-item nav-link {{ $title == 'Jenis Loker' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Jenis Loker</a>
             <a href="{{ url('home/lamar') }}" class="nav-item nav-link {{ $title == 'Lamar' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Lamar</a>
     </nav>

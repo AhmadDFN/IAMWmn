@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.mhs.template2')
 
 @section('title', $data->title)
 @section('page-title', $data->page)

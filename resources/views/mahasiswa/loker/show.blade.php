@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.mhs.template2')
 
 @section('title', $data->title)
 @section('page-title', $data->page)
@@ -13,28 +13,28 @@
                     </div>
                 @endif
             </div>
-            <div class="col-md-5">
-                <div class="profile-header">
-                    <div class="overlay"></div>
-                    <div class="profile-main" style="background-image: url({{ asset('img/profile-bg.png') }});">
-                        <div class="profile-glass">
-                            <div class="glass-effect">
-                                @if (@$perusahaan->perusahaan_foto != '')
-                                    <img src="{{ asset($perusahaan->perusahaan_foto) }}"
-                                        alt="{{ $perusahaan->perusahaan_nm }}" class="img-circle" width="100">
-                                @else
-                                    <img src="{{ url(asset('img/iamw/company-1.jpg')) }}"
-                                        alt="{{ $perusahaan->perusahaan_nm }}" class="img-circle" width="100">
-                                @endif
-                                <h3 class="name">{{ $perusahaan->perusahaan_nm }}</h3>
-                                <span class="online-status status-available">Aktif</span>
-                            </div>
+            <div class="profile-header">
+                <div class="overlay"></div>
+                <div class="profile-main" style="background-image: url({{ asset('img/profile-bg.png') }});">
+                    <div class="profile-glass">
+                        <div class="glass-effect">
+                            @if (@$perusahaan->perusahaan_foto != '')
+                                <img src="{{ asset($perusahaan->perusahaan_foto) }}" alt="{{ $perusahaan->perusahaan_nm }}"
+                                    class="img-circle" width="100">
+                            @else
+                                <img src="{{ url(asset('img/iamw/company-1.jpg')) }}" alt="{{ $perusahaan->perusahaan_nm }}"
+                                    class="img-circle" width="100">
+                            @endif
+                            <h3 class="name">{{ $perusahaan->perusahaan_nm }}</h3>
+                            <span class="online-status status-available">Aktif</span>
                         </div>
                     </div>
-                    <a href="{{ route('perusahaan.index') }}" class="btn btn-primary" style="position: relative;">Back
-                        to
-                        perusahaan List</a>
                 </div>
+                <a href="{{ url('home/perusahaan') }}" class="btn btn-primary" style="position: relative;">Back
+                    to
+                    perusahaan List</a>
+            </div>
+            <div class="col-md-6">
                 <div class="profile-detail">
                     <div class="profile-info">
                         <h4><i class="fa fa-user box-circle"></i> Informasi Loker</h4>
@@ -50,13 +50,12 @@
                             <div class="col-md-4">Loker Status</div>
                             <div class="col-md-8">: {{ @$loker->loker_status == 1 ? 'Active' : 'Not Active' }}</div>
                             <br><br>
-                            <a href="{{ url('/loker') }}" class="btn btn-primary" style="position: relative;">Ke
-                                Loker</a>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="profile-detail">
                     <div class="profile-info">
                         <h4><i class="fa fa-user box-circle"></i> Informasi Perusahaan</h4>
@@ -78,40 +77,28 @@
                             <div class="col-md-4">CP No Telp</div>
                             <div class="col-md-8">: {{ @$perusahaan->perusahaan_cp_notelp }}</div>
                             <br><br>
-                            <a href="{{ url('/perusahaan') }}" class="btn btn-primary" style="position: relative;">Ke
-                                Perusahaan</a>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="tombol-export"></div>
-                <div class="table-responsive">
-                    <table id="dtTableshow" class="table compact table-dark dtTable">
-                        <thead>
-                            <tr>
-                                <th scope="col">NIM</th>
-                                <th scope="col">Kode</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Pelamar</th>
-                                <th scope="col" width="12%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($lamars as $item)
-                                <tr>
-                                    <td>{{ $item->lamar_NIM }}</td>
-                                    <td>{{ $item->lamar_kd }}</td>
-                                    <td>{{ $item->lamar_nm }}</td>
-                                    <td>{{ $item->mhs_nm }}</td>
-                                    <td>
-                                        <a href="{{ url('/lamar/' . $item->id) }}"><i
-                                                class="text-success fas fa-eye"></i></a><br>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+            <div class="row justify-content-center align-items-center text-center">
+                <div class="col-6">
+                    <a href="{{ url('home/loker') }}" class="btn btn-primary" style="position: relative; width:100%;">Ke
+                        Loker list</a>
+                </div>
+                <div class="col-6">
+                    <a href="{{ url('home/perusahaan/' . $perusahaan->id) }}" class="btn btn-primary"
+                        style="position: relative;width:100%;">Info
+                        {{ @$perusahaan->perusahaan_nm }}</a>
+                </div>
+            </div>
+            <br><br>
+            <div class="row justify-content-center align-items-center text-center">
+                <div class="col-6">
+                    <a href="{{ url('home/lokerku') }}" class="btn btn-primary" style="position: relative;width:100%;">Info
+                        Loker
+                        Jurusanku</a>
                 </div>
             </div>
         </div>

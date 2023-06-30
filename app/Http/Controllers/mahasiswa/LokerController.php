@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\mahasiswa;
 
 use App\Models\loker;
 use App\Models\Jurusan;
@@ -12,12 +12,14 @@ use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Lamar;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class LokerController extends Controller
 {
-    protected $view = 'admin.loker.';
-    protected $route = '/loker/';
+    protected $view = 'mahasiswa.loker.';
+    protected $route = 'home/loker/';
 
     /**
      * Display a listing of the resource.
@@ -35,52 +37,35 @@ class LokerController extends Controller
             $lokers[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lokers[$key]->loker_kd_jurusan))->get();
         }
 
-        // dd($lokers[0]->jurusans);
-
-        // foreach ($lokers as $key => $loker) {
-        //     $lokers[$key]->loker_kd_jurusan = explode(',', $loker->loker_kd_jurusan);
-        // }
-        // $lokers->map(function ($loker) {
-        //     $loker->loker_kd_jurusan = rand(1, 5);
-        //     return $loker;
-        // });
-
-        // $lokerganti = explode(",", $lokers[0]->loker_kd_jurusan);
-        // $lokers[0]->loker_kd_jurusan = $lokerganti;
-
-        // foreach ($lokers[0]->loker_kd_jurusan as $item) {
-        // };
-
-        // $lokers->map(function ($loker) {
-        //     $joinedJurusan = collect($loker->loker_kd_jurusan)->map(function ($jurusan_kd) {
-        //         return Jurusan::select('jurusan_kd', 'jurusan_nm')->where('jurusan_kd', $jurusan_kd)->first();;
-        //     });
-
-        //     $loker->joined_jurusan = $joinedJurusan;
-
-        //     return $loker;
-        // });
-
-        // $result = collect($lokers[0]->joined_jurusan)->map(function ($item) {
-        //     return $item['jurusan_nm'];
-        // })->all();
-
-        // $lokers[0]->joined_jurusan = $result;
-
-        // $balikinjur = implode(",", $lokers[0]->loker_kd_jurusan);
-        // $lokers[0]->loker_kd_jurusan = $balikinjur;
-
-        // $namajur = implode(",", $lokers[0]->joined_jurusan);
-        // $lokers[0]->joined_jurusan = $namajur;
-
-        // dd($lokers[0]->joined_jurusan);
-
         $data = (object)[
             "title" => "Loker",
             'page' => 'Loker Account',
         ];
         $title = $data->title;
         return view($this->view . 'data', compact('lokers', 'jurusans', 'routes', 'data', 'title'));
+    }
+
+    public function lokerku()
+    {
+        $mahasiswa = Mahasiswa::where('mhs_NIM', Auth::user()->reff)->get()->first();
+        $routes = (object)[
+            'index' => $this->route,
+        ];
+        $lokers = loker::where('loker_kd_jurusan', 'LIKE', '%' . $mahasiswa->mhs_kd_jurusan . "%")->get();
+        $jurusans  = Jurusan::all();
+        // dd($lokers);
+
+
+        foreach ($lokers as $key => $loker) {
+            $lokers[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lokers[$key]->loker_kd_jurusan))->get();
+        }
+
+        $data = (object)[
+            "title" => "Lokerku",
+            'page' => 'Loker Account',
+        ];
+        $title = $data->title;
+        return view($this->view . 'dataku', compact('lokers', 'jurusans', 'routes', 'data', 'title'));
     }
 
     /**
@@ -138,10 +123,7 @@ class LokerController extends Controller
             'loker' => loker::find($loker->id),
         ];
         $perusahaan = Perusahaan::where('id', $loker->loker_id_perusahaan)->get()->first();
-        $lamars = Lamar::where('lamar_id_loker', $loker->id)
-            ->join('mahasiswas', 'lamars.lamar_NIM', '=', 'mahasiswas.mhs_NIM')
-            ->select("mahasiswas.mhs_nm", "lamars.*")
-            ->get();
+        $lamars = Lamar::where('lamar_id_loker', $loker->id)->get();
         $title = "Loker";
         return view($this->view . 'show', compact('loker', 'data', 'title', 'perusahaan', 'lamars'));
     }

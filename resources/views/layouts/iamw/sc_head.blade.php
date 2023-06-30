@@ -1,5 +1,7 @@
 {{-- CDN --}}
 
+<link rel="icon" href="{{ asset('img/favicon.png') }}">
+
 <!-- Google Web Fonts -->
 <link href="{{ asset('font/opensans.css') }}" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">

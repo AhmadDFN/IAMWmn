@@ -5,7 +5,6 @@ use App\Http\Controllers\iamw;
 use App\Http\Controllers\mahasiswa;
 use App\Http\Controllers\admin;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\kotaController;
 
@@ -38,7 +37,17 @@ Route::group(["middleware" => "auth"], function () {
     Route::get('home/', [mahasiswa\DashboardController::class, 'index'])->name('dashboard');
     Route::get('home/myprofile', [mahasiswa\DashboardController::class, 'profilku'])->name('edit.mahasiswa');
     Route::put('home/myprofile/update', [mahasiswa\DashboardController::class, 'update'])->name('update.mahasiswa');
-
+    Route::resource('home/perusahaan', mahasiswa\PerusahaanController::class)->except([
+        'create', 'store', 'update', 'destroy'
+    ]);
+    Route::resource('home/jenisloker', mahasiswa\JenisLokerController::class)->except([
+        'create', 'store', 'update', 'destroy'
+    ]);
+    Route::resource('home/loker', mahasiswa\LokerController::class)->except([
+        'create', 'store', 'update', 'destroy'
+    ]);
+    Route::get('home/lokerku', [mahasiswa\LokerController::class, 'lokerku']);
+    Route::resource('home/lamar', mahasiswa\LamarController::class);
 
 
 

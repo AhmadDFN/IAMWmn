@@ -18,8 +18,10 @@ class LamarFactory extends Factory
     {
         $faker = fake('id_ID');
 
+
         return [
             "lamar_kd" => $faker->isbn13(),
+            "lamar_tgl_daftar" => $faker->date($format = 'Y-m-d', $max = '-8 weeks'),
         ];
     }
 }

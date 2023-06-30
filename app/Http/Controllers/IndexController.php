@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
@@ -119,6 +120,16 @@ class IndexController extends Controller
 
                 return back()->with($mess);
             }
+
+            // Jika data mahasiswa ditemukan
+            // if ($mahasiswaData) {
+            //     // Menggabungkan data mahasiswa ke sesi otentikasi
+            //     Session::merge([
+            //         'mahasiswa' => $mahasiswaData,
+            //     ]);
+            // }
+
+            // dd($mahasiswaData);
             switch (Auth::user()->role) {
                 case "SuperAdmin":
                     return redirect()->intended($this->routes->admin_home->route);

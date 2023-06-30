@@ -22,6 +22,7 @@
             <div class="col-md-12">
                 <div class="profile-info">
                     <h4><i class="fa fa-user box-circle"></i>Mahasiswa Jurusan {{ $jurusan->jurusan_nm }}</h4>
+                    <div class="card-tools"></div>
                     <div class="table-responsive">
                         <table id="dtTable" class="table compact table-dark dtTable">
                             <thead>

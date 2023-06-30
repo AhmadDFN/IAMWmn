@@ -47,15 +47,26 @@
             .appendTo(".card-tools");
     });
     $(document).ready(function () {
-        $("#dtTableshow").DataTable({
-            paging: false,
-            lengthChange: true,
-            searching: false,
-            ordering: false,
-            info: false,
-            autoWidth: false,
-            responsive: true,
-        });
+        $("#dtTableshow")
+            .DataTable({
+                buttons: [
+                    {
+                        extend: "collection",
+                        text: "Export",
+                        buttons: ["excel", "pdf"],
+                    },
+                ],
+                paging: false,
+                lengthChange: true,
+                searching: false,
+                ordering: false,
+                info: false,
+                autoWidth: false,
+                responsive: true,
+            })
+            .buttons()
+            .container()
+            .appendTo(".tombol-export");
     });
 
     // Spinner

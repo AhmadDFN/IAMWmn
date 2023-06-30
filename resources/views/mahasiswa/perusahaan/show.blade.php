@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.mhs.template2')
 
 @section('title', $data->title)
 @section('page-title', $data->page)
@@ -31,28 +31,14 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ route('perusahaan.index') }}" class="btn btn-primary" style="position: relative;">Back
-                        to
-                        perusahaan List</a>
-                </div>
-                <div class="profile-detail">
-                    <div class="profile-info">
-                        <h4><i class="fa fa-user box-circle"></i> Informasi Loker</h4>
-                        <div class="row">
-                            <div class="col-md-4">Kode</div>
-                            <div class="col-md-8">: {{ @$loker->loker_kd }}</div>
-                            <div class="col-md-4">Nama Lowongan</div>
-                            <div class="col-md-8">: {{ @$loker->loker_nm }}</div>
-                            <div class="col-md-4">Ket Loker</div>
-                            <div class="col-md-8">: {{ @$loker->loker_ket }}</div>
-                            <div class="col-md-4">Expired Lowongan Kerja</div>
-                            <div class="col-md-8">: {{ @$loker->loker_exp }}</div>
-                            <div class="col-md-4">Loker Status</div>
-                            <div class="col-md-8">: {{ @$loker->loker_status == 1 ? 'Active' : 'Not Active' }}</div>
-                            <br><br>
-                            <a href="{{ url('/loker') }}" class="btn btn-primary" style="position: relative;">Ke
-                                Loker</a>
+                    <div class="profile-detail">
+                        <div class="profile-info">
+                            <div class="col">Jumlah Lowongan</div>
+                            <div class="col">{{ @$lokers->count() }}</div>
                         </div>
+                        <a href="{{ route('perusahaan.index') }}" class="btn btn-primary" style="position: relative;">Back
+                            to
+                            perusahaan List</a>
                     </div>
                 </div>
             </div>
@@ -85,27 +71,39 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="tombol-export"></div>
                 <div class="table-responsive">
                     <table id="dtTableshow" class="table compact table-dark dtTable">
                         <thead>
                             <tr>
-                                <th scope="col">NIM</th>
-                                <th scope="col">Kode</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Pelamar</th>
-                                <th scope="col" width="12%">Action</th>
+                                <th scope="col">Loker KD</th>
+                                <th scope="col" width="15%">Nama Loker</th>
+                                <th scope="col" width="30%">Keterangan Loker</th>
+                                <th scope="col">Loker Exp</th>
+                                <th scope="col">Jurusan Loker</th>
+                                <th scope="col">Stats</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($lamars as $item)
+                            @foreach ($lokers as $item)
                                 <tr>
-                                    <td>{{ $item->lamar_NIM }}</td>
-                                    <td>{{ $item->lamar_kd }}</td>
-                                    <td>{{ $item->lamar_nm }}</td>
-                                    <td>{{ $item->mhs_nm }}</td>
+                                    <td>{{ $item->loker_kd }}</td>
+                                    <td>{{ $item->loker_nm }}</td>
+                                    <td>{{ $item->loker_ket }}</td>
+                                    <td>{{ $item->loker_exp }}</td>
                                     <td>
-                                        <a href="{{ url('/lamar/' . $item->id) }}"><i
+                                        @foreach ($item->jurusans as $jurusan)
+                                            {!! '-' . $jurusan->jurusan_nm . '</br>' !!}
+                                        @endforeach
+                                    </td>
+                                    {{--  <td>
+                                        @foreach ($item->loker_kd_jurusan as $kd_jurusan)
+    
+                                        @endforeach
+                                    </td>  --}}
+                                    <td>{{ $item->loker_status }}</td>
+                                    <td>
+                                        <a href="{{ url('/loker/' . $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
                                     </td>
                                 </tr>
@@ -114,5 +112,4 @@
                     </table>
                 </div>
             </div>
-        </div>
-    @endsection
+        @endsection
