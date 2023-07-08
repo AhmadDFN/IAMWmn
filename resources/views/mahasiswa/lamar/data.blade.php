@@ -37,10 +37,8 @@
                                 {{--  <td>{{ $item->jenis_loker_nm }}</td>  --}}
                                 <td>
                                     <form action="{{ url($routes->index . $item->id) }}" method="post">
-                                        <a href="{{ url($routes->index . $item->id . '/edit') }}"><i
-                                                class="text-warning fas fa-user-edit"></i></a>
                                         <a href="{{ url($routes->index . $item->id) }}"><i
-                                                class="text-success fas fa-eye"></i></a><br>
+                                                class="text-success fas fa-eye"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent mt-0"><i

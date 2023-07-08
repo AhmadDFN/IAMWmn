@@ -19,7 +19,8 @@
                                     <th scope="col" class="text-center">Gender</th>
                                     <th scope="col" class="text-center">Tahun Lulus</th>
                                     <th scope="col" class="text-center">Status</th>
-                                    <th scope="col" class="text-center" width="5%">Act</th>
+                                    <th scope="col" class="text-center" width="5%">Verif</th>
+                                    <th scope="col" class="text-center" width="5%">View</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,6 +50,10 @@
                                                 <a href="{{ url('verif/' . $mahasiswa->id . '/acc') }}"><i
                                                         class="text-success fas fa-check"></i></a>
                                             @endif
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('mahasiswa.show', $mahasiswa->id) }}"><i
+                                                    class="text-success fas fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

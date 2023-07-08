@@ -218,4 +218,28 @@ class BerkasController extends Controller
         $berkas->delete();
         return redirect($this->route($mahasiswa))->with($notif);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function BerkasNew(Mahasiswa $mahasiswa)
+    {
+        $notif = [
+            "type" => "success",
+            "text" => "Data Berhasil Dihapus !"
+        ];
+        $faker = fake('id_ID');
+
+        $kirim = [
+            "berkas_kd" => $faker->isbn13(),
+            "berkas_NIM" => $mahasiswa->mhs_NIM,
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s"),
+        ];
+
+        // dd($kirim);
+
+        Berkas::create($kirim);
+        return redirect($this->route($mahasiswa))->with($notif);
+    }
 }

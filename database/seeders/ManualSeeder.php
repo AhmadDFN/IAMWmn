@@ -74,7 +74,7 @@ class ManualSeeder extends Seeder
             "mhs_tb" => "178",
             "mhs_bb" => "60",
             "mhs_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
-            "mhs_kd_jurusan" => "330",
+            "mhs_kd_jurusan" => "320",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
@@ -95,7 +95,7 @@ class ManualSeeder extends Seeder
             "mhs_tb" => "148",
             "mhs_bb" => "120",
             "mhs_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
-            "mhs_kd_jurusan" => "330",
+            "mhs_kd_jurusan" => "320",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
@@ -103,11 +103,11 @@ class ManualSeeder extends Seeder
         DB::table('mahasiswas')->insert([
             "mhs_NIM" => "2022320075",
             "mhs_nm" => "Ahmad Dany Fathin Nawwaf",
-            "mhs_email" => "dany@gmail.com",
+            "mhs_email" => "danyahmadadfn@gmail.com",
             "mhs_jk" => 1,
             "mhs_notelp" => "0895352882228",
-            "mhs_th_masuk" => "2023",
-            "mhs_th_lulus" => "2024",
+            "mhs_th_masuk" => "2022",
+            "mhs_th_lulus" => "2023",
             "mhs_kota_lahir" => "MADIUN",
             "mhs_tanggal_lahir" => date("1999-03-20"),
             "mhs_alamat" => "JL Merak Madiun",
@@ -116,12 +116,44 @@ class ManualSeeder extends Seeder
             "mhs_tb" => "168",
             "mhs_bb" => "50",
             "mhs_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
-            "mhs_kd_jurusan" => "330",
+            "mhs_kd_jurusan" => "320",
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
+
+        DB::table('mahasiswas')->insert([
+            "mhs_NIM" => "2021200200",
+            "mhs_nm" => "Aditya Wildan E",
+            "mhs_email" => "adityawa22@gmail.com",
+            "mhs_jk" => 1,
+            "mhs_notelp" => "0812351351351",
+            "mhs_th_masuk" => "2021",
+            "mhs_th_lulus" => "2022",
+            "mhs_kota_lahir" => "MADIUN",
+            "mhs_tanggal_lahir" => date("2002-11-11"),
+            "mhs_alamat" => "JL Merak Madiun",
+            "mhs_kota" => "MADIUN",
+            "mhs_status" => 1,
+            "mhs_tb" => "168",
+            "mhs_bb" => "50",
+            "mhs_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "mhs_kd_jurusan" => "320",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
 
         // Data Berkas
+        DB::table('berkas')->insert([
+            "berkas_kd" => $faker->isbn13(),
+            "berkas_skck" => $faker->uuid(),
+            "berkas_kk" => $faker->uuid(),
+            "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "berkas_cv" => $faker->uuid(),
+            "berkas_ijazah" => $faker->uuid(),
+            "berkas_NIM" => "2021200200",
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
         DB::table('berkas')->insert([
             "berkas_kd" => $faker->isbn13(),
             "berkas_skck" => $faker->uuid(),

@@ -7,6 +7,7 @@ use App\Models\Loker;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\Perusahaan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -65,7 +66,7 @@ class DashboardController extends Controller
 
     public function profilku()
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
         $routes = (object)[
             'save' => $this->route,
         ];
@@ -78,10 +79,19 @@ class DashboardController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
+        if ($request->file("foto")) {
+            $fileName = time() . $user->id . "PP-NoAL-" . Str::random(6) . '.' . $request->file("foto")->extension();
+            $result = $request->file("foto")->move(public_path('uploads/profile/foto'), $fileName);
+            $foto = "uploads/profile/foto/" . $fileName;
+        } else {
+            $foto = $request->input("old_foto");
+        }
+
         if ($request->input('password') == $request->input('confirmpassword')) {
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->foto = $foto;
             if ($request->filled('password')) {
                 $user->password = Hash::make($request->input('password'));
             }

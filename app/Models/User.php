@@ -13,10 +13,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function mahasiswa()
-    {
-        return $this->hasOne(Mahasiswa::class);
-    }
     /**
      * The attributes that are mass assignable.
      *
@@ -46,4 +42,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getProfilePhotoUrlAttribute()
+    {
+        if ($this->foto) {
+            return asset('storage/' . $this->foto);
+        } else {
+            // Jika foto belum diisi, mengembalikan URL dengan singkatan dari nama lengkap
+            $initials = '';
+            $nameParts = explode(' ', $this->name);
+            foreach ($nameParts as $part) {
+                $initials .= strtoupper(mb_substr($part, 0, 1));
+            }
+
+            return "https://ui-avatars.com/api/?name={$initials}&background=007BFF&color=FFF";
+        }
+    }
 }

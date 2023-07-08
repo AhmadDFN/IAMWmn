@@ -171,18 +171,18 @@
                                 ? '<p><a target="_blank" href="' .
                                     asset($berkas->berkas_skck) .
                                     '">Download skck</a> <i class="fa fa-check"></i></p>'
-                                : '<span class="label label-danger">ktp belum ada <i class="fa fa-remove"></i></span>' !!}</td>
+                                : '<span class="label label-danger">skck belum ada <i class="fa fa-remove"></i></span>' !!}</td>
                             <td>{!! $berkas->berkas_kk !== null
                                 ? '<p><a target="_blank" href="' . asset($berkas->berkas_kk) . '">Download kk</a> <i class="fa fa-check"></i></p>'
-                                : '<span class="label label-danger">ktp belum ada <i class="fa fa-remove"></i></span>' !!}</td>
+                                : '<span class="label label-danger">kk belum ada <i class="fa fa-remove"></i></span>' !!}</td>
                             <td>{!! $berkas->berkas_cv !== null
                                 ? '<p><a target="_blank" href="' . asset($berkas->berkas_cv) . '">Download cv</a> <i class="fa fa-check"></i></p>'
-                                : '<span class="label label-danger">ktp belum ada <i class="fa fa-remove"></i></span>' !!}</td>
+                                : '<span class="label label-danger">cv belum ada <i class="fa fa-remove"></i></span>' !!}</td>
                             <td>{!! $berkas->berkas_ijazah !== null
                                 ? '<p><a target="_blank" href="' .
                                     asset($berkas->berkas_ijazah) .
                                     '">Download ijazah</a> <i class="fa fa-check"></i></p>'
-                                : '<span class="label label-danger">ktp belum ada <i class="fa fa-remove"></i></span>' !!}</td>
+                                : '<span class="label label-danger">ijazah belum ada <i class="fa fa-remove"></i></span>' !!}</td>
                         </tr>
                     </tbody>
                 </table>

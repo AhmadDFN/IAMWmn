@@ -6,8 +6,14 @@
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
-                <img class="rounded-circle" src="{{ asset('img/user.jpg') }}" alt=""
-                    style="width: 40px; height: 40px;">
+                @if (@Auth::user()->foto == null)
+                    <img class="rounded-circle"
+                        src="https://ui-avatars.com/api/?name={{ @Auth::user()->name }}&background=007BFF&color=FFF"
+                        alt="{{ @Auth::user()->name }}" style="width: 40px; height: 40px;">
+                @else
+                    <img class="rounded-circle" src="{{ asset(@Auth::user()->foto) }}" alt="{{ @Auth::user()->name }}"
+                        style="width: 40px; height: 40px;">
+                @endif
                 <div
                     class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
                 </div>
@@ -32,7 +38,7 @@
             <a href="{{ url('home/loker') }}" class="nav-item nav-link {{ $title == 'Loker' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Semua Loker</a>
             <a href="{{ url('home/lokerku') }}" class="nav-item nav-link {{ $title == 'Lokerku' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Loker Jurusanmu</a>
+                    class="fa fa-laptop me-2"></i>Lamar Kerja</a>
             <a href="{{ url('home/perusahaan') }}"
                 class="nav-item nav-link {{ $title == 'Perusahaan' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Perusahaan</a>

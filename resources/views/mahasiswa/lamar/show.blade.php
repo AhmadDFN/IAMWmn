@@ -13,21 +13,21 @@
                     </div>
                 @endif
             </div>
-            <div class="col-md-5">
+            <div class="col-md-12">
                 <div class="profile-header">
                     <div class="overlay"></div>
                     <div class="profile-main" style="background-image: url({{ asset('img/profile-bg.png') }});">
                         <div class="profile-glass">
                             <div class="glass-effect">
-                                @if ($mahasiswa->mhs_foto != '')
-                                    <img src="{{ asset($mahasiswa->mhs_foto) }}" alt="{{ $mahasiswa->mhs_nm }}"
+                                @if (@$perusahaan->perusahaan_foto == null)
+                                    <img src="{{ asset('img/iamw/company-4.jpg') }}" alt="{{ @$perusahaan->perusahaan_nm }}"
                                         class="img-circle" width="100">
                                 @else
-                                    <img src="{{ asset($mahasiswa->mhs_foto) }}" alt="{{ asset('images/no-image.webp') }}"
-                                        class="img-circle" width="100">
+                                    <img src="{{ asset($perusahaan->perusahaan_foto) }}"
+                                        alt="{{ asset('img/iamw/company-2.jpg') }}" class="img-circle" width="100">
                                 @endif
 
-                                <h3 class="name">{{ $mahasiswa->mhs_nm }}</h3>
+                                <h3 class="name">{{ @$loker->loker_nm }}</h3>
                                 <span
                                     class="online-status {{ @$mahasiswa->mhs_status != 0 ? 'status-available' : 'status-unavailable' }}">{{ @$mahasiswa->mhs_status != 0 ? 'Aktif' : 'Tidak Aktif' }}</span>
                             </div>
@@ -42,7 +42,32 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
+                <div class="profile-detail">
+                    <div class="profile-info">
+                        <h4><i class="fa fa-user box-circle"></i> Informasi Loker</h4>
+                        <div class="row">
+                            <div class="col-md-4">Kode</div>
+                            <div class="col-md-8">: {{ @$loker->loker_kd }}</div>
+                            <div class="col-md-4">Nama Lowongan</div>
+                            <div class="col-md-8">: {{ @$loker->loker_nm }}</div>
+                            <div class="col-md-4">Ket Loker</div>
+                            <div class="col-md-8">: {{ @$loker->loker_ket }}</div>
+                            <div class="col-md-4">Terbuka Hingga</div>
+                            <div class="col-md-8">:
+                                {{ \Carbon\Carbon::createFromFormat('Y-m-d', @$loker->loker_exp)->locale('id')->isoFormat('D MMMM YYYY') }}
+                            </div>
+                            <div class="col-md-4">Loker Lowongan Jurusan</div>
+                            <div class="col-md-8">
+                                @foreach ($loker->jurusans as $jurusan)
+                                    {!! '-' . $jurusan->jurusan_nm . '</br>' !!}
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
                 <div class="profile-detail">
                     <div class="profile-info">
                         <h4><i class="fa fa-user box-circle"></i> Informasi Dasar</h4>

@@ -14,7 +14,7 @@ class PerusahaanSeeder extends Seeder
     public function run(): void
     {
         Perusahaan::factory()
-            ->count(60)
+            ->count(30)
             ->create();
     }
 }

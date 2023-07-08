@@ -25,6 +25,33 @@
             .appendTo(".card-tools");
     });
     $(document).ready(function () {
+        $("#dtTablekuae")
+            .DataTable({
+                buttons: [
+                    {
+                        extend: "collection",
+                        text: "Export",
+                        buttons: ["excel", "pdf"],
+                    },
+                ],
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                responsive: true,
+                pagingType: "full_numbers",
+            })
+            .columns(".lowkeer")
+            .order("asc")
+            .draw()
+            .buttons()
+            .container()
+            .appendTo(".card-tools");
+    });
+
+    $(document).ready(function () {
         $("#dtTablepaginate")
             .DataTable({
                 buttons: [

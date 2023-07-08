@@ -45,12 +45,16 @@
                             <div class="col-md-8">: {{ @$loker->loker_nm }}</div>
                             <div class="col-md-4">Ket Loker</div>
                             <div class="col-md-8">: {{ @$loker->loker_ket }}</div>
-                            <div class="col-md-4">Expired Lowongan Kerja</div>
-                            <div class="col-md-8">: {{ @$loker->loker_exp }}</div>
-                            <div class="col-md-4">Loker Status</div>
-                            <div class="col-md-8">: {{ @$loker->loker_status == 1 ? 'Active' : 'Not Active' }}</div>
-                            <br><br>
-
+                            <div class="col-md-4">Terbuka Hingga</div>
+                            <div class="col-md-8">:
+                                {{ \Carbon\Carbon::createFromFormat('Y-m-d', @$loker->loker_exp)->locale('id')->isoFormat('D MMMM YYYY') }}
+                            </div>
+                            <div class="col-md-4">Loker Lowongan Jurusan</div>
+                            <div class="col-md-8">
+                                @foreach ($loker->jurusans as $jurusan)
+                                    {!! '-' . $jurusan->jurusan_nm . '</br>' !!}
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

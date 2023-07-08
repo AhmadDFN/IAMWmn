@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\mahasiswa;
 
+use App\Models\User;
 use App\Models\Loker;
 use App\Models\Jurusan;
 use App\Models\Mahasiswa;
 use App\Models\Perusahaan;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-    // protected $view = 'layDashboard';
-    // protected $view = 'admin.user.';
     protected $route = 'update.mahasiswa';
     protected $view = 'mahasiswa.home';
 
@@ -75,7 +74,7 @@ class DashboardController extends Controller
 
     public function profilku()
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
         $routes = (object)[
             'save' => $this->route,
         ];
@@ -88,22 +87,30 @@ class DashboardController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::id());
+        if ($request->file("foto")) {
+            $fileName = time() . $user->id . "PP-NoAL-" . Str::random(6) . '.' . $request->file("foto")->extension();
+            $result = $request->file("foto")->move(public_path('uploads/profile/foto'), $fileName);
+            $foto = "uploads/profile/foto/" . $fileName;
+        } else {
+            $foto = $request->input("old_foto");
+        }
         if ($request->input('password') == $request->input('confirmpassword')) {
             $user->name = $request->input('name');
             $user->email = $request->input('email');
+            $user->foto = $foto;
             if ($request->filled('password')) {
                 $user->password = Hash::make($request->input('password'));
             }
             // dd($request);
-            // $user->save();
+            $user->save();
 
             $mess = [
                 "type" => "success",
                 "text" => "Profil berhasil diperbarui.!"
             ];
 
-            return redirect()->route('edit.admin')->with($mess);
+            return redirect()->route('edit.mahasiswa')->with($mess);
         }
         $mess = [
             "type" => "danger",

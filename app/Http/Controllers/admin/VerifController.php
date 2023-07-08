@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Mail\VerificationCode;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class VerifController extends Controller
 {
@@ -56,5 +58,22 @@ class VerifController extends Controller
         ]);
 
         return back();
+    }
+
+    function send_email(Mahasiswa $mahasiswa)
+    {
+
+        $single = collect($mahasiswa);
+
+        try {
+            Mail::to($mahasiswa->mhs_email)->send(new VerificationCode($single));
+            $mess = "Berhasil Kekirim";
+            // dd("Berhasil");
+        } catch (Exception $err) {
+            $mess = "Gagal Terkirim" . " " . $err;
+            // dd($th);
+        }
+
+        return redirect("/")->with($mess);
     }
 }

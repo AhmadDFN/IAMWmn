@@ -27,7 +27,7 @@
                                         @foreach (@$loker->jurusans as $jurusan)
                                             {!! @$jurusan->jurusan_nm . ' - ' !!}
                                         @endforeach
-                                        Mulai Pendaftaran:
+                                        Akhir Pendaftaran:
                                         {{ date('d M Y', strtotime(@$loker->loker_exp)) }}
                                     </div>
                                 </div>

@@ -33,8 +33,13 @@ class DatabaseSeeder extends Seeder
                 File::makeDirectory($folderPath, 0755, true);
             }
         }
+
         if (!File::exists(public_path("uploads/perusahaan/foto"))) {
             File::makeDirectory(public_path("uploads/perusahaan/foto"), 0755, true);
+        }
+
+        if (!File::exists(public_path("uploads/profile/foto"))) {
+            File::makeDirectory(public_path("uploads/profile/foto"), 0755, true);
         }
     }
     /**
@@ -51,7 +56,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MahasiswaSeeder::class);
         $this->call(PerusahaanSeeder::class);
         $this->call(BerkasSeeder::class);
-        // $this->call(UserSeeder::class);
+        $this->call(UserSeeder::class);
         $this->call(ManualSeeder::class);
         $this->call(LokerSeeder::class);
         $this->call(LamarSeeder::class);

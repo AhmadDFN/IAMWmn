@@ -5,7 +5,32 @@ $(document).ready(function () {
         // Hapus opsi kota sebelumnya
         $("#kotaup").empty();
     });
+
+    // Foto click
+    $("#photo-preview").click(function () {
+        $("#photo-input").click();
+    });
+
+    // Ketika file input change
+    $("#photo-input").change(function () {
+        setImage(this, "#photo-preview");
+    });
 });
+
+// Read Image
+function setImage(input, target) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        // Mengganti src dari object img#avatar
+        reader.onload = function (e) {
+            $(target).attr("src", e.target.result);
+            // $("#foto").val(e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
 function getKota(element, url) {
     const idProv = $(element).val();

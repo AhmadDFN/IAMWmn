@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.mhs.template2')
 
 @section('title', $title)
 @section('page-title', $page)
@@ -12,9 +12,9 @@
             </div>
         @endif
     </div>
-    <form action="{{ route('mahasiswa.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('/home/mahasiswa/' . @$mahasiswa->id) }}" method="post" enctype="multipart/form-data">
         @csrf
-        
+        @method('PUT')
         <div class="container-fluid pt-1 px-0">
             <div class="row g-4">
                 <div class="col-md-4">
@@ -22,20 +22,19 @@
                         @if (@$mahasiswa->mhs_foto)
                             @if (file_exists($mahasiswa->mhs_foto))
                                 <img class="thumb-menu-big" src="{{ asset(@$mahasiswa->mhs_foto) }}"
-                                    alt="{{ @$mahasiswa->mhs_nm }}">
+                                    alt="{{ @$mahasiswa->mhs_nm }}" width="100%" id="photo-preview"
+                                    style="cursor: pointer;height: auto;">
                             @else
                                 <img class="thumb-menu-big" src="{{ asset('img/no-image.webp') }}"
-                                    alt="{{ @$mahasiswa->mhs_nm }}">
+                                    alt="{{ @$mahasiswa->mhs_nm }}" width="100%" id="photo-preview"
+                                    style="cursor: pointer;height: auto;">
                             @endif
                         @else
                             <img class="thumb-menu-big" src="{{ asset('img/no-image.webp') }}"
-                                alt="{{ @$mahasiswa->mhs_nm }}">
+                                alt="{{ @$mahasiswa->mhs_nm }}" width="100%" id="photo-preview"
+                                style="cursor: pointer;height: auto;">
                         @endif
-                        <div class="mb-3">
-                            <input class="form-control form-control-sm bg-dark mt-2" id="mhs_foto" type="file"
-                                name="mhs_foto" />
-                        </div>
-                        {{--  <input type="file" class="mt-2" name="mhs_foto" id="mhs_foto">  --}}
+                        <input type="file" name="foto" id="photo-input" style="display: none;">
                         <input type="hidden" name="old_foto" value="{{ @$mahasiswa->mhs_foto }}">
                         @error('foto')
                             <div id="foto" class="invalid-feedback">
@@ -43,18 +42,76 @@
                             </div>
                         @enderror
                     </div>
+                    <div class="bg-secondary rounded p-4 mt-5">
+                        <div class="form-floating mb-3">
+                            <input type="hidden" name="id_berkas" value="{{ @$berkas->id }}">
+                            <input type="hidden" name="berkas_kd" value="{{ @$berkas->berkas_kd }}">
+                            <input type="hidden" name="berkas_NIM" value="{{ @$berkas->berkas_NIM }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="berkas_cv" class="form-label text-white">CV</label>
+                            <input type="file" id="berkas_cv" name="berkas_cv" class="form-control bg-dark">
+                            <input type="hidden" name="old_cv" value="{{ @$berkas->berkas_cv }}">
+                            <p>
+                                {!! $berkas->berkas_cv !== null
+                                    ? pathinfo(@$berkas->berkas_cv, PATHINFO_FILENAME)
+                                    : '<span class="label label-danger">cv belum ada <span class="badge bg-danger"><span class="bi bi-x"></span></span></span>' !!}
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="berkas_skck" class="form-label text-white">SKCK</label>
+                            <input type="file" id="berkas_skck" name="berkas_skck" class="form-control bg-dark">
+                            <input type="hidden" name="old_skck" value="{{ @$berkas->berkas_skck }}">
+                            <p>
+                                {!! $berkas->berkas_skck !== null
+                                    ? pathinfo(@$berkas->berkas_skck, PATHINFO_FILENAME)
+                                    : '<span class="label label-danger">skck belum ada <span class="badge bg-danger"><span class="bi bi-x"></span></span></span>' !!}
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="berkas_kk" class="form-label text-white">KARTU KELUARGA</label>
+                            <input type="file" id="berkas_kk" name="berkas_kk" class="form-control bg-dark">
+                            <input type="hidden" name="old_kk" value="{{ @$berkas->berkas_kk }}">
+                            <p>
+                                {!! $berkas->berkas_kk !== null
+                                    ? pathinfo(@$berkas->berkas_kk, PATHINFO_FILENAME)
+                                    : '<span class="label label-danger">kk belum ada <span class="badge bg-danger"><span class="bi bi-x"></span></span></span>' !!}
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="berkas_ijazah" class="form-label text-white">IJAZAH</label>
+                            <input type="file" id="berkas_ijazah" name="berkas_ijazah" class="form-control bg-dark">
+                            <input type="hidden" name="old_ijazah" value="{{ @$berkas->berkas_ijazah }}">
+                            <p>
+                                {!! $berkas->berkas_ijazah !== null
+                                    ? pathinfo(@$berkas->berkas_ijazah, PATHINFO_FILENAME)
+                                    : '<span class="label label-danger">ijazahberkas_ijazah belum ada <span class="badge bg-danger"><span class="bi bi-x"></span></span></span>' !!}
+                            </p>
+                        </div>
+                        <div class="mb-3">
+                            <label for="berkas_ktp" class="form-label text-white">KTP</label>
+                            <input type="file" id="berkas_ktp" name="berkas_ktp" class="form-control bg-dark">
+                            <input type="hidden" name="old_ktp" value="{{ @$berkas->berkas_ktp }}">
+                            <p>
+                                {!! $berkas->berkas_ktp !== null
+                                    ? pathinfo(@$berkas->berkas_ktp, PATHINFO_FILENAME)
+                                    : '<span class="label label-danger">ktp belum ada <span class="badge bg-danger"><span class="bi bi-x"></span></span></span>' !!}
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="bg-secondary rounded h-100 p-4">
                         <div class="form-floating mb-3">
                             <input type="hidden" name="id" value="{{ @$mahasiswa->id }}">
-                            <input type="text" class="form-control @error('mhs_NIM') is-invalid @enderror" id="mhs_NIM"
-                                name="mhs_NIM" placeholder="Masukkan NIM 10 Digit" value="{{ @$mahasiswa->mhs_NIM }}">
+                            <input type="text" class="form-control @error('mhs_NIM') is-invalid @enderror"
+                                id="mhs_NIM" name="mhs_NIM" placeholder="Masukkan NIM 10 Digit"
+                                value="{{ @$mahasiswa->mhs_NIM }}">
                             <label for="mhs_NIM">NIM</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="mhs_nm" name="mhs_nm" placeholder="Nama Anda"
-                                value="{{ @$mahasiswa->mhs_nm }}">
+                            <input type="text" class="form-control" id="mhs_nm" name="mhs_nm"
+                                placeholder="Nama Anda" value="{{ @$mahasiswa->mhs_nm }}">
                             <label for="mhs_nm">Nama</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -72,11 +129,6 @@
                                 value="{{ @$mahasiswa->mhs_tanggal_lahir }}">
                             <label for="mhs_tanggal_lahir" class="form-label">Tanggal Lahir</label>
                         </div>
-                        {{--  <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="mhs_password"
-                            placeholder="Password" value="{{@$mahasiswa->mhs_pass}}">
-                        <label for="mhs_password">Password</label>
-                    </div>  --}}
                         <div class="form-floating mb-3">
                             <select class="form-select" id="mhs_kd_jurusan" name="mhs_kd_jurusan" aria-label="Jurusan"
                                 style="height: 70px; color: white;">
@@ -122,7 +174,6 @@
                             </select>
                             <label for="mhs_th_masuk">Tahun Masuk</label>
                         </div>
-
                         <div class="form-floating mb-3">
                             <select class="form-select" id="provinsiup" name="mhs_provinsi" aria-label="Provinsi"
                                 style="height: 70px; color: white;" onchange="getKota(this,'{{ route('kota') }}')">
@@ -150,12 +201,21 @@
                                     <option style="color: white" value=""></option>
                                 @endif
                             </select>
-                            <label for="kotaup">kota</label>
+                            <label for="kotaup">Kota</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="mhs_bb" name="mhs_bb"
+                                placeholder="Berat Badan" value="{{ @$mahasiswa->mhs_bb }}">
+                            <label for="mhs_bb">Berat Badan</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="mhs_tb" name="mhs_tb"
+                                placeholder="Tinggi badan" value="{{ @$mahasiswa->mhs_tb }}">
+                            <label for="mhs_tb">Tinggi badan</label>
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="SIMPAN">
                         </div>
-                        {{--  <button type="submit" class="btn btn-primary">Simpan</button>  --}}
                     </div>
                 </div>
             </div>

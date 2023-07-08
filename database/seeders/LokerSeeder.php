@@ -16,12 +16,12 @@ class LokerSeeder extends Seeder
     {
         $perusahaans = Perusahaan::all();
         foreach ($perusahaans as $perusahaan) {
-            $randomno = rand(1, 4);
+            $randomno = rand(1, 5);
             if ($randomno != 1) {
                 Loker::factory()
-                    ->count(1)
+                    ->count(rand(1, 3))
                     ->create([
-                        'loker_nm' => $perusahaan->perusahaan_nm . " Lowongan Kerja",
+                        'loker_nm' => $perusahaan->perusahaan_nm . " Lowongan Kerja" . " " . rand(1, 10),
                         'loker_id_perusahaan' => $perusahaan->id
                     ]);
             }

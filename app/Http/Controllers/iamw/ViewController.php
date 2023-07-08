@@ -36,6 +36,7 @@ class ViewController extends Controller
             $dateend = new DateTime($lokers[$key]->loker_exp);
             $lokers[$key]->loker_exp_new = $dateend;
         }
+
         switch (@Auth::user()->role) {
             case "SuperAdmin":
                 $dashboard = "admin";

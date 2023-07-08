@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\mahasiswa;
 
+use App\Models\Lamar;
 use App\Models\loker;
 use App\Models\Jurusan;
+use App\Models\Mahasiswa;
 use App\Models\JenisLoker;
 use App\Models\Perusahaan;
+use App\Helpers\getDateNow;
 use Illuminate\Http\Request;
 use App\Helpers\CodeGenerator;
-use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Lamar;
-use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,15 +51,44 @@ class LokerController extends Controller
         $routes = (object)[
             'index' => $this->route,
         ];
-        $lokers = loker::where('loker_kd_jurusan', 'LIKE', '%' . $mahasiswa->mhs_kd_jurusan . "%")->get();
-        $jurusans  = Jurusan::all();
+        // $lokers = DB::table('lokers')
+        //     ->leftJoin('lamars', 'lokers.id', '=', 'lamars.lamar_id_loker')
+        //     ->where('lokers.loker_kd_jurusan', 'LIKE', '%' . $mahasiswa->mhs_kd_jurusan . "%")
+        //     ->groupBy('lokers.id', 'lamars.lamar_kd')
+        //     ->groupBy('lokers.loker_kd')
+        //     ->groupBy('lokers.loker_nm')
+        //     ->groupBy('lokers.loker_ket')
+        //     ->groupBy('lokers.loker_exp')
+        //     ->groupBy('lokers.loker_kd_jurusan')
+        //     ->groupBy('lokers.loker_status')
+        //     ->groupBy('lokers.loker_id_perusahaan')
+        //     ->groupBy('lokers.loker_id_jnsloker')
+        //     ->groupBy('lokers.created_at')
+        //     ->groupBy('lokers.updated_at')
+        //     ->orderBy('lamars.lamar_kd', 'asc')
+        //     ->select('lamars.lamar_kd', 'lokers.*')
+        //     ->get();
+        $lokers = DB::table('lokers')
+            ->leftJoin('lamars', 'lokers.id', '=', 'lamars.lamar_id_loker')
+            ->where('lokers.loker_kd_jurusan', 'LIKE', '%320%')
+            ->where(function ($query) {
+                $query->where('lamars.lamar_NIM', '2022320075')
+                    ->orWhereNull('lamars.lamar_NIM')
+                    ->orWhere('lamars.lamar_NIM', '');
+            })
+            ->groupBy('lokers.id', 'lokers.loker_kd', 'lokers.loker_nm', 'lokers.loker_ket', 'lokers.loker_exp', 'lokers.loker_kd_jurusan', 'lokers.loker_status', 'lokers.loker_id_perusahaan', 'lokers.loker_id_jnsloker', 'lokers.created_at', 'lokers.updated_at', 'lamars.lamar_NIM')
+            ->select(DB::raw('MAX(lamars.lamar_kd) as lamar_kd'), 'lamars.lamar_NIM', 'lokers.*')
+            ->orderBy('lamars.lamar_kd', 'desc')
+            ->get();
         // dd($lokers);
+        $jurusans  = Jurusan::all();
 
 
         foreach ($lokers as $key => $loker) {
             $lokers[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lokers[$key]->loker_kd_jurusan))->get();
         }
 
+        // dd($lokers);
         $data = (object)[
             "title" => "Lokerku",
             'page' => 'Loker Account',
@@ -124,7 +153,21 @@ class LokerController extends Controller
         ];
         $perusahaan = Perusahaan::where('id', $loker->loker_id_perusahaan)->get()->first();
         $lamars = Lamar::where('lamar_id_loker', $loker->id)->get();
-        $title = "Loker";
+        $mahasiswa = Mahasiswa::where('mhs_NIM', Auth::user()->reff)->get()->first();
+        $loker->jurusans = explode(",", $loker->loker_kd_jurusan);
+        $result = in_array($mahasiswa->mhs_kd_jurusan, $loker->jurusans);
+
+        $loker->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $loker->loker_kd_jurusan))->get();
+
+
+        // dd($loker);
+
+        if ($result) {
+            $title = "Lokerku";
+        } else {
+            $title = "Loker";
+        }
+        // dd($title);
         return view($this->view . 'show', compact('loker', 'data', 'title', 'perusahaan', 'lamars'));
     }
 
@@ -168,5 +211,21 @@ class LokerController extends Controller
         $loker->delete();
         DB::table('lamars')->where('lamar_id_loker', '=', $loker->id)->delete();
         return redirect($this->route);
+    }
+
+    public function lamarkerja(loker $loker)
+    {
+        $code = CodeGenerator::generateUniqueCode();
+        $requestData = [
+            "lamar_kd" => $code,
+            'lamar_nm' => $loker->loker_nm,
+            'lamar_NIM' => @Auth::user()->reff,
+            'lamar_id_loker' => $loker->id,
+            "lamar_tgl_daftar" => getDateNow::getDateNow("Y/m/d"),
+        ];
+        // dd($requestData);
+        Lamar::create($requestData);
+        // $loker->delete();
+        return redirect('home/lokerku/');
     }
 }

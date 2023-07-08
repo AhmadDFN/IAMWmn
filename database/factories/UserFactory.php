@@ -20,11 +20,10 @@ class UserFactory extends Factory
     {
         $faker = fake('id_ID');
         return [
-            'username' => $faker->userName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-            'role' => "Mahasiswa",
+            'role' => "Perusahaan",
             'status' => 1,
         ];
     }

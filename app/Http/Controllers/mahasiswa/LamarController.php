@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\mahasiswa;
 
+use App\Helpers\getDateNow;
 use Exception;
 use App\Models\Lamar;
 use App\Models\Loker;
+use App\Models\Jurusan;
 use App\Models\Mahasiswa;
+use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -72,13 +75,18 @@ class LamarController extends Controller
      */
     public function show(lamar $lamar)
     {
+        $loker = Loker::where('id', $lamar->lamar_id_loker)->get()->first();
+        $perusahaan = Perusahaan::where('id', $loker->loker_id_perusahaan)->get()->first();
         $mahasiswa = Mahasiswa::where('mhs_NIM', $lamar->lamar_NIM)->get()->first();
+        $loker->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $loker->loker_kd_jurusan))->get();
+        $datenow = getDateNow::getDateNow();
+        // dd($loker);
         $data = (object)[
             'title' => $lamar->lamar_nm,
             'page' => "Profil lamar " . $lamar->lamar_nm,
         ];
         $title = "Lamar";
-        return view($this->view . 'show', compact('lamar', 'data', 'title', 'mahasiswa'));
+        return view($this->view . 'show', compact('lamar', 'data', 'title', 'mahasiswa', 'loker'));
     }
 
     /**

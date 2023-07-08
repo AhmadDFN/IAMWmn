@@ -117,6 +117,19 @@ class MahasiswaController extends Controller
                 ]
             );
 
+            if (!$request->input("id")) {
+                // dd($request->input("id"));
+                $faker = fake('id_ID');
+
+                $kirim = [
+                    "berkas_kd" => $faker->isbn13(),
+                    "berkas_NIM" => $request->input("mhs_NIM"),
+                    "created_at" => date("Y-m-d h:i:s"),
+                    "updated_at" => date("Y-m-d h:i:s"),
+                ];
+                Berkas::create($kirim);
+            };
+
             if ($request->input("id")) {
                 DB::table('berkas')
                     ->where('berkas_NIM', $request->input("mhs_NIM"))

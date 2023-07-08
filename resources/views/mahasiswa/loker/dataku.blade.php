@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table id="dtTable" class="table compact table-dark dtTable">
+                <table id="dtTablekuae" class="table compact table-dark dtTable">
                     <thead>
                         <tr>
                             <th scope="col">Loker KD</th>
@@ -24,8 +24,7 @@
                             <th scope="col" width="30%">Keterangan Loker</th>
                             <th scope="col">Loker Exp</th>
                             <th scope="col">Jurusan Loker</th>
-                            <th scope="col">Stats</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" class="lowkeer">Lamar Kerja</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,16 +39,17 @@
                                         {!! '-' . $jurusan->jurusan_nm . '</br>' !!}
                                     @endforeach
                                 </td>
-                                {{--  <td>
-                                    @foreach ($item->loker_kd_jurusan as $kd_jurusan)
-
-                                    @endforeach
-                                </td>  --}}
-                                <td>{{ $item->loker_status }}</td>
-                                <td>
-                                    <a href="{{ url($routes->index . $item->id) }}"><i
-                                            class="text-success fas fa-eye"></i></a><br>
-                                    </form>
+                                <td class="text-center align-middle">
+                                    @if ($item->lamar_kd == null or $item->lamar_kd == '')
+                                        <a href="{{ url('home/loker/' . @$item->id . '/submit') }}"><span
+                                                class="badge bg-success text-black"><i class="fas fa-check-circle"> Lamar
+                                                    Kerja</i></span></a>
+                                    @else
+                                        <span class="badge bg-warning text-black"><i class="fas fa-file-alt">
+                                                Sedang
+                                                Aktif</i></span>
+                                        {{--  <i class="fa-sharp fa-light fa-star"></i>  --}}
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

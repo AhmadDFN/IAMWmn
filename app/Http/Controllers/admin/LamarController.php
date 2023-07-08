@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
-use Exception;
 use App\Models\Lamar;
-use App\Models\Loker;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

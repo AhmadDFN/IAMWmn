@@ -8,10 +8,12 @@ use App\Models\JenisLoker;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Helpers\CodeGenerator;
+use App\Helpers\getDateNow;
 use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Lamar;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class LokerController extends Controller
@@ -115,6 +117,7 @@ class LokerController extends Controller
         $requestData = $request->all();
         $requestData["loker_kd_jurusan"] = $mergedOptions;
 
+
         $validator = Validator::make($requestData, [
             'loker_kd_jurusan' => 'required|unique:lokers',
         ]);
@@ -122,7 +125,8 @@ class LokerController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        // dd($requestData);
+
+        // dd($requestData1);
         loker::create($requestData);
         return redirect($this->route);
     }

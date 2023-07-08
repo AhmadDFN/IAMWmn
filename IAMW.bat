@@ -1,0 +1,1 @@
+start chrome --app=http://localhost:8000 --start-fullscreen
