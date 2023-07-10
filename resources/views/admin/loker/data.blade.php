@@ -19,43 +19,46 @@
                 <table id="dtTable" class="table compact table-dark dtTable">
                     <thead>
                         <tr>
-                            <th scope="col">Loker KD</th>
-                            <th scope="col" width="15%">Nama Loker</th>
-                            <th scope="col" width="30%">Keterangan Loker</th>
-                            <th scope="col">Loker Exp</th>
+                            <th scope="col" width="12%">Foto</th>
+                            <th scope="col">Nama Loker</th>
+                            <th scope="col">Nama Perusahaan</th>
                             <th scope="col">Jurusan Loker</th>
-                            <th scope="col">Stats</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">Deadline</th>
+                            <th scope="col" width="8%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($lokers as $item)
                             <tr>
-                                <td>{{ $item->loker_kd }}</td>
+                                <td>
+                                    @if ($item->perusahaan_foto != '')
+                                        <img class="thumb-menu" src="{{ asset($item->perusahaan_foto) }}"
+                                            alt="{{ $item->perusahaan_nm }}">
+                                    @else
+                                        <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}"
+                                            alt="{{ $item->perusahaan_nm }}">
+                                    @endif
+                                </td>
                                 <td>{{ $item->loker_nm }}</td>
-                                <td>{{ $item->loker_ket }}</td>
-                                <td>{{ $item->loker_exp }}</td>
+                                <td>{{ $item->perusahaan_nm }}</td>
                                 <td>
                                     @foreach ($item->jurusans as $jurusan)
                                         {!! '-' . $jurusan->jurusan_nm . '</br>' !!}
                                     @endforeach
                                 </td>
-                                {{--  <td>
-                                    @foreach ($item->loker_kd_jurusan as $kd_jurusan)
-
-                                    @endforeach
-                                </td>  --}}
-                                <td>{{ $item->loker_status }}</td>
+                                <td>{{ $item->perusahaan_kota }}</td>
+                                <td>{{ $item->loker_exp }}</td>
                                 <td>
                                     <form action="{{ url($routes->index . $item->id) }}" method="post">
                                         <a href="{{ url($routes->index . $item->id . '/edit') }}"><i
-                                                class="text-warning fas fa-user-edit"></i></a>
+                                                class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ url($routes->index . $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent mt-0"><i
-                                                class="text-danger fas fa-user-times"></i></button>
+                                                class="text-danger fas fa-trash"></i></button>
 
                                     </form>
                                 </td>

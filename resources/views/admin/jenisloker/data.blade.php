@@ -32,13 +32,13 @@
                                 <td>
                                     <form action="{{ url($routes->index . $item->id) }}" method="post">
                                         <a href="{{ url($routes->index . $item->id . '/edit') }}"><i
-                                                class="text-warning fas fa-user-edit"></i></a>
+                                                class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ url($routes->index . $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent mt-0"><i
-                                                class="text-danger fas fa-user-times"></i></button>
+                                                class="text-danger fas fa-trash"></i></button>
 
                                     </form>
                                 </td>

@@ -28,6 +28,7 @@ class UserController extends Controller
             $exceptNames = ['Admin', 'SuperAdmin'];
             $users = DB::table('users')
                 ->whereNotIn('role', $exceptNames)
+                ->orderBy('role', 'asc')
                 ->get();
         }
         $data = (object)[
@@ -88,12 +89,14 @@ class UserController extends Controller
             $mahasiswa->remember_token = null;
         }
 
-        if ($user->role == "perusahaan") {
+        if ($user->role == "Perusahaan") {
             $perusahaan = DB::table('users')
+                ->select('users.*',  'perusahaans.id as id_perusahaan', 'perusahaans.*')
                 ->join('perusahaans', 'users.reff', '=', 'perusahaans.id')
-                ->select('users.*', 'perusahaans.*', 'perusahaan.id as id_perusahaan')
                 ->where('perusahaans.id', '=', $user->reff)
-                ->get()->first();
+                ->get()
+                ->first();
+            // dd($perusahaan);
             $perusahaan->password = null;
             $perusahaan->remember_token = null;
         }

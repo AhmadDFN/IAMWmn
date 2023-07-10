@@ -23,8 +23,7 @@
                 <span class="d-none d-lg-inline-flex">{{ @Auth::user()->name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                <a href="{{ route('edit.admin') }}" class="dropdown-item">My Profile</a>
-                <a href="#" class="dropdown-item">Settings</a>
+                <a href="{{ route('edit.admin') }}" class="dropdown-item">Edit Profile</a>
                 <a href="{{ route('signout') }}" class="dropdown-item">Log Out</a>
             </div>
         </div>

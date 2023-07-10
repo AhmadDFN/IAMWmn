@@ -41,14 +41,14 @@
                                 <td>
                                     <form action="{{ url($index . $item->id) }}" method="post">
                                         <a href="{{ url($index . $item->id) . '/edit' }}"><i
-                                                class="text-warning fas fa-user-edit"></i></a>
+                                                class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ url($index . $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
 
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent mt-0"><i
-                                                class="text-danger fas fa-user-times"></i></button>
+                                                class="text-danger fas fa-trash"></i></button>
 
                                     </form>
                                 </td>
@@ -68,51 +68,4 @@
             </div>
         </div>
     </div>
-
-
-
-    {{--  
-    <div class="card-tools text-right mb-2 mr-2">
-        <a href="{{ url("mahasiswa/form") }}" class="btn btn-primary btn-sm">Tambah Mahasiswa</a>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <table id="dtCustomers" class="dtTable table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Foto</th>
-                        <th>NIM</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Gender</th>
-                        <th>Tahun Lulus</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($mahasiswas as $mahasiswa)
-                    <tr>
-                        <td>{{ $mahasiswa->mhs_foto }}</td>
-                        <td>{{ $mahasiswa->mhs_NIM }}</td>
-                        <td>{{ $mahasiswa->mhs_nm }}</td>
-                        <td>{!! $mahasiswa->mhs_alamat.", ".$mahasiswa->mhs_kota."</br>".$mahasiswa->mhs_notelp !!}</td>
-                        <td>{{ $mahasiswa->mhs_jk==1 ? "Laki-Laki" : "Perempuan" }}</td>
-                        <td>{{ $mahasiswa->mhs_th_lulus }}</td>
-                        <td>
-                            <form action="{{ route('mahasiswa.destroy',$mahasiswa->id) }}" method="post">
-                                <a href="{{ route('mahasiswa.edit',$mahasiswa->id) }}"><i class="text-warning fas fa-user-edit"></i></a>
-                                
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-transparent mt-0"><i class="text-danger fas fa-user-times"></i></button>
-                                
-                                <a href="{{ route('mahasiswa.show',$mahasiswa->id) }}"><i class="text-primary fas fa-eye"></i></a><br>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>            
-        </div>
-    </div>   --}}
 @endsection

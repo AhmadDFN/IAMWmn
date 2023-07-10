@@ -35,25 +35,63 @@
         <div class="navbar-nav w-100">
             <a href="{{ url('admin') }}" class="nav-item nav-link {{ $title == 'Dashboard' ? 'active' : '' }}"><i
                     class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            <a href="{{ url('verif') }}" class="nav-item nav-link {{ $title == 'Verif' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Verif Akun</a>
-            <a href="{{ url('mahasiswa') }}"
+            <div class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link dropdown-toggle {{ (($title == 'Mahasiswa' or $title == 'Berkas') ? 'active' : $title == 'Jurusan') ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Mahasiswa</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ url('mahasiswa') }}"
+                        class="dropdown-item {{ ($title == 'Mahasiswa' or $title == 'Berkas') ? 'active' : '' }}">Data
+                        Mahasiswa</a>
+                    <a href="{{ url('jurusan') }}"
+                        class="dropdown-item {{ $title == 'Jurusan' ? 'active' : '' }}">Jurusan</a>
+                </div>
+            </div>
+            {{--  <a href="{{ url('mahasiswa') }}"
                 class="nav-item nav-link {{ ($title == 'Mahasiswa' or $title == 'Berkas') ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Mahasiswa</a>
+            <a href="{{ url('jurusan') }}" class="nav-item nav-link {{ $title == 'Jurusan' ? 'active' : '' }}"><i
+                    class="fa fa-laptop me-2"></i>Jurusan</a>  --}}
             <a href="{{ url('perusahaan') }}"
                 class="nav-item nav-link {{ $title == 'Perusahaan' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Perusahaan</a>
-            <a href="{{ url('jurusan') }}" class="nav-item nav-link {{ $title == 'Jurusan' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Jurusan</a>
-            <a href="{{ url('jenisloker') }}"
+            <div class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link dropdown-toggle {{ ((($title == 'Loker' ? 'active' : $title == 'Lamar') ? 'active' : $title == 'Jenis Loker') ? 'active' : $title == 'Histori Lamaran') ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pekerjaan</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ url('loker') }}"
+                        class="dropdown-item {{ $title == 'Loker' ? 'active' : '' }}">Lowongan</a>
+                    <a href="{{ url('lamar') }}"
+                        class="dropdown-item {{ $title == 'Lamar' ? 'active' : '' }}">Lamar</a>
+                    <a href="{{ url('lamar/histori') }}"
+                        class="dropdown-item {{ $title == 'Histori Lamaran' ? 'active' : '' }}">Record Lamar</a>
+                    <a href="{{ url('jenisloker') }}"
+                        class="dropdown-item {{ $title == 'Jenis Loker' ? 'active' : '' }}">Jenis Loker</a>
+                </div>
+            </div>
+            {{--  <a href="{{ url('jenisloker') }}"
                 class="nav-item nav-link {{ $title == 'Jenis Loker' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Jenis Loker</a>
             <a href="{{ url('lamar') }}" class="nav-item nav-link {{ $title == 'Lamar' ? 'active' : '' }}"><i
                     class="fa fa-laptop me-2"></i>Lamar</a>
             <a href="{{ url('loker') }}" class="nav-item nav-link {{ $title == 'Loker' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Loker</a>
-            <a href="{{ url('user') }}" class="nav-item nav-link {{ $title == 'User' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>User</a>
+                    class="fa fa-laptop me-2"></i>Lowongan</a>  --}}
+            {{--  <a href="{{ url('user') }}" class="nav-item nav-link {{ $title == 'User' ? 'active' : '' }}"><i
+                    class="fa fa-laptop me-2"></i>User</a>  --}}
+            {{--  <a href="{{ url('verif') }}" class="nav-item nav-link {{ $title == 'Verif' ? 'active' : '' }}"><i
+                    class="fa fa-laptop me-2"></i>Verif Akun</a>  --}}
+            <div class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link dropdown-toggle {{ ($title == 'User' ? 'active' : $title == 'Verif') ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Account</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="{{ url('user') }}"
+                        class="dropdown-item {{ $title == 'User' ? 'active' : '' }}">User</a>
+                    <a href="{{ url('verif') }}" class="dropdown-item {{ $title == 'Verif' ? 'active' : '' }}">Verif
+                        Akun</a>
+                </div>
+            </div>
         </div>
     </nav>
 </div>

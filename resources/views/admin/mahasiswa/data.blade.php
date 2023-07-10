@@ -22,7 +22,7 @@
                             <th scope="col">Foto</th>
                             <th scope="col">NIM</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">Alamat</th>
+                            <th scope="col">Kota - CP</th>
                             <th scope="col">Gender</th>
                             <th scope="col">Tahun Lulus</th>
                             <th scope="col">Action</th>
@@ -47,12 +47,12 @@
                                 </td>
                                 <td>{{ $mahasiswa->mhs_NIM }}</td>
                                 <td>{{ $mahasiswa->mhs_nm }}</td>
-                                <td>{!! $mahasiswa->mhs_alamat . ', ' . $mahasiswa->mhs_kota . '</br>' . $mahasiswa->mhs_notelp !!}</td>
+                                <td>{!! $mahasiswa->mhs_kota . '</br>' . $mahasiswa->mhs_notelp !!}</td>
                                 <td>{{ $mahasiswa->mhs_jk == 1 ? 'Laki-Laki' : 'Perempuan' }}</td>
                                 <td>{{ $mahasiswa->mhs_th_lulus }}</td>
                                 <td>
                                     <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}"><i
-                                            class="text-warning fas fa-user-edit"></i></a>
+                                            class="text-warning fas fa-edit"></i></a>
                                     <a href="{{ route('mahasiswa.show', $mahasiswa->id) }}"><i
                                             class="text-success fas fa-eye"></i></a>
                                     <a href="{{ url('/mahasiswa/' . $mahasiswa->id . '/berkas') }}"><i
@@ -62,7 +62,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent m-0 p-0"><i
-                                                class="text-danger fas fa-user-times"></i></button>
+                                                class="text-danger fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>

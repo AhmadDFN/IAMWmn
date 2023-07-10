@@ -19,23 +19,37 @@
                 <table id="dtTable" class="table compact table-dark dtTable">
                     <thead>
                         <tr>
-                            <th scope="col">NIM</th>
-                            <th scope="col">Kode</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Perusahaaan</th>
-                            {{--  <th scope="col">Jenis Loker</th>  --}}
-                            <th scope="col" width="12%">Action</th>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Lowongan</th>
+                            <th scope="col">Perusahaan</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">Deadline</th>
+                            <th scope="col">Sistem Kerja</th>
+                            <th scope="col" width="12%">Jumlah Pelamar</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($lamars as $item)
                             <tr>
-                                <td>{{ $item->lamar_NIM }}</td>
-                                <td>{{ $item->lamar_kd }}</td>
-                                <td>{{ $item->lamar_nm }}</td>
-                                <td>{{ $item->perusahaan_nm }}</td>
-                                {{--  <td>{{ $item->jenis_loker_nm }}</td>  --}}
+                                <td>{{ $loop->iteration }}</td>
                                 <td>
+                                    <a href={{ url('loker/' . $item->id) }}>
+                                        {{ $item->loker_nm }}
+                                    </a>
+                                </td>
+                                <td>{{ $item->perusahaan_nm }}</td>
+                                <td>{{ $item->perusahaan_kota }}</td>
+                                {{-- <td>{{ $item->desc_low }}</td> --}}
+                                {{-- <td>{{ $item->kriteria_low }}</td> --}}
+                                <td>{{ \Carbon\Carbon::parse($item->loker_exp)->locale('id')->isoFormat('D MMMM YYYY') }}
+                                </td>
+                                <td>{{ $item->jenis_loker_nm }}</td>
+                                <td class="text-center">
+                                    {{--  <a href={{ route('detail_loker', ['id_lowongan' => $item->id]) }}>  --}}
+                                    {{ $item->jumlah_pelamar }}
+                                    {{--  </a>  --}}
+                                </td>
+                                {{--  <td>
                                     <form action="{{ url($routes->index . $item->id) }}" method="post">
                                         <a href="{{ url($routes->index . $item->id . '/edit') }}"><i
                                                 class="text-warning fas fa-user-edit"></i></a>
@@ -47,7 +61,7 @@
                                                 class="text-danger fas fa-user-times"></i></button>
 
                                     </form>
-                                </td>
+                                </td>  --}}
                             </tr>
                         @endforeach
                     </tbody>

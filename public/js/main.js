@@ -25,6 +25,29 @@
             .appendTo(".card-tools");
     });
     $(document).ready(function () {
+        $("#dtTableNoorder")
+            .DataTable({
+                buttons: [
+                    {
+                        extend: "collection",
+                        text: "Export",
+                        buttons: ["excel", "pdf"],
+                    },
+                ],
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                ordering: false,
+                info: true,
+                autoWidth: false,
+                responsive: true,
+                pagingType: "full_numbers",
+            })
+            .buttons()
+            .container()
+            .appendTo(".card-tools");
+    });
+    $(document).ready(function () {
         $("#dtTablekuae")
             .DataTable({
                 buttons: [

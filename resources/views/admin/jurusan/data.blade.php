@@ -34,13 +34,13 @@
                                 <td>
                                     <form action="{{ route($index . 'destroy', $jurusan->id) }}" method="post">
                                         <a href="{{ route($index . 'edit', $jurusan->id) }}"><i
-                                                class="text-warning fas fa-user-edit"></i></a>
+                                                class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ route($index . 'show', $jurusan->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-transparent mt-0"><i
-                                                class="text-danger fas fa-user-times"></i></button>
+                                                class="text-danger fas fa-trash"></i></button>
 
                                     </form>
                                 </td>

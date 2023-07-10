@@ -76,6 +76,7 @@ Route::group(["middleware" => "auth"], function () {
         Route::resource('jenisloker', admin\JenisLokerController::class);
         Route::resource('jurusan', admin\JurusanController::class);
         Route::resource('loker', admin\LokerController::class);
+        Route::get('lamar/histori', [admin\LamarController::class, 'histori']);
         Route::resource('lamar', admin\LamarController::class);
         Route::resource('user', admin\UserController::class);
     });

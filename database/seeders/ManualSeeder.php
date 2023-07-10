@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ManualSeeder extends Seeder
 {
@@ -80,7 +79,7 @@ class ManualSeeder extends Seeder
         ]);
 
         DB::table('mahasiswas')->insert([
-            "mhs_NIM" => "2022320064",
+            "mhs_NIM" => "2022320264",
             "mhs_nm" => "Aditya Ramatullah Yoga Pratama",
             "mhs_email" => "rama@gmail.com",
             "mhs_jk" => 1,
@@ -142,7 +141,39 @@ class ManualSeeder extends Seeder
             "updated_at" => date("Y-m-d h:i:s")
         ]);
 
+        DB::table('mahasiswas')->insert([
+            "mhs_NIM" => "2022320064",
+            "mhs_nm" => "Aliffian Witama Putra",
+            "mhs_email" => "aliffianwitama26@gmail.com",
+            "mhs_jk" => 1,
+            "mhs_notelp" => "085731718506",
+            "mhs_th_masuk" => "2022",
+            "mhs_th_lulus" => "2023",
+            "mhs_kota_lahir" => "MADIUN",
+            "mhs_tanggal_lahir" => date("2002-11-27"),
+            "mhs_alamat" => "JL Raya Kedunggalar Rt.3 Rw.2",
+            "mhs_kota" => "MADIUN",
+            "mhs_status" => 1,
+            "mhs_tb" => "175",
+            "mhs_bb" => "49",
+            "mhs_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "mhs_kd_jurusan" => "320",
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
+
         // Data Berkas
+        DB::table('berkas')->insert([
+            "berkas_kd" => $faker->isbn13(),
+            "berkas_skck" => $faker->uuid(),
+            "berkas_kk" => $faker->uuid(),
+            "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
+            "berkas_cv" => $faker->uuid(),
+            "berkas_ijazah" => $faker->uuid(),
+            "berkas_NIM" => "2022320064",
+            "created_at" => date("Y-m-d h:i:s"),
+            "updated_at" => date("Y-m-d h:i:s")
+        ]);
         DB::table('berkas')->insert([
             "berkas_kd" => $faker->isbn13(),
             "berkas_skck" => $faker->uuid(),
@@ -172,7 +203,7 @@ class ManualSeeder extends Seeder
             "berkas_foto" => $faker->image("public/uploads/berkas/foto", 640, 480),
             "berkas_cv" => $faker->uuid(),
             "berkas_ijazah" => $faker->uuid(),
-            "berkas_NIM" => "2022320064",
+            "berkas_NIM" => "2022320264",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);

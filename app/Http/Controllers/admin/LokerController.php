@@ -30,7 +30,11 @@ class LokerController extends Controller
             'index' => $this->route,
             'add' => $this->route . 'create',
         ];
-        $lokers = Loker::all();
+        $lokers =  DB::table('lokers')
+            ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
+            ->select('lokers.*', 'perusahaans.*')
+            ->get();
+        // dd($lokers);
         $jurusans  = Jurusan::all();
 
         foreach ($lokers as $key => $loker) {
@@ -146,6 +150,7 @@ class LokerController extends Controller
             ->join('mahasiswas', 'lamars.lamar_NIM', '=', 'mahasiswas.mhs_NIM')
             ->select("mahasiswas.mhs_nm", "lamars.*")
             ->get();
+        // dd($lamars);
         $title = "Loker";
         return view($this->view . 'show', compact('loker', 'data', 'title', 'perusahaan', 'lamars'));
     }

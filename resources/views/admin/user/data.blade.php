@@ -16,10 +16,10 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table id="dtTable" class="table compact table-dark dtTable">
+                <table id="dtTableNoorder" class="table compact table-dark dtTable">
                     <thead>
                         <tr>
-                            <th scope="col">id</th>
+                            <th scope="col">No</th>
                             <th scope="col">Reff</th>
                             <th scope="col">Email</th>
                             <th scope="col">Name</th>
@@ -31,12 +31,12 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{ $user->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $user->reff }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->role }}</td>
-                                <td>{{ $user->status }}</td>
+                                <td>{{ $user->status = 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                                 <td>
                                     <form action="{{ url($routes->index . $user->id) }}" method="post">
                                         <a href="{{ url($routes->index . $user->id . '/edit') }}"><i

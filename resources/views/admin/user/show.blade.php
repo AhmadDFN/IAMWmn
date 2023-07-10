@@ -27,25 +27,25 @@
                                         alt="{{ asset('images/no-image.webp') }}" class="img-circle" width="100">
                                 @endif
                                 @if (@$user->role == 'Mahasiswa')
-                                    @if ($mahasiswa->mhs_foto != '')
-                                        <img src="{{ asset($mahasiswa->mhs_foto) }}" alt="{{ $mahasiswa->mhs_nm }}"
+                                    @if (@$mahasiswa->mhs_foto != '')
+                                        <img src="{{ asset(@$mahasiswa->mhs_foto) }}" alt="{{ @$mahasiswa->mhs_nm }}"
                                             class="img-circle" width="100">
                                     @else
-                                        <img src="{{ asset($mahasiswa->mhs_foto) }}"
+                                        <img src="{{ asset(@$mahasiswa->mhs_foto) }}"
                                             alt="{{ asset('images/no-image.webp') }}" class="img-circle" width="100">
                                     @endif
                                 @endif
                                 @if (@$user->role == 'Perusahaan')
-                                    @if ($perusahaan->perusahaan_foto != '')
-                                        <img src="{{ asset($perusahaan->perusahaan_foto) }}"
-                                            alt="{{ $perusahaan->perusahaan_nm }}" class="img-circle" width="100">
+                                    @if (@$perusahaan->perusahaan_foto != '')
+                                        <img src="{{ asset(@$perusahaan->perusahaan_foto) }}"
+                                            alt="{{ @$perusahaan->perusahaan_nm }}" class="img-circle" width="100">
                                     @else
-                                        <img src="{{ asset($perusahaan->perusahaan_foto) }}"
+                                        <img src="{{ asset(@$perusahaan->perusahaan_foto) }}"
                                             alt="{{ asset('images/no-image.webp') }}" class="img-circle" width="100">
                                     @endif
                                 @endif
 
-                                <h3 class="name">{{ $user->name }}</h3>
+                                <h3 class="name">{{ @$user->name }}</h3>
                                 <span
                                     class="online-status {{ @$user->status != 0 ? 'status-available' : 'status-unavailable' }}">{{ @$user->status != 0 ? 'Aktif' : 'Tidak Aktif' }}</span>
                             </div>

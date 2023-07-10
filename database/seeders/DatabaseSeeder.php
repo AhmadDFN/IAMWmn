@@ -65,6 +65,10 @@ class DatabaseSeeder extends Seeder
             ->where('berkas_foto', 'LIKE', 'public/%')
             ->update(['berkas_foto' => DB::raw("REPLACE(berkas_foto, 'public/', '')")]);
 
+        DB::table('perusahaans')
+            ->where('perusahaan_foto', 'LIKE', 'public/%')
+            ->update(['perusahaan_foto' => DB::raw("REPLACE(perusahaan_foto, 'public/', '')")]);
+
         DB::table('mahasiswas')
             ->where('mhs_foto', 'LIKE', 'public/%')
             ->update(['mhs_foto' => DB::raw("REPLACE(mhs_foto, 'public/', '')")]);
@@ -80,10 +84,6 @@ class DatabaseSeeder extends Seeder
         DB::table('perusahaans')
             ->whereNotNull('perusahaan_kota')
             ->update(['perusahaan_kota' => DB::raw("CONCAT('KOTA ', perusahaan_kota)")]);
-
-
-
-
 
         // Mahasiswa::factory(10)->create();
 
