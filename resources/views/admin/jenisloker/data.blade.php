@@ -30,14 +30,17 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->jenis_loker_nm }}</td>
                                 <td>
-                                    <form action="{{ url($routes->index . $item->id) }}" method="post">
+                                    <form id="{{ 'delete-form-' . @$item->id }}"
+                                        action="{{ url($routes->index . $item->id) }}" method="post">
                                         <a href="{{ url($routes->index . $item->id . '/edit') }}"><i
                                                 class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ url($routes->index . $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
+                                        <button hidden type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-transparent mt-0"
+                                            onclick="confirmDeleteItem('{{ 'delete-form-' . $item->id }}')"><i
                                                 class="text-danger fas fa-trash"></i></button>
 
                                     </form>

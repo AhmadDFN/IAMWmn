@@ -57,11 +57,13 @@
                                             class="text-success fas fa-eye"></i></a>
                                     <a href="{{ url('/mahasiswa/' . $mahasiswa->id . '/berkas') }}"><i
                                             class="fa-solid fa-file"></i></a>
-                                    <form class="d-inline-block" action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}"
-                                        method="post">
+                                    <form id="{{ 'delete-form-' . @$mahasiswa->id }}" class="d-inline-block"
+                                        action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent m-0 p-0"><i
+                                        <button hidden type="submit" class="btn btn-primary">Submit</button>
+                                        <button onclick="confirmDeleteItem('{{ 'delete-form-' . $mahasiswa->id }}')"
+                                            type="button" class="btn btn-transparent m-0 p-0"><i
                                                 class="text-danger fas fa-trash"></i></button>
                                     </form>
                                 </td>

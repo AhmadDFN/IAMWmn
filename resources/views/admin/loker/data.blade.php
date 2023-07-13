@@ -19,6 +19,7 @@
                 <table id="dtTable" class="table compact table-dark dtTable">
                     <thead>
                         <tr>
+                            <th scope="col">ID</th>
                             <th scope="col" width="12%">Foto</th>
                             <th scope="col">Nama Loker</th>
                             <th scope="col">Nama Perusahaan</th>
@@ -31,6 +32,7 @@
                     <tbody>
                         @foreach ($lokers as $item)
                             <tr>
+                                <td>{{ $item->id }}</td>
                                 <td>
                                     @if ($item->perusahaan_foto != '')
                                         <img class="thumb-menu" src="{{ asset($item->perusahaan_foto) }}"
@@ -50,16 +52,18 @@
                                 <td>{{ $item->perusahaan_kota }}</td>
                                 <td>{{ $item->loker_exp }}</td>
                                 <td>
-                                    <form action="{{ url($routes->index . $item->id) }}" method="post">
+                                    <form action="{{ url($routes->index . $item->id) }}" method="post"
+                                        id="{{ 'delete-form-' . @$item->id }}">
                                         <a href="{{ url($routes->index . $item->id . '/edit') }}"><i
                                                 class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ url($routes->index . $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
+                                        <button hidden type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-transparent mt-0"
+                                            onclick="confirmDeleteItem('{{ 'delete-form-' . $item->id }}')"><i
                                                 class="text-danger fas fa-trash"></i></button>
-
                                     </form>
                                 </td>
                             </tr>

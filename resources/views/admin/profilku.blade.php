@@ -6,7 +6,7 @@
 @section('content')
     <div class="col-12 container-fluid px-4">
         <div class="bg-secondary rounded h-100 p-4 row">
-            <form action="{{ route($routes->save) }}" method="post" enctype="multipart/form-data">
+            <form id="form-simpan" action="{{ route($routes->save) }}" method="post" enctype="multipart/form-data">
                 <div class="row">
                     @csrf
                     @method('PUT')
@@ -78,7 +78,8 @@
                                 placeholder="Nama user">
                             <label for="confirmpassword">Confirm Password</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button hidden type="submit" class="btn btn-primary">Simpan</button>
+                        <button onclick="confirmSave('form-simpan')" type="button" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </form>

@@ -39,7 +39,8 @@
                                 <td>{{ pathinfo($item->berkas_cv, PATHINFO_FILENAME) }}</td>
                                 <td>{{ pathinfo($item->berkas_ijazah, PATHINFO_FILENAME) }}</td>
                                 <td>
-                                    <form action="{{ url($index . $item->id) }}" method="post">
+                                    <form id="{{ 'delete-form-' . @$item->id }}" action="{{ url($index . $item->id) }}"
+                                        method="post">
                                         <a href="{{ url($index . $item->id) . '/edit' }}"><i
                                                 class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ url($index . $item->id) }}"><i
@@ -47,7 +48,9 @@
 
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
+                                        <button hidden type="submit" class="btn btn-primary">Submit</button>
+                                        <button onclick="confirmDeleteItem('{{ 'delete-form-' . $item->id }}')"
+                                            type="button" class="btn btn-transparent mt-0"><i
                                                 class="text-danger fas fa-trash"></i></button>
 
                                     </form>

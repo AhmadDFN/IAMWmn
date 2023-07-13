@@ -20,6 +20,7 @@
 <script src="{{ asset('js/pdfmake.min.js') }}"></script>
 <script src="{{ asset('js/vfs_fonts.js') }}"></script>
 <script src="{{ asset('js/jszip.min.js') }}"></script>
+<script src="{{ asset('js/swalfire.js') }}"></script>
 
 {{--  dTTable CDN  --}}
 {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>

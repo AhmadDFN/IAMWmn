@@ -40,7 +40,8 @@
                                 <td>{{ $perusahaan->perusahaan_website }}</td>
                                 <td>{!! $perusahaan->perusahaan_cp_nama . '</br>' . $perusahaan->perusahaan_cp_notelp !!}</td>
                                 <td>
-                                    <form action="{{ route('perusahaan.destroy', $perusahaan->id) }}" method="post">
+                                    <form id="{{ 'delete-form-' . @$perusahaan->id }}"
+                                        action="{{ route('perusahaan.destroy', $perusahaan->id) }}" method="post">
                                         <a href="{{ route('perusahaan.edit', $perusahaan->id) }}"><i
                                                 class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ route('perusahaan.show', $perusahaan->id) }}"><i
@@ -48,9 +49,10 @@
 
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
+                                        <button hidden type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-transparent mt-0"
+                                            onclick="confirmDeleteItem('{{ 'delete-form-' . $perusahaan->id }}')"><i
                                                 class="text-danger fas fa-trash"></i></button>
-
                                     </form>
                                 </td>
                             </tr>

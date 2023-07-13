@@ -32,14 +32,17 @@
                                 <td>{{ $jurusan->jurusan_kd }}</td>
                                 <td>{{ $jurusan->jurusan_nm }}</td>
                                 <td>
-                                    <form action="{{ route($index . 'destroy', $jurusan->id) }}" method="post">
+                                    <form id="{{ 'delete-form-' . @$jurusan->id }}"
+                                        action="{{ route($index . 'destroy', $jurusan->id) }}" method="post">
                                         <a href="{{ route($index . 'edit', $jurusan->id) }}"><i
                                                 class="text-warning fas fa-edit"></i></a>
                                         <a href="{{ route($index . 'show', $jurusan->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
+                                        <button hidden type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-transparent mt-0"
+                                            onclick="confirmDeleteItem('{{ 'delete-form-' . $jurusan->id }}')"><i
                                                 class="text-danger fas fa-trash"></i></button>
 
                                     </form>

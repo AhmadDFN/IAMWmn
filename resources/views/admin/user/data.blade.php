@@ -38,14 +38,17 @@
                                 <td>{{ $user->role }}</td>
                                 <td>{{ $user->status = 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                                 <td>
-                                    <form action="{{ url($routes->index . $user->id) }}" method="post">
+                                    <form id="{{ 'delete-form-' . @$user->id }}"
+                                        action="{{ url($routes->index . $user->id) }}" method="post">
                                         <a href="{{ url($routes->index . $user->id . '/edit') }}"><i
                                                 class="text-warning fas fa-user-edit"></i></a>
                                         <a href="{{ url($routes->index . $user->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a><br>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
+                                        <button hidden type="submit" class="btn btn-primary">Submit</button>
+                                        <button onclick="confirmDeleteItem('{{ 'delete-form-' . $user->id }}')"
+                                            type="button" class="btn btn-transparent mt-0"><i
                                                 class="text-danger fas fa-user-times"></i></button>
                                     </form>
                                 </td>

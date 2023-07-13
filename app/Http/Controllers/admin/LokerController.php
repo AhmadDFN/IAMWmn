@@ -8,12 +8,9 @@ use App\Models\JenisLoker;
 use App\Models\Perusahaan;
 use Illuminate\Http\Request;
 use App\Helpers\CodeGenerator;
-use App\Helpers\getDateNow;
-use Database\Seeders\LokerSeeder;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Lamar;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class LokerController extends Controller
@@ -32,7 +29,7 @@ class LokerController extends Controller
         ];
         $lokers =  DB::table('lokers')
             ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
-            ->select('lokers.*', 'perusahaans.*')
+            ->select('lokers.*', 'perusahaans.perusahaan_foto', 'perusahaans.perusahaan_nm', 'perusahaans.perusahaan_kota')
             ->get();
         // dd($lokers);
         $jurusans  = Jurusan::all();
@@ -86,6 +83,7 @@ class LokerController extends Controller
             'page' => 'Loker Account',
         ];
         $title = $data->title;
+        // dd($lokers);
         return view($this->view . 'data', compact('lokers', 'jurusans', 'routes', 'data', 'title'));
     }
 
@@ -130,7 +128,7 @@ class LokerController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // dd($requestData1);
+        // dd($requestData);
         loker::create($requestData);
         return redirect($this->route);
     }
