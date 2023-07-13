@@ -29,8 +29,13 @@ Route::get("auth/login", [IndexController::class, "show_login"])->name("login");
 Route::post("auth/login", [IndexController::class, "login"]);
 Route::get("auth/register", [IndexController::class, "show_register"])->name("signup"); // Dengan nama route
 Route::post("auth/register", [IndexController::class, "register"]);
-Route::get('admin/send-email/{mahasiswa}', [admin\VerifController::class, 'send_email'])->name('sendemail');
+Route::get('admin/send-email/{mahasiswa}', [admin\VerifController::class, 'test_email'])->name('testemail');
+Route::get('admin/send-email/{mahasiswa}/{token}/{nim}', [admin\VerifController::class, 'send_email'])->name('sendemail');
+Route::get("verif/email/{mahasiswa}/acc", [admin\VerifController::class, "email_update"]);
 // Kota - Provinsi
+Route::get('/test', function () {
+    return view("admin.verif.email");
+});
 Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
 
 Route::group(["middleware" => "auth"], function () {
@@ -63,9 +68,6 @@ Route::group(["middleware" => "auth"], function () {
         Route::get('admin/', [admin\DashboardController::class, 'index'])->name('dashboard');
         Route::get('admin/myprofile', [admin\DashboardController::class, 'profilku'])->name('edit.admin');
         Route::put('admin/myprofile/update', [admin\DashboardController::class, 'update'])->name('update.admin');
-        Route::get('/test', function () {
-            return view("admin.blank");
-        });
 
         Route::get('verif', [admin\VerifController::class, 'index'])->name('verif');
         Route::get("verif/{mahasiswa}/acc", [admin\VerifController::class, "update_status"]);

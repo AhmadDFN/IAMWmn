@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
+use Exception;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Mahasiswa;
+use App\Mail\VerificationCode;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Mail\VerificationCode;
-use Exception;
+use App\Mail\sendPass;
 use Illuminate\Support\Facades\Mail;
 
 class VerifController extends Controller
@@ -60,13 +62,62 @@ class VerifController extends Controller
         return back();
     }
 
-    function send_email(Mahasiswa $mahasiswa)
+    function email_update(Mahasiswa $mahasiswa)
+    {
+
+        Mahasiswa::where("id", $mahasiswa->id)->update([
+            "mhs_status" => 2
+        ]);
+        User::where("reff", $mahasiswa->mhs_NIM)->update([
+            "status" => 1,
+            "email_verified_at" => date("Y-m-d h:i:s"),
+        ]);
+        $single = collect($mahasiswa);
+        $single["pass"] = str_replace("-", "", Carbon::createFromFormat('Y-m-d', $mahasiswa->mhs_tanggal_lahir)->locale('id')->isoFormat('DMMYYYY'));
+        try {
+            Mail::to($mahasiswa->mhs_email)->send(new sendPass($single));
+            $mess = "Berhasil Kekirim";
+            // dd("Berhasil");
+        } catch (Exception $err) {
+            $mess = "Gagal Terkirim" . " " . $err;
+            // dd($th);
+        }
+
+        return redirect("/")->with($mess);
+    }
+
+    function send_email(Mahasiswa $mahasiswa, $token, $reff)
     {
 
         $single = collect($mahasiswa);
+        $single["token"] = $token;
+        $single["reff"] = $reff;
+        // $single["pass"] = str_replace("-", "", Carbon::createFromFormat('Y-m-d', $mahasiswa->mhs_tanggal_lahir)->locale('id')->isoFormat('DMMYYYY'));
+        // dd([
+        //     "mahasiswa" => $mahasiswa,
+        //     "single" => $single,
+        //     "token" => $token,
+        //     "reff" => $reff,
+        // ]);
 
         try {
             Mail::to($mahasiswa->mhs_email)->send(new VerificationCode($single));
+            $mess = "Berhasil Kekirim";
+            // dd("Berhasil");
+        } catch (Exception $err) {
+            $mess = "Gagal Terkirim" . " " . $err;
+            // dd($th);
+        }
+
+        return redirect("/")->with($mess);
+    }
+
+    function test_email(Mahasiswa $mahasiswa)
+    {
+
+        $single = collect($mahasiswa);
+        try {
+            Mail::to($mahasiswa->mhs_email)->send(new sendPass($single));
             $mess = "Berhasil Kekirim";
             // dd("Berhasil");
         } catch (Exception $err) {

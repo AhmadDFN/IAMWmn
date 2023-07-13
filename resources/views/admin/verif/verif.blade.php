@@ -119,7 +119,8 @@
                     <tr>
                         <td bgcolor="#ffffff" align="center" valign="top"
                             style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; line-height: 48px;">
-                            <h1 style="font-size: 48px; font-weight: 400; margin: 2;">Selamat datang {{ @$nama }}
+                            <h1 style="font-size: 48px; font-weight: 400; margin: 2;">Terimakasih Sudah Verifikasi
+                                {{ @$nama }}
                                 <br> {{ @$jurusan . '  -  ' . @$nim }}
                             </h1><img src="https://drive.google.com/uc?export=view&id=1SYBeV6qIT0_JeUQVImV-qNBMeYTXPoew"
                                 width="325" height="320"
@@ -138,32 +139,16 @@
                     <tr>
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;">Terimakasih sudah melakukan daftar ulang pada IAMBopi, Silahkan klik
-                                link dibawah untuk verifikasi anda</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor="#ffffff" align="left">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
-                                        <table border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td align="center" style="border-radius: 20px;" bgcolor="brown"><a
-                                                        href="{{ url('verif/email/' . @$id . '/acc') }}" target="_blank"
-                                                        style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #FFA73B; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 20px; border: 1px solid #FFA73B; display: inline-block;">Confirm
-                                                        Account</a></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
+                            <p style="margin: 0;">Terimakasih sudah melakukan daftar ulang pada IAMBopi. Ini id user dan
+                                password anda untuk login</p>
                         </td>
                     </tr>
                     <tr>
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;">Token Anda {{ @$token }} <br> Reff anda {{ @$reff }}</p>
+                            <p style="margin: 0;">Nama {{ @$nama }} <br> Reff anda {{ @$reff }} <br> Email
+                                {{ @$email }} <br> Jurusan {{ @$jurusan }} <br> Password Anda
+                                {{ @$pass }}</p>
                         </td>
                     </tr>
                     <tr>
@@ -184,7 +169,7 @@
                             <h2 style="font-size: 20px; font-weight: 400; color: #111111; margin: 0;">Ada Pertanyaan ?
                                 Hubungi
                             </h2>
-                            <p style="margin: 0;"><a href="https://wa.me/62895352882228" target="_blank"
+                            <p style="margin: 0;"><a href="https:wa.me/62895352882228" target="_blank"
                                     style="color: brown;">Whatsapp Admin
                                     Bopi University</a></p>
                         </td>

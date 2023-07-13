@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\CodeGenerator;
 use Exception;
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -180,43 +182,70 @@ class IndexController extends Controller
             ->where('mhs_tanggal_lahir', '=', $request->mhs_tanggal_lahir)
             ->where('mhs_status', '=', 1)
             ->get();
+        $user = User::where("reff", $request->mhs_NIM)
+            ->where('email', $request->mhs_email)
+            ->get();
 
-        $hasildd = $request;
-        // dd($hasil[0]->mhs_nm);
-        // dd($cektanggal);
-        // dd($request->mhs_NIM);
+        // dd([
+        //     "Hasil" => $hasil,
+        //     "Hasil2" => $hasil[0]->mhs_NIM,
+        //     "Request" => $request->all(),
+        //     "mhs_nim" => $request->mhs_NIM,
+        //     "count" => $user->count(),
+        //     "count Hasil" => $hasil->count(),
+        //     "remember Token" => @$user[0]->remember_token,
+        //     "url" => "admin/send-email/" . $hasil[0]->mhs_NIM . "/" . @$user[0]->remember_token,
+        // ]);
 
         if ($hasil->count() > 0) {
-            try {
-                // Save
-                DB::table('users')->insert([
-                    "name" => $hasil[0]->mhs_nm,
-                    "reff" => $hasil[0]->mhs_NIM,
-                    "email" => $hasil[0]->mhs_email,
-                    "password" => Hash::make(str_replace("-", "", Carbon::createFromFormat('Y-m-d', $hasil[0]->mhs_tanggal_lahir)->locale('id')->isoFormat('DMMYYYY'))),
-                    "role" => "Mahasiswa",
-                    "status" => 0,
-                    "remember_token" => Str::random(10),
-                    "created_at" => date("Y-m-d h:i:s"),
-                    "updated_at" => date("Y-m-d h:i:s")
-                ]);
-                $mess = [
-                    "type" => "success",
-                    "text" => "Registrasi berhasil , Silahkan tunggu maksimal 2x24 jam !"
-                ];
-            } catch (Exception $err) {
-                $mess = [
-                    "type" => "danger",
-                    "text" => $err . "  -  " . "Registrasi gagal !"
-                ];
+            if ($user->count() > 0) {
+                $requestuser = $user[0]->toArray();
+                $requestuser["remember_token"] = CodeGenerator::generateUniqueCode(15);
+                // dd($requestuser);
+                $user = User::where("reff", $request->mhs_NIM)
+                    ->where('email', $request->mhs_email)
+                    ->first();
+
+                $user->fill($requestuser);
+                $user->save();
+                return redirect("admin/send-email/" . $hasil[0]->id . "/" . $user->remember_token . "/" . $hasil[0]->mhs_NIM)->with($mess);
             }
+            // try {
+            // Save
+            DB::table('users')->insert([
+                "name" => $hasil[0]->mhs_nm,
+                "reff" => $hasil[0]->mhs_NIM,
+                "email" => $hasil[0]->mhs_email,
+                "password" => Hash::make(str_replace("-", "", Carbon::createFromFormat('Y-m-d', $hasil[0]->mhs_tanggal_lahir)->locale('id')->isoFormat('DMMYYYY'))),
+                "role" => "Mahasiswa",
+                "status" => 0,
+                "remember_token" => CodeGenerator::generateUniqueCode(15),
+                "created_at" => date("Y-m-d h:i:s"),
+                "updated_at" => date("Y-m-d h:i:s")
+            ]);
+
+            $user = User::where("reff", $request->mhs_NIM)
+                ->where('email', $request->mhs_email)
+                ->first();
+
+            $mess = [
+                "type" => "success",
+                "text" => "Registrasi berhasil , Silahkan tunggu maksimal 2x24 jam !"
+            ];
+            return redirect("admin/send-email/" . $hasil[0]->id . "/" . $user->remember_token . "/" . $hasil[0]->mhs_NIM)->with($mess);
+            // } catch (Exception $err) {
+            //     $mess = [
+            //         "type" => "danger",
+            //         "text" => $err . "  -  " . "Registrasi gagal !"
+            //     ];
+            // }
 
             return redirect()->route('home')->with($mess);
         } else {
             // Jika hasil tidak ditemukan, lempar exception
             $mess = [
                 "type" => "danger",
-                "text" => "NIM Belum Terdaftar !"
+                "text" => "NIM Belum Terdaftar atau Sudah terverif!!"
             ];
         }
 

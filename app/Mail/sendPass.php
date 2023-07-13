@@ -3,13 +3,14 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
-class VerificationCode extends Mailable
+class sendPass extends Mailable
 {
     use Queueable, SerializesModels;
     public $reciv;
@@ -28,7 +29,7 @@ class VerificationCode extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Verification Code',
+            subject: 'Congratulations',
             from: new Address('adanyfn@gmail.com', 'Bopi University Madiun')
         );
     }
@@ -38,17 +39,15 @@ class VerificationCode extends Mailable
      */
     public function content(): Content
     {
-        // dd($this->reciv);
         return new Content(
-            view: 'admin.verif.email',
+            view: 'admin.verif.verif',
             with: [
                 "nama" => $this->reciv["mhs_nm"],
                 "email" => $this->reciv["mhs_email"],
                 "jurusan" => $this->reciv["mhs_kd_jurusan"],
                 "nim" => $this->reciv["mhs_NIM"],
-                "token" => $this->reciv["token"],
-                "reff" => $this->reciv["reff"],
-                "id" => $this->reciv["id"],
+                "pass" => $this->reciv["pass"],
+                // "id" => $this->reciv["id"],
             ]
         );
     }
