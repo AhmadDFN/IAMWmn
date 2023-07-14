@@ -42,7 +42,7 @@ function confirmLogout() {
     }).then((result) => {
         if (result.isConfirmed) {
             // Lanjutkan dengan proses logout di sini
-            window.location.href = "{{ url('auth/logout') }}";
+            window.location.href = "auth/logout";
         }
     });
     return false; // Hindari aksi logout langsung dari tautan
