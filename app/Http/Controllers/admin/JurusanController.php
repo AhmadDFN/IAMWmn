@@ -21,7 +21,7 @@ class JurusanController extends Controller
     {
         $data = [
             "title" => "Jurusan",
-            'page' => 'Data Jurusan Wearnes Madiun',
+            'page' => 'Data Jurusan Bopi Madiun',
             "jurusans" => Jurusan::All(),
             'add' => $this->route . "create",
             'index' => $this->route,

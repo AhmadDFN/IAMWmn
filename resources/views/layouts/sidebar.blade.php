@@ -2,7 +2,8 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-secondary navbar-dark">
         <a href="{{ url('/') }}" class="navbar-brand mx-4 mb-3">
-            <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>IAMW</h3>
+            <h3 class="text-primary "><img src="{{ asset('img/bopi.png') }}" alt="BOPI" width="30%" class="mt-1">
+                BOPI</h3>
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
             <div class="position-relative">
@@ -38,7 +39,7 @@
             <div class="nav-item dropdown">
                 <a href="#"
                     class="nav-link dropdown-toggle {{ (($title == 'Mahasiswa' or $title == 'Berkas') ? 'active' : $title == 'Jurusan') ? 'active' : '' }}"
-                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Mahasiswa</a>
+                    data-bs-toggle="dropdown"><i class="fa fa-users me-2"></i>Mahasiswa</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('mahasiswa') }}"
                         class="dropdown-item {{ ($title == 'Mahasiswa' or $title == 'Berkas') ? 'active' : '' }}">Data
@@ -54,11 +55,11 @@
                     class="fa fa-laptop me-2"></i>Jurusan</a>  --}}
             <a href="{{ url('perusahaan') }}"
                 class="nav-item nav-link {{ $title == 'Perusahaan' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Perusahaan</a>
+                    class="fa fa-building me-2"></i>Perusahaan</a>
             <div class="nav-item dropdown">
                 <a href="#"
                     class="nav-link dropdown-toggle {{ ((($title == 'Loker' ? 'active' : $title == 'Lamar') ? 'active' : $title == 'Jenis Loker') ? 'active' : $title == 'Histori Lamaran') ? 'active' : '' }}"
-                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Pekerjaan</a>
+                    data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Pekerjaan</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('loker') }}"
                         class="dropdown-item {{ $title == 'Loker' ? 'active' : '' }}">Lowongan</a>
@@ -84,7 +85,7 @@
             <div class="nav-item dropdown">
                 <a href="#"
                     class="nav-link dropdown-toggle {{ ($title == 'User' ? 'active' : $title == 'Verif') ? 'active' : '' }}"
-                    data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Account</a>
+                    data-bs-toggle="dropdown"><i class="fa fa-envelope me-2"></i>Account</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('user') }}"
                         class="dropdown-item {{ $title == 'User' ? 'active' : '' }}">User</a>

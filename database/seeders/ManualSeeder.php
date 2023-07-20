@@ -254,36 +254,42 @@ class ManualSeeder extends Seeder
         DB::table('jurusans')->insert([
             "jurusan_kd" => "310",
             "jurusan_nm" => "Kabab Exim",
+            "jurusan_kda" => "KE",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
         DB::table('jurusans')->insert([
             "jurusan_kd" => "320",
             "jurusan_nm" => "Inforkom",
+            "jurusan_kda" => "IK",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
         DB::table('jurusans')->insert([
             "jurusan_kd" => "330",
             "jurusan_nm" => "Kasima Pr",
+            "jurusan_kda" => "KS",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
         DB::table('jurusans')->insert([
             "jurusan_kd" => "340",
             "jurusan_nm" => "Degrakom",
+            "jurusan_kda" => "DK",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
         DB::table('jurusans')->insert([
             "jurusan_kd" => "350",
             "jurusan_nm" => "Komputer Pajak",
+            "jurusan_kda" => "KP",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);
         DB::table('jurusans')->insert([
             "jurusan_kd" => "360",
             "jurusan_nm" => "Digital Marketing",
+            "jurusan_kda" => "DM",
             "created_at" => date("Y-m-d h:i:s"),
             "updated_at" => date("Y-m-d h:i:s")
         ]);

@@ -113,30 +113,32 @@
                         </div>
                     </div>
                 @else
-                    <div class="profile-detail">
-                        <div class="profile-info">
-                            <h4><i class="fa fa-user box-circle"></i> Informasi {{ @$user->role }}</h4>
-                            <div class="row">
-                                <div class="col-md-4">Nama</div>
-                                <div class="col-md-8">: {{ @$perusahaan->perusahaan_nm }}</div>
-                                <div class="col-md-4">Alamat</div>
-                                <div class="col-md-8">: {{ @$perusahaan->perusahaan_alamat }}</div>
-                                <div class="col-md-4">Kota Perusahaan</div>
-                                <div class="col-md-8">: {{ @$perusahaan->perusahaan_kota }}</div>
-                                <div class="col-md-4">No Telpon</div>
-                                <div class="col-md-8">: {{ @$perusahaan->perusahaan_notelp }}</div>
-                                <div class="col-md-4">Email</div>
-                                <div class="col-md-8">: {{ @$perusahaan->perusahaan_email }}</div>
-                                <div class="col-md-4">Website</div>
-                                <div class="col-md-8">: {{ @$perusahaan->perusahaan_website }}</div>
-                                <div class="col-md-4">CP Nama</div>
-                                <div class="col-md-8">: {{ @$perusahaan->perusahaan_cp_nama }}</div>
-                                <div class="col-md-4">CP No Telp</div>
-                                <div class="col-md-8">: {{ @$perusahaan->perusahaan_cp_notelp }}</div>
-                                <br><br>
-                                <a href="{{ url('/perusahaan/' . $perusahaan->id_perusahaan) }}" class="btn btn-primary"
-                                    style="position: relative;">Ke
-                                    Perusahaan</a>
+                    <div class="col-md-7">
+                        <div class="profile-detail">
+                            <div class="profile-info">
+                                <h4><i class="fa fa-user box-circle"></i> Informasi {{ @$user->role }}</h4>
+                                <div class="row">
+                                    <div class="col-md-4">Nama</div>
+                                    <div class="col-md-8">: {{ @$perusahaan->perusahaan_nm }}</div>
+                                    <div class="col-md-4">Alamat</div>
+                                    <div class="col-md-8">: {{ @$perusahaan->perusahaan_alamat }}</div>
+                                    <div class="col-md-4">Kota Perusahaan</div>
+                                    <div class="col-md-8">: {{ @$perusahaan->perusahaan_kota }}</div>
+                                    <div class="col-md-4">No Telpon</div>
+                                    <div class="col-md-8">: {{ @$perusahaan->perusahaan_notelp }}</div>
+                                    <div class="col-md-4">Email</div>
+                                    <div class="col-md-8">: {{ @$perusahaan->perusahaan_email }}</div>
+                                    <div class="col-md-4">Website</div>
+                                    <div class="col-md-8">: {{ @$perusahaan->perusahaan_website }}</div>
+                                    <div class="col-md-4">CP Nama</div>
+                                    <div class="col-md-8">: {{ @$perusahaan->perusahaan_cp_nama }}</div>
+                                    <div class="col-md-4">CP No Telp</div>
+                                    <div class="col-md-8">: {{ @$perusahaan->perusahaan_cp_notelp }}</div>
+                                    <br><br>
+                                    <a href="{{ url('/perusahaan/' . $perusahaan->id_perusahaan) }}"
+                                        class="btn btn-primary" style="position: relative;">Ke
+                                        Perusahaan</a>
+                                </div>
                             </div>
                         </div>
                     </div>

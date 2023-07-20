@@ -33,6 +33,11 @@
                                 placeholder="Alamat jurusan" value="{{ @$jurusan->jurusan_nm }}">
                             <label for="jurusan_nm">Nama jurusan</label>
                         </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="jurusan_kda" name="jurusan_kda"
+                                placeholder="Alamat jurusan" value="{{ @$jurusan->jurusan_kda }}">
+                            <label for="jurusan_kda">Jurusan Kode Nama</label>
+                        </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>

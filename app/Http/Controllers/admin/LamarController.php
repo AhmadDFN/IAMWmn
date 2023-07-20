@@ -9,6 +9,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Perusahaan;
 
 class LamarController extends Controller
 {
@@ -33,7 +34,7 @@ class LamarController extends Controller
         $lamars =  DB::table('lokers')
             ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
             ->join('jenis_lokers', 'lokers.loker_id_jnsloker', '=', 'jenis_lokers.id')
-            ->select('jenis_lokers.jenis_loker_nm', 'perusahaans.*', 'lokers.*', DB::raw('(SELECT COUNT(*) FROM lamars WHERE lamars.lamar_id_loker = lokers.id) AS jumlah_pelamar'))
+            ->select('jenis_lokers.jenis_loker_nm', 'perusahaans.perusahaan_foto', 'perusahaans.perusahaan_nm', 'perusahaans.perusahaan_kota', 'lokers.*', DB::raw('(SELECT COUNT(*) FROM lamars WHERE lamars.lamar_id_loker = lokers.id) AS jumlah_pelamar'))
             ->get();
         // dd($lokers);
         // Output the results
@@ -156,19 +157,50 @@ class LamarController extends Controller
         return view($this->view . 'record', compact('lamars', 'routes', 'data', 'title'));
     }
 
-    function detail_lowongan(Request $req)
+    function detail_lowongan(Loker $loker)
+    {
+        $routes = (object)[
+            'index' => $this->route,
+            'add' => $this->route . 'create',
+        ];
+        $data = (object)[
+            "title" => "Lamar",
+            'page' => 'Lamar',
+        ];
+        $perusahaan = Perusahaan::where('id', $loker->loker_id_perusahaan)->get()->first();
+        $title = $data->title;
+        $lamars = DB::table("lamars")
+            ->join("mahasiswas", "lamars.lamar_NIM", "=", "mahasiswas.mhs_NIM")
+            ->join("berkas", "mahasiswas.mhs_NIM", "=", "berkas.berkas_NIM")
+            ->select("lamars.*", "mahasiswas.mhs_nm", "berkas.id as id_berkas", "mahasiswas.id as id_mahasiswa")
+            ->where("lamars.lamar_id_loker", $loker->id)
+            ->get();
+        // dd($data);
+        return view($this->view . 'detail', compact('lamars', 'perusahaan', 'routes', 'data', 'title', 'loker'));
+    }
+
+    function detail_lowongan2(Loker $loker)
     {
         $data = [
-            "rsLowongan" => loker::where("id", $req->id_lowongan)->first(),
+            "rsLowongan" => $loker,
             "dtLamar" => DB::table("lamar")
-                ->join("users", "lamar.id_users", "=", "users.id")
-                ->join("file", "users.id", "=", "file.id_users")
-                ->select("lamar.*", "users.name", "file.filename", "file.filepath")
-                ->where("lamar.id_lowongan", $req->id_lowongan)
+                ->join("mahasiswas", "lamar.lamar_NIM", "=", "mahasiswas.mhs_NIM")
+                ->join("berkas", "mahasiswas.mhs_NIM", "=", "berkas.berkas_NIM")
+                ->select("lamar.*", "mahasiswas.name", "berkas.id as id_berkas", "mahasiswas.id as id_mahasiswa")
+                ->where("lamar.id_lowongan", $loker->id)
                 ->get(),
             "title" => "Lamar",
             "page" => "Lamar",
         ];
+
         return view("lamar.detail", $data);
+    }
+
+    function update_status(Lamar $lamar, Request $request)
+    {
+        $lamar->fill($request->all());
+        $lamar->save();
+
+        return back();
     }
 }

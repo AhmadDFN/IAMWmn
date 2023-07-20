@@ -187,7 +187,7 @@ class BerkasController extends Controller
     {
         $data = [
             "title" => "Berkas",
-            'page' => 'Data Berkas Alumni Wearnes Madiun',
+            'page' => 'Data Berkas Alumni Bopi Madiun',
             "berkas" => $berka,
             'index' => $this->route($mahasiswa),
             'save' => $this->route($mahasiswa),

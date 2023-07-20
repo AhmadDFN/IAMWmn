@@ -4,6 +4,7 @@
 use App\Http\Controllers\iamw;
 use App\Http\Controllers\mahasiswa;
 use App\Http\Controllers\admin;
+use App\Http\Controllers\admin\LamarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\kotaController;
@@ -31,10 +32,10 @@ Route::get("auth/register", [IndexController::class, "show_register"])->name("si
 Route::post("auth/register", [IndexController::class, "register"]);
 Route::get('admin/send-email/{mahasiswa}', [admin\VerifController::class, 'test_email'])->name('testemail');
 Route::get('admin/send-email/{mahasiswa}/{token}/{nim}', [admin\VerifController::class, 'send_email'])->name('sendemail');
-Route::get("verif/email/{mahasiswa}/acc", [admin\VerifController::class, "email_update"]);
+Route::get("verif/email/{mahasiswa}/acc/{token}", [admin\VerifController::class, "email_update"]);
 // Kota - Provinsi
 Route::get('/test', function () {
-    return view("admin.verif.email");
+    return view("admin.verif.verif");
 });
 Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
 
@@ -78,6 +79,8 @@ Route::group(["middleware" => "auth"], function () {
         Route::resource('jenisloker', admin\JenisLokerController::class);
         Route::resource('jurusan', admin\JurusanController::class);
         Route::resource('loker', admin\LokerController::class);
+        Route::get("lamar/{loker}/detail", [admin\LamarController::class, "detail_lowongan"]);
+        Route::get("lamar/{lamar}/status/{lamar_status}", [LamarController::class, "update_status"]);
         Route::get('lamar/histori', [admin\LamarController::class, 'histori']);
         Route::resource('lamar', admin\LamarController::class);
         Route::resource('user', admin\UserController::class);

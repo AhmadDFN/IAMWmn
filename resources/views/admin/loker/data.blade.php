@@ -19,7 +19,7 @@
                 <table id="dtTable" class="table compact table-dark dtTable">
                     <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            {{--  <th scope="col">ID</th>  --}}
                             <th scope="col" width="12%">Foto</th>
                             <th scope="col">Nama Loker</th>
                             <th scope="col">Nama Perusahaan</th>
@@ -32,7 +32,7 @@
                     <tbody>
                         @foreach ($lokers as $item)
                             <tr>
-                                <td>{{ $item->id }}</td>
+                                {{--  <td>{{ $item->id }}</td>  --}}
                                 <td>
                                     @if ($item->perusahaan_foto != '')
                                         <img class="thumb-menu" src="{{ asset($item->perusahaan_foto) }}"
@@ -46,7 +46,7 @@
                                 <td>{{ $item->perusahaan_nm }}</td>
                                 <td>
                                     @foreach ($item->jurusans as $jurusan)
-                                        {!! '-' . $jurusan->jurusan_nm . '</br>' !!}
+                                        {!! $jurusan->jurusan_kda . '</br>' !!}
                                     @endforeach
                                 </td>
                                 <td>{{ $item->perusahaan_kota }}</td>

@@ -39,11 +39,6 @@
                                         <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}"
                                             alt="{{ $mahasiswa->mhs_nm }}">
                                     @endif
-                                    {{--  @if ($mahasiswa->mhs_foto != '')                                
-                                    <img class="thumb-menu" src="{{ asset(str_replace("public/","",$mahasiswa->mhs_foto)) }}" alt="{{ $mahasiswa->mhs_nm }}">
-                                @else
-                                    <img class="thumb-menu" src="{{ asset('images/no-image.webp') }}" alt="{{ $mahasiswa->mhs_nm }}">
-                                @endif  --}}
                                 </td>
                                 <td>{{ $mahasiswa->mhs_NIM }}</td>
                                 <td>{{ $mahasiswa->mhs_nm }}</td>

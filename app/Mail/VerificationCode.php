@@ -44,7 +44,7 @@ class VerificationCode extends Mailable
             with: [
                 "nama" => $this->reciv["mhs_nm"],
                 "email" => $this->reciv["mhs_email"],
-                "jurusan" => $this->reciv["mhs_kd_jurusan"],
+                "jurusan" => $this->reciv["jurusan"]->jurusan_nm,
                 "nim" => $this->reciv["mhs_NIM"],
                 "token" => $this->reciv["token"],
                 "reff" => $this->reciv["reff"],

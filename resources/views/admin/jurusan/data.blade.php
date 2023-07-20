@@ -22,6 +22,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Kode Jurusan</th>
                             <th scope="col">Nama Jurusan</th>
+                            <th scope="col">Jurusan Kode</th>
                             <th scope="col" width="12%">Action</th>
                         </tr>
                     </thead>
@@ -31,6 +32,7 @@
                                 <td>{{ $jurusan->id }}</td>
                                 <td>{{ $jurusan->jurusan_kd }}</td>
                                 <td>{{ $jurusan->jurusan_nm }}</td>
+                                <td>{{ $jurusan->jurusan_kda }}</td>
                                 <td>
                                     <form id="{{ 'delete-form-' . @$jurusan->id }}"
                                         action="{{ route($index . 'destroy', $jurusan->id) }}" method="post">
@@ -44,7 +46,6 @@
                                         <button type="button" class="btn btn-transparent mt-0"
                                             onclick="confirmDeleteItem('{{ 'delete-form-' . $jurusan->id }}')"><i
                                                 class="text-danger fas fa-trash"></i></button>
-
                                     </form>
                                 </td>
                             </tr>

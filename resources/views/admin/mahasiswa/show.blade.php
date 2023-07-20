@@ -26,7 +26,6 @@
                                     <img src="{{ asset($mahasiswa->mhs_foto) }}" alt="{{ asset('images/no-image.webp') }}"
                                         class="img-circle" width="100">
                                 @endif
-
                                 <h3 class="name">{{ $mahasiswa->mhs_nm }}</h3>
                                 <span
                                     class="online-status {{ @$mahasiswa->mhs_status != 0 ? 'status-available' : 'status-unavailable' }}">{{ @$mahasiswa->mhs_status != 0 ? 'Aktif' : 'Tidak Aktif' }}</span>

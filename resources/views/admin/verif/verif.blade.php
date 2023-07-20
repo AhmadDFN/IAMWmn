@@ -6,6 +6,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <!-- Menggunakan Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <style type="text/css">
         @media screen {
             @font-face {
@@ -146,9 +150,25 @@
                     <tr>
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;">Nama {{ @$nama }} <br> Reff anda {{ @$reff }} <br> Email
-                                {{ @$email }} <br> Jurusan {{ @$jurusan }} <br> Password Anda
-                                {{ @$pass }}</p>
+                            <p style="margin: 0;">Nama {{ @$nama }} <br> Reff anda {{ @$nim }} <br> Email
+                                {{ @$email }} <br> Jurusan {{ @$jurusan }}
+                            </p>
+                            <div class="input-group" style="background-color: #fff">
+                                Password anda
+                                <input type="password" class="form-control" id="passwordInput"
+                                    value="{{ @$pass }}" readonly
+                                    style="
+                                    background: white;
+                                    border: white;
+                                ">
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword"
+                                    style="
+                                border: 0px;
+                                margin-top: -5px;
+                            ">
+                                    <i id="passwordIcon" class="fas fa-eye"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -178,6 +198,24 @@
             </td>
         </tr>
     </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordIcon = document.getElementById('passwordIcon');
+        const togglePassword = document.getElementById('togglePassword');
+
+        togglePassword.addEventListener('click', function() {
+            if (passwordInput.getAttribute('type') === 'password') {
+                passwordInput.setAttribute('type', 'text');
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.setAttribute('type', 'password');
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            }
+        });
+    </script>
 </body>
 
 </html>

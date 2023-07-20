@@ -39,29 +39,14 @@
                                 </td>
                                 <td>{{ $item->perusahaan_nm }}</td>
                                 <td>{{ $item->perusahaan_kota }}</td>
-                                {{-- <td>{{ $item->desc_low }}</td> --}}
-                                {{-- <td>{{ $item->kriteria_low }}</td> --}}
                                 <td>{{ \Carbon\Carbon::parse($item->loker_exp)->locale('id')->isoFormat('D MMMM YYYY') }}
                                 </td>
                                 <td>{{ $item->jenis_loker_nm }}</td>
                                 <td class="text-center">
-                                    {{--  <a href={{ route('detail_loker', ['id_lowongan' => $item->id]) }}>  --}}
-                                    {{ $item->jumlah_pelamar }}
-                                    {{--  </a>  --}}
+                                    <a href={{ url('lamar/' . @$item->id . '/detail') }}>
+                                        {{ $item->jumlah_pelamar }}
+                                    </a>
                                 </td>
-                                {{--  <td>
-                                    <form action="{{ url($routes->index . $item->id) }}" method="post">
-                                        <a href="{{ url($routes->index . $item->id . '/edit') }}"><i
-                                                class="text-warning fas fa-user-edit"></i></a>
-                                        <a href="{{ url($routes->index . $item->id) }}"><i
-                                                class="text-success fas fa-eye"></i></a><br>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
-                                                class="text-danger fas fa-user-times"></i></button>
-
-                                    </form>
-                                </td>  --}}
                             </tr>
                         @endforeach
                     </tbody>

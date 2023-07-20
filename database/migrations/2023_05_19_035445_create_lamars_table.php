@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("lamar_kd");
             $table->string("lamar_nm");
             $table->date("lamar_tgl_daftar");
+            $table->integer("lamar_status")->default(0);
             $table->string("lamar_NIM");
             $table->integer("lamar_id_loker");
             $table->timestamps();

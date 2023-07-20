@@ -12,8 +12,10 @@
                     <div class="row">
                         <div class="col-md-4">Kode Jurusan</div>
                         <div class="col-md-8">: {{ $jurusan->jurusan_kd }}</div>
-                        <div class="col-md-4">Email</div>
+                        <div class="col-md-4">Nama Jurusan</div>
                         <div class="col-md-8">: {{ $jurusan->jurusan_nm }}</div>
+                        <div class="col-md-4">Jurusan Kode Nama</div>
+                        <div class="col-md-8">: {{ $jurusan->jurusan_kda }}</div>
                     </div>
                     <br>
                     <a href="{{ route('jurusan.index') }}" class="btn btn-primary">Back to Jurusan List</a>

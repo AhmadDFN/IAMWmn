@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("jurusan_kd");
             $table->string("jurusan_nm");
+            $table->string("jurusan_kda")->nullable();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-    <title>@yield('title') | IAMW WEC - MADIUN</title>
+    <title>@yield('title') | BOPI UNIVERSITY - MADIUN</title>
 
     @include('layouts.iamw.sc_head')
 </head>
@@ -39,7 +39,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <div class="col-md-10 d-flex align-items-center ftco-animate">
                     <div class="text text-center pt-5 mt-md-5">
-                        <h1 class="mb-5">Selamat Datang di IAMW - Ikatan Alumni Mahasiswa Wearnes</h1>
+                        <h1 class="mb-5">Selamat Datang di BOPI - Bocah Ngopi University Madiun</h1>
                     </div>
                 </div>
             </div>
@@ -64,8 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="col-md-3 grid_4">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Tentang Kami</h2>
-                        <p>"IAMW adalah bursa kerja khusus Wearnes Education Center dan Royal Ocean
-                            International.
+                        <p>"BOPIAI adalah bursa kerja khusus Bopi University.
                             Membantu mahasiswa dan alumni dalam mencari pekerjaan."</p>
                     </div>
                 </div>
@@ -73,8 +72,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">link terkait</h2>
                         <ul class="footer_list">
-                            <li><a href="http://wearneseducation.com">- WEARNES EDUCATION CENTER </a></li>
-                            <li><a href="http://royaloceancollege.com">- ROYAL OCEAN INTERNATIONAL</a></li>
+                            <li><a href="https://www.instagram.com/ahmad_dfn/">- Bopi University </a></li>
+                            <li><a href="https://www.linkedin.com/in/ahmaddfn">- Webdev Bopi University</a></li>
 
                         </ul>
                     </div>
@@ -83,12 +82,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">hubungi kami</h2>
                         <address>
-                            <span>Jl. Thamrin No.35A, Klegen, Kec. Kartoharjo, Kota Madiun, Jawa Timur 63117</span>
+                            <span>Jl. Warungkopindo. No. 78, Manguharjo, Kota Madiun, Jawa Timur, Indonesia.
+                                63117</span>
                             <br>
                             <abbr>Telepon : </abbr> (0351) 483778
                             <br>
-                            <!--<abbr>Email 1 : </abbr> <a href="#">admin@wearneseducation.com</a><br>-->
-                            <!--<abbr>Email 2 : </abbr> <a href="#">admin@royaloceancollege.com</a>-->
+                            <!--<abbr>Email 1 : </abbr> <a href="#">admin@bopiuniversity.com</a><br>-->
+                            <!--<abbr>Email 2 : </abbr> <a href="#">admin@bopiuniversity.carrer</a>-->
                         </address>
                     </div>
                 </div>
@@ -136,8 +136,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <p>
                         Copyright &copy;
                         <?= date('F Y') ?> All rights reserved | This template
-                        is made with <i class="fas fa-heart"></i> IAMW | iRzellA <a href="http://wearneseducation.com/"
-                            title="wearneseducation.com" target="_blank">wearneseducation.com</a>
+                        is made with <i class="fas fa-heart"></i> BOPI | iRzellA <a
+                            href="https://www.linkedin.com/in/ahmaddfn/" title="bopiuniversity.com"
+                            target="_blank">bopiuniversity.com</a>
                     </p>
                 </div>
             </div>

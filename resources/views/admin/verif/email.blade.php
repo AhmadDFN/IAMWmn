@@ -150,7 +150,8 @@
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td align="center" style="border-radius: 20px;" bgcolor="brown"><a
-                                                        href="{{ url('verif/email/' . @$id . '/acc') }}" target="_blank"
+                                                        href="{{ url('verif/email/' . @$id . '/acc/' . @$token) }}"
+                                                        target="_blank"
                                                         style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #FFA73B; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 20px; border: 1px solid #FFA73B; display: inline-block;">Confirm
                                                         Account</a></td>
                                             </tr>

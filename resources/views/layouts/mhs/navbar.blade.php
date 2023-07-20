@@ -7,7 +7,7 @@
         <i class="fa fa-bars"></i>
     </a>
     <a class="sidebar-control sidebar-main-toggle hidden-xs" style="margin-left: 15px;">
-        <marquee style="margin-top: 10px">e-Recruitment Wearnes Education Center Madiun (IAMW)</marquee>
+        <marquee style="margin-top: 10px">e-Recruitment Bopi University (Bocah Ngopi)</marquee>
     </a>
     <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
