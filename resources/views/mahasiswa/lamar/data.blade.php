@@ -23,7 +23,7 @@
                             <th scope="col">Kode</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Perusahaaan</th>
-                            {{--  <th scope="col">Jenis Loker</th>  --}}
+                            <th scope="col">Status</th>
                             <th scope="col" width="12%">Action</th>
                         </tr>
                     </thead>
@@ -34,16 +34,42 @@
                                 <td>{{ $item->lamar_kd }}</td>
                                 <td>{{ $item->lamar_nm }}</td>
                                 <td>{{ $item->perusahaan_nm }}</td>
+                                <td
+                                    class="{{ ($item->lamar_status == 0
+                                            ? 'bg-warning text-black'
+                                            : $item->lamar_status == 0)
+                                        ? 'bg-warning text-black'
+                                        : ($item->lamar_status == 1
+                                            ? 'bg-primary text-white'
+                                            : ($item->lamar_status == 2
+                                                ? 'bg-danger text-white'
+                                                : ($item->lamar_status == 6
+                                                    ? 'bg-danger text-white'
+                                                    : 'bg-success text-white'))) }}">
+                                    {{ ($item->lamar_status == 0
+                                            ? 'Menunggu'
+                                            : $item->lamar_status == 0)
+                                        ? 'Menunggu'
+                                        : ($item->lamar_status == 1
+                                            ? 'Interview'
+                                            : (($item->lamar_status == 2
+                                                    ? 'Ditolak'
+                                                    : $item->lamar_status == 6)
+                                                ? 'Ditolak'
+                                                : 'Diterima')) }}
+                                </td>
                                 {{--  <td>{{ $item->jenis_loker_nm }}</td>  --}}
                                 <td>
-                                    <form action="{{ url($routes->index . $item->id) }}" method="post">
+                                    <form action="{{ url($routes->index . $item->id) }}" method="post"
+                                        id="{{ 'delete-form-' . @$item->id }}">
                                         <a href="{{ url($routes->index . $item->id) }}"><i
                                                 class="text-success fas fa-eye"></i></a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-transparent mt-0"><i
-                                                class="text-danger fas fa-user-times"></i></button>
-
+                                        <button hidden type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-transparent mt-0"
+                                            onclick="confirmDeleteItem('{{ 'delete-form-' . $item->id }}')"><i
+                                                class="text-danger fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>

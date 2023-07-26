@@ -97,6 +97,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
                 class="bi bi-arrow-up-short"></i></a>
     </div>
+    @if (session('notification'))
+        <div class="notification-glass bg-{{ session('notification.type') }}" id="notification">
+            <div class="notification-content">
+                {{ session('notification.text') }}
+            </div>
+        </div>
+    @endif
     @include('layouts.mhs.sc_footer')
 
 </body>

@@ -183,8 +183,11 @@ class MahasiswaController extends Controller
         $mahasiswa->save();
         $berkas->fill($requestberkas);
         $berkas->save();
-
-        return redirect('home/mahasiswa');
+        $mess = [
+            "type" => "success",
+            "text" => "Anda Berhasil Mengedit Berkas."
+        ];
+        return redirect('home/mahasiswa')->with('notification', $mess);
     }
 
     /**
@@ -197,6 +200,6 @@ class MahasiswaController extends Controller
             "text" => "Data Berhasil Dihapus !"
         ];
         $mahasiswa->delete();
-        return redirect('mahasiswa')->with($notif);
+        return redirect('mahasiswa')->with('notification', $notif);
     }
 }

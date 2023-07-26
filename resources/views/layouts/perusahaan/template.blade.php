@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta content="" name="description">
     <title>@yield('title') | BOPI UNIVERSITY - MADIUN</title>
 
-    @include('layouts.sc_head')
+    @include('layouts.mhs.sc_head')
 </head>
 
 <body>
@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- Spinner End -->
 
-        @include('layouts.sidebar')
+        @include('layouts.mhs.sidebar')
         @if (session('mess'))
             <div class="col-sm-4">
                 <div class="d-flex align-items-center justify-content-between p-4">
@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @endif
         <!-- Content Start -->
         <div class="content">
-            @include('layouts.navbar')
+            @include('layouts.mhs.navbar')
             {{--  Header Start  --}}
             <div class="content-header">
                 <div class="container-fluid pt-4 px-4">
@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="bg-secondary rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="https://www.instagram.com/ahmad_dfn/" target="_blank">BOPI</a>, iRzella
+                            &copy; <a href="https://www.linkedin.com/in/ahmaddfn/" target="_blank">Bopi</a>, iRzella
                             - All Right Reserved.
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
@@ -97,14 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
                 class="bi bi-arrow-up-short"></i></a>
     </div>
-    @if (session('notification'))
-        <div class="notification-glass bg-{{ session('notification.type') }}" id="notification">
-            <div class="notification-content">
-                {{ session('notification.text') }}
-            </div>
-        </div>
-    @endif
-    @include('layouts.sc_footer')
+    @include('layouts.mhs.sc_footer')
 
 </body>
 

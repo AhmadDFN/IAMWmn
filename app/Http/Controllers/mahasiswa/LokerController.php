@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Helpers\CodeGenerator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Berkas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,28 +52,13 @@ class LokerController extends Controller
         $routes = (object)[
             'index' => $this->route,
         ];
-        // $lokers = DB::table('lokers')
-        //     ->leftJoin('lamars', 'lokers.id', '=', 'lamars.lamar_id_loker')
-        //     ->where('lokers.loker_kd_jurusan', 'LIKE', '%' . $mahasiswa->mhs_kd_jurusan . "%")
-        //     ->groupBy('lokers.id', 'lamars.lamar_kd')
-        //     ->groupBy('lokers.loker_kd')
-        //     ->groupBy('lokers.loker_nm')
-        //     ->groupBy('lokers.loker_ket')
-        //     ->groupBy('lokers.loker_exp')
-        //     ->groupBy('lokers.loker_kd_jurusan')
-        //     ->groupBy('lokers.loker_status')
-        //     ->groupBy('lokers.loker_id_perusahaan')
-        //     ->groupBy('lokers.loker_id_jnsloker')
-        //     ->groupBy('lokers.created_at')
-        //     ->groupBy('lokers.updated_at')
-        //     ->orderBy('lamars.lamar_kd', 'asc')
-        //     ->select('lamars.lamar_kd', 'lokers.*')
-        //     ->get();
+        $jalan = $mahasiswa;
+
         $lokers = DB::table('lokers')
             ->leftJoin('lamars', 'lokers.id', '=', 'lamars.lamar_id_loker')
-            ->where('lokers.loker_kd_jurusan', 'LIKE', '%320%')
-            ->where(function ($query) {
-                $query->where('lamars.lamar_NIM', '2022320075')
+            ->where('lokers.loker_kd_jurusan', 'LIKE', '%' . $mahasiswa->mhs_kd_jurusan . '%')
+            ->where(function ($query) use ($mahasiswa) {
+                $query->where('lamars.lamar_NIM', $mahasiswa->mhs_NIM)
                     ->orWhereNull('lamars.lamar_NIM')
                     ->orWhere('lamars.lamar_NIM', '');
             })
@@ -138,7 +124,11 @@ class LokerController extends Controller
         }
         // dd($requestData);
         loker::create($requestData);
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Anda Berhasil Membuat Lowongan."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     /**
@@ -199,7 +189,11 @@ class LokerController extends Controller
     {
         $loker->fill($request->all());
         $loker->save();
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Anda Berhasil Mengupdate Lowongan."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     /**
@@ -210,22 +204,59 @@ class LokerController extends Controller
         // dd($loker);
         $loker->delete();
         DB::table('lamars')->where('lamar_id_loker', '=', $loker->id)->delete();
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Anda Berhasil Menghapus Lowongan."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     public function lamarkerja(loker $loker)
     {
-        $code = CodeGenerator::generateUniqueCode();
-        $requestData = [
-            "lamar_kd" => $code,
-            'lamar_nm' => $loker->loker_nm,
-            'lamar_NIM' => @Auth::user()->reff,
-            'lamar_id_loker' => $loker->id,
-            "lamar_tgl_daftar" => getDateNow::getDateNow("Y/m/d"),
-        ];
-        // dd($requestData);
-        Lamar::create($requestData);
-        // $loker->delete();
-        return redirect('home/lokerku/');
+        $berkas = Berkas::Where('berkas_NIM', Auth::User()->reff)->get()->first();
+        $progress = 0;
+        if ($berkas->berkas_kk !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_skck !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_cv !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_foto !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_ijazah !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_ktp !== null) {
+            $progress++;
+        }
+        $berkas->progress = $progress;
+        // dd($berkas);
+        if ($berkas->progress == 6) {
+            $code = CodeGenerator::generateUniqueCode();
+            $requestData = [
+                "lamar_kd" => $code,
+                'lamar_nm' => $loker->loker_nm,
+                'lamar_NIM' => @Auth::user()->reff,
+                'lamar_id_loker' => $loker->id,
+                "lamar_tgl_daftar" => getDateNow::getDateNow("Y/m/d"),
+            ];
+            // dd($requestData);
+            Lamar::create($requestData);
+            $mess = [
+                "type" => "success",
+                "text" => "Anda Berhasil Melamar."
+            ];
+            return redirect('home/lokerku/')->with('notification', $mess);
+        } else {
+            $mess = [
+                "type" => "danger",
+                "text" => "Maaf, Lengkapi berkas anda dulu."
+            ];
+            return back()->with('notification', $mess);
+        }
     }
 }

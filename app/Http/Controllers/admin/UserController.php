@@ -63,7 +63,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         user::create($request->all());
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Dibuat."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     /**
@@ -129,7 +133,11 @@ class UserController extends Controller
     {
         $user->fill($request->all());
         $user->save();
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Diperbarui."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     /**
@@ -138,6 +146,10 @@ class UserController extends Controller
     public function destroy(user $user)
     {
         $user->delete();
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Dihapus."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 }

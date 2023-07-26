@@ -247,4 +247,43 @@ class MahasiswaController extends Controller
         $mahasiswa->delete();
         return redirect('mahasiswa')->with($notif);
     }
+
+    public function pemberkasan(Mahasiswa $mahasiswa)
+    {
+        $berkas = Berkas::where('berkas_NIM', $mahasiswa->mhs_NIM)->get()->first();
+        $progress = 0;
+        if ($berkas->berkas_kk !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_skck !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_cv !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_foto !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_ijazah !== null) {
+            $progress++;
+        }
+        if ($berkas->berkas_ktp !== null) {
+            $progress++;
+        }
+        // dd($progress);
+        $data = (object)[
+            "title" => $mahasiswa->mhs_nm,
+            'page' => "Profil Mahasiswa " . $mahasiswa->mhs_nm,
+        ];
+        $lamars =  DB::table('lamars')
+            ->join('lokers', 'lamars.lamar_id_loker', '=', 'lokers.id')
+            ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
+            ->select('lamars.*', 'lokers.loker_nm', 'perusahaans.perusahaan_nm')
+            ->where('lamars.lamar_NIM', "=", $mahasiswa->mhs_NIM)
+            ->limit(3)
+            ->get();
+        $title = "Mahasiswa";
+        $berkas = Berkas::where("berkas_NIM", $mahasiswa->mhs_NIM)->get()->first();
+        return view("admin.mahasiswa.showberkas", compact('data', 'mahasiswa', 'title', 'lamars', 'berkas', 'progress'));
+    }
 }

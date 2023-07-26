@@ -33,6 +33,31 @@
                             </div>
                         </div>
                     </div>
+                    <div
+                        class="{{ ($lamar->lamar_status == 0
+                                ? 'bg-warning text-black'
+                                : $lamar->lamar_status == 0)
+                            ? 'bg-warning text-black'
+                            : ($lamar->lamar_status == 1
+                                ? 'bg-primary text-white'
+                                : ($lamar->lamar_status == 2
+                                    ? 'bg-danger text-white'
+                                    : ($lamar->lamar_status == 6
+                                        ? 'bg-danger text-white'
+                                        : 'bg-success text-white'))) }}">
+                        Status Lamaran :
+                        {{ ($lamar->lamar_status == 0
+                                ? 'Menunggu'
+                                : $lamar->lamar_status == 0)
+                            ? 'Menunggu'
+                            : ($lamar->lamar_status == 1
+                                ? 'Interview'
+                                : (($lamar->lamar_status == 2
+                                        ? 'Ditolak'
+                                        : $lamar->lamar_status == 6)
+                                    ? 'Ditolak'
+                                    : 'Diterima')) }}
+                    </div>
                     <div class="profile-detail">
                         <div class="profile-info">
                         </div>

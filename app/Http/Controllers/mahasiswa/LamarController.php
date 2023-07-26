@@ -67,7 +67,11 @@ class LamarController extends Controller
     public function store(Request $request)
     {
         lamar::create($request->all());
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Anda Berhasil Membuat Lamaran."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     /**
@@ -114,7 +118,11 @@ class LamarController extends Controller
     {
         $lamar->fill($request->all());
         $lamar->save();
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Anda Berhasil Edit Lamaran."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     /**
@@ -123,6 +131,10 @@ class LamarController extends Controller
     public function destroy(lamar $lamar)
     {
         $lamar->delete();
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Anda Berhasil Menghapus Lamaran."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 }

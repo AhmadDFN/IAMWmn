@@ -31,52 +31,12 @@ class LokerController extends Controller
             ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
             ->select('lokers.*', 'perusahaans.perusahaan_foto', 'perusahaans.perusahaan_nm', 'perusahaans.perusahaan_kota')
             ->get();
-        // dd($lokers);
+
         $jurusans  = Jurusan::all();
 
         foreach ($lokers as $key => $loker) {
             $lokers[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lokers[$key]->loker_kd_jurusan))->get();
         }
-
-        // dd($lokers[0]->jurusans);
-
-        // foreach ($lokers as $key => $loker) {
-        //     $lokers[$key]->loker_kd_jurusan = explode(',', $loker->loker_kd_jurusan);
-        // }
-        // $lokers->map(function ($loker) {
-        //     $loker->loker_kd_jurusan = rand(1, 5);
-        //     return $loker;
-        // });
-
-        // $lokerganti = explode(",", $lokers[0]->loker_kd_jurusan);
-        // $lokers[0]->loker_kd_jurusan = $lokerganti;
-
-        // foreach ($lokers[0]->loker_kd_jurusan as $item) {
-        // };
-
-        // $lokers->map(function ($loker) {
-        //     $joinedJurusan = collect($loker->loker_kd_jurusan)->map(function ($jurusan_kd) {
-        //         return Jurusan::select('jurusan_kd', 'jurusan_nm')->where('jurusan_kd', $jurusan_kd)->first();;
-        //     });
-
-        //     $loker->joined_jurusan = $joinedJurusan;
-
-        //     return $loker;
-        // });
-
-        // $result = collect($lokers[0]->joined_jurusan)->map(function ($item) {
-        //     return $item['jurusan_nm'];
-        // })->all();
-
-        // $lokers[0]->joined_jurusan = $result;
-
-        // $balikinjur = implode(",", $lokers[0]->loker_kd_jurusan);
-        // $lokers[0]->loker_kd_jurusan = $balikinjur;
-
-        // $namajur = implode(",", $lokers[0]->joined_jurusan);
-        // $lokers[0]->joined_jurusan = $namajur;
-
-        // dd($lokers[0]->joined_jurusan);
 
         $data = (object)[
             "title" => "Loker",

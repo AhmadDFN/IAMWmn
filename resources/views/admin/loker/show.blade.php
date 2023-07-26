@@ -91,32 +91,74 @@
             <div class="col-12">
                 <div class="tombol-export"></div>
                 <div class="table-responsive">
-                    <table id="dtTableshow" class="table compact table-dark dtTable">
-                        <thead>
-                            <tr>
-                                <th scope="col">NIM</th>
-                                <th scope="col">Kode</th>
-                                <th scope="col">Nama Loker</th>
-                                <th scope="col">Pelamar</th>
-                                <th scope="col" width="12%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($lamars as $item)
+                    <table id="dtTableshow" class="table compact table-dark dtTable table-bordered table-hover">
+                        @if ($lamars->count() > 0)
+                            <thead>
                                 <tr>
-                                    <td>{{ $item->lamar_NIM }}</td>
-                                    <td>{{ $item->lamar_kd }}</td>
-                                    <td>{{ $item->lamar_nm }}</td>
-                                    <td>{{ $item->mhs_nm }}</td>
-                                    <td>
-                                        <a href="{{ url('/lamar/' . $item->id) }}"><i class="text-success fas fa-eye"
-                                                style="position: relative;"></i></a><br>
+                                    <th scope="col">NIM</th>
+                                    <th scope="col">Kode</th>
+                                    <th scope="col">Nama Loker</th>
+                                    <th scope="col">Pelamar</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col" width="8%" class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($lamars as $item)
+                                    <tr>
+                                        <td>{{ $item->lamar_NIM }}</td>
+                                        <td>{{ $item->lamar_kd }}</td>
+                                        <td>{{ $item->lamar_nm }}</td>
+                                        <td>{{ $item->mhs_nm }}</td>
+                                        <td
+                                            class="{{ ($item->lamar_status == 0
+                                                    ? 'bg-warning text-black'
+                                                    : $item->lamar_status == 0)
+                                                ? 'bg-warning text-black'
+                                                : ($item->lamar_status == 1
+                                                    ? 'bg-primary text-white'
+                                                    : ($item->lamar_status == 2
+                                                        ? 'bg-danger text-white'
+                                                        : ($item->lamar_status == 6
+                                                            ? 'bg-danger text-white'
+                                                            : 'bg-success text-white'))) }}">
+                                            {{ ($item->lamar_status == 0
+                                                    ? 'Menunggu'
+                                                    : $item->lamar_status == 0)
+                                                ? 'Menunggu'
+                                                : ($item->lamar_status == 1
+                                                    ? 'Interview'
+                                                    : (($item->lamar_status == 2
+                                                            ? 'Ditolak'
+                                                            : $item->lamar_status == 6)
+                                                        ? 'Ditolak'
+                                                        : 'Diterima')) }}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ url('/lamar/' . $item->id) }}"><i class="text-success fas fa-eye"
+                                                    style="position: relative;"></i></a><br>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        @else
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center pt-3"><b>
+                                            <p>- BELUM ADA PELAMAR -</p>
+                                        </b>
                                     </td>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            </tbody>
+                        @endif
                     </table>
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

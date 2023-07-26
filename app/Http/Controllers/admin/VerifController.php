@@ -91,7 +91,7 @@ class VerifController extends Controller
             $mess = "Token SALAH!!!";
         }
 
-        return redirect("/")->with($mess);
+        return redirect("/")->with('notification', $mess);
     }
 
     function send_email(Mahasiswa $mahasiswa, $token, $reff)
@@ -118,7 +118,7 @@ class VerifController extends Controller
             // dd($th);
         }
 
-        return redirect("/")->with($mess);
+        return redirect("/")->with('notification', $mess);
     }
 
     function test_email(Mahasiswa $mahasiswa)
@@ -134,6 +134,6 @@ class VerifController extends Controller
             // dd($th);
         }
 
-        return redirect("/")->with($mess);
+        return redirect("/")->with('notification', $mess);
     }
 }

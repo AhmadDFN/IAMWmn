@@ -41,9 +41,12 @@
                                 </td>
                                 <td class="text-center align-middle">
                                     @if ($item->lamar_kd == null or $item->lamar_kd == '')
-                                        <a href="{{ url('home/loker/' . @$item->id . '/submit') }}"><span
+                                        <a href="#" onclick="confirmLowongan({{ $item->id }})"><span
                                                 class="badge bg-success text-black"><i class="fas fa-check-circle"> Lamar
                                                     Kerja</i></span></a>
+                                        {{--  <a href="{{ url('home/loker/' . @$item->id . '/submit') }}"><span
+                                                class="badge bg-success text-black"><i class="fas fa-check-circle"> Lamar
+                                                    Kerja</i></span></a>  --}}
                                     @else
                                         <span class="badge bg-warning text-black"><i class="fas fa-file-alt">
                                                 Sedang

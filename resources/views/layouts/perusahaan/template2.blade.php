@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta content="" name="description">
     <title>@yield('title') | BOPI UNIVERSITY - MADIUN</title>
 
-    @include('layouts.sc_head')
+    @include('layouts.mhs.sc_head')
 </head>
 
 <body>
@@ -26,43 +26,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- Spinner End -->
 
-        @include('layouts.sidebar')
-        @if (session('mess'))
-            <div class="col-sm-4">
-                <div class="d-flex align-items-center justify-content-between p-4">
-                    {{-- Notif --}}
+        @include('layouts.mhs.sidebar')
 
-                    <div class="alert alert-{{ session('type') }} text-center" style="width: 300px;" role="alert">
-                        {{ session('mess') }}
-                    </div>
-
-                </div>
-            </div>
-        @endif
         <!-- Content Start -->
         <div class="content">
-            @include('layouts.navbar')
-            {{--  Header Start  --}}
-            <div class="content-header">
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-0 bg-secondary">
-                        <div class="col-sm-8">
-                            <div class="d-flex align-items-center justify-content-between p-4">
-                                <h3 class="m-0">@yield('page-title')</h3>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="d-flex align-items-center justify-content-end p-4">
-                                <ol class="breadcrumb float-lg-right m-0">
-                                    <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-                                    <li class="breadcrumb-item active">@yield('title')</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{--  Header End  --}}
+            @include('layouts.mhs.navbar')
 
             <!-- Content Start -->
             <div class="container-fluid pt-4 px-4">
@@ -77,10 +45,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="bg-secondary rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="https://www.instagram.com/ahmad_dfn/" target="_blank">BOPI</a>, iRzella
+                            &copy; <a href="https://www.linkedin.com/in/ahmaddfn/" target="_blank">IAMW</a>, iRzella
                             - All Right Reserved.
                         </div>
                         <div class="col-12 col-sm-6 text-center text-sm-end">
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                             Designed By <a href="https://github.com/AhmadDFN" target="_blank">iRzellA</a>
                             <br>Distributed By: <a href="https://www.linkedin.com/in/ahmaddfn/" target="_blank">Ahmad
                                 Dany FN</a>
@@ -97,14 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
                 class="bi bi-arrow-up-short"></i></a>
     </div>
-    @if (session('notification'))
-        <div class="notification-glass bg-{{ session('notification.type') }}" id="notification">
-            <div class="notification-content">
-                {{ session('notification.text') }}
-            </div>
-        </div>
-    @endif
-    @include('layouts.sc_footer')
+    @include('layouts.mhs.sc_footer')
 
 </body>
 

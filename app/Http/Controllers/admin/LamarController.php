@@ -9,6 +9,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\JenisLoker;
 use App\Models\Perusahaan;
 
 class LamarController extends Controller
@@ -25,37 +26,126 @@ class LamarController extends Controller
             'index' => $this->route,
             'add' => $this->route . 'create',
         ];
-        // $lamars =  DB::table('lokers')
-        //     ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
-        //     ->join('lamars', 'lokers.id', '=', 'lamars.lamar_id_loker')
-        //     ->select('lokers.*', 'perusahaans.*')
-        //     ->get();
 
         $lamars =  DB::table('lokers')
             ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
             ->join('jenis_lokers', 'lokers.loker_id_jnsloker', '=', 'jenis_lokers.id')
-            ->select('jenis_lokers.jenis_loker_nm', 'perusahaans.perusahaan_foto', 'perusahaans.perusahaan_nm', 'perusahaans.perusahaan_kota', 'lokers.*', DB::raw('(SELECT COUNT(*) FROM lamars WHERE lamars.lamar_id_loker = lokers.id) AS jumlah_pelamar'))
+            ->select(
+                'jenis_lokers.jenis_loker_nm',
+                'perusahaans.perusahaan_foto',
+                'perusahaans.perusahaan_nm',
+                'perusahaans.perusahaan_kota',
+                'lokers.*',
+                DB::raw('(SELECT COUNT(*) FROM lamars WHERE lamars.lamar_id_loker = lokers.id AND (lamars.lamar_status = 0 OR lamars.lamar_status = 5 OR lamars.lamar_status = 6)) AS jumlah_pelamar'),
+                DB::raw('(SELECT COUNT(*) FROM lamars WHERE lamars.lamar_id_loker = lokers.id AND lamars.lamar_status = 0) AS jumlah_request')
+            )
             ->get();
         // dd($lokers);
-        // Output the results
-        // foreach ($lokers as $loker) {
-        //     echo $loker->id . ' - ' . $loker->nama . ' - Jumlah Pelamar: ' . $loker->jumlah_pelamar . '<br>';
-        // }
-        // dd($lokers);
-        // $jurusans  = Jurusan::all();
 
-        // foreach ($lamars as $key => $loker) {
-        //     $lamars[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lamars[$key]->loker_kd_jurusan))->get();
-        // }
         $data = (object)[
             "title" => "Lamar",
-            'page' => 'Lamar Account',
+            'page' => 'Lamar Admin',
         ];
         // dd($lamars);
         $title = $data->title;
-        return view($this->view . 'data', compact('lamars', 'routes', 'data', 'title'));
+        return view($this->view . 'admin.data', compact('lamars', 'routes', 'data', 'title'));
     }
 
+    function detail_lowongan(Loker $loker)
+    {
+        $routes = (object)[
+            'index' => $this->route,
+            'add' => $this->route . 'create',
+        ];
+        $data = (object)[
+            "title" => "Lamar",
+            'page' => 'Lamar Admin',
+        ];
+        $perusahaan = Perusahaan::where('id', $loker->loker_id_perusahaan)->get()->first();
+        $title = $data->title;
+        $lamars = DB::table("lamars")
+            ->join("mahasiswas", "lamars.lamar_NIM", "=", "mahasiswas.mhs_NIM")
+            ->join("berkas", "mahasiswas.mhs_NIM", "=", "berkas.berkas_NIM")
+            ->join("lokers", "lamars.lamar_id_loker", "=", "lokers.id") // Adding the join with the lokers table
+            ->select("lamars.*", "mahasiswas.mhs_nm", "berkas.id as id_berkas", "mahasiswas.id as id_mahasiswa")
+            ->where("lamars.lamar_id_loker", $loker->id)
+            ->where(function ($query) {
+                $query->where("lamars.lamar_status", "=", 0)
+                    ->orWhere("lamars.lamar_status", "=", 5)
+                    ->orWhere("lamars.lamar_status", "=", 6);
+            })
+            ->get();
+
+        // dd($lamars);
+
+        $loker->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $loker->loker_kd_jurusan))->get();
+
+        $loker->jenisloker = JenisLoker::where('id', $loker->loker_id_jnsloker)->get()->first();
+        // dd($loker->jenisloker->jenis_loker_nm);
+        return view($this->view . 'admin.detail', compact('lamars', 'perusahaan', 'routes', 'data', 'title', 'loker'));
+    }
+
+    function detail_lowongan_accept(Loker $loker)
+    {
+        $lamar = Lamar::where('lamar_id_loker', $loker->id)->where('lamar_status', 0);
+        // dd($lamar->count() > 0);
+        if ($lamar->count() > 0) {
+            if ($lamar) {
+                // Update the lamar_status column
+                $lamar->update([
+                    'lamar_status' => 5,
+                ]);
+            } else {
+                $mess = [
+                    "type" => "danger",
+                    "text" => "Tidak Ada Lamaran."
+                ];
+                return back()->with('notification', $mess);
+            }
+            $mess = [
+                "type" => "success",
+                "text" => "Status Diupdate."
+            ];
+            return back()->with('notification', $mess);
+        } else {
+            $mess = [
+                "type" => "danger",
+                "text" => "Data Tidak ada yang terupdate."
+            ];
+            return back()->with('notification', $mess);
+        }
+    }
+
+    function detail_lowongan_denied(Loker $loker)
+    {
+        $lamar = Lamar::where('lamar_id_loker', $loker->id)->where('lamar_status', 0);
+        // dd($lamar->count() > 0);
+        if ($lamar->count() > 0) {
+            if ($lamar) {
+                // Update the lamar_status column
+                $lamar->update([
+                    'lamar_status' => 6,
+                ]);
+            } else {
+                $mess = [
+                    "type" => "danger",
+                    "text" => "Tidak Ada Lamaran."
+                ];
+                return back()->with('notification', $mess);
+            }
+            $mess = [
+                "type" => "success",
+                "text" => "Status Diupdate."
+            ];
+            return back()->with('notification', $mess);
+        } else {
+            $mess = [
+                "type" => "danger",
+                "text" => "Data Tidak ada yang terupdate."
+            ];
+            return back()->with('notification', $mess);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -80,7 +170,11 @@ class LamarController extends Controller
     public function store(Request $request)
     {
         lamar::create($request->all());
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Dibuat."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     /**
@@ -122,7 +216,11 @@ class LamarController extends Controller
     {
         $lamar->fill($request->all());
         $lamar->save();
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Diperbarui."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     /**
@@ -131,7 +229,11 @@ class LamarController extends Controller
     public function destroy(lamar $lamar)
     {
         $lamar->delete();
-        return redirect($this->route);
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Dihapus."
+        ];
+        return redirect($this->route)->with('notification', $mess);
     }
 
     public function histori()
@@ -157,50 +259,107 @@ class LamarController extends Controller
         return view($this->view . 'record', compact('lamars', 'routes', 'data', 'title'));
     }
 
-    function detail_lowongan(Loker $loker)
+
+    function update_status(Lamar $lamar, $lamar_status)
+    {
+        $request = [
+            'lamar_status' => $lamar_status
+        ];
+        $lamar->fill($request);
+        $lamar->save();
+        $mess = [
+            "type" => "success",
+            "text" => "Status Diupdate."
+        ];
+        return back()->with('notification', $mess);
+    }
+
+    function update_all($id_loker, $status)
+    {
+        // dd(['idloker' => $id_loker, 'status' => $status]);
+        Lamar::where('lamar_id_loker', $id_loker)->update(['lamar_status' => $status]);
+        $mess = [
+            "type" => "success",
+            "text" => "Status Diupdate."
+        ];
+        return back()->with('notification', $mess);
+    }
+
+    public function indexPerusahaan()
+    {
+        $routes = (object)[
+            'index' => $this->route,
+            'add' => $this->route . 'create',
+        ];
+        // $lamars =  DB::table('lokers')
+        //     ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
+        //     ->join('lamars', 'lokers.id', '=', 'lamars.lamar_id_loker')
+        //     ->select('lokers.*', 'perusahaans.*')
+        //     ->get();
+
+        $lamars =  DB::table('lokers')
+            ->join('perusahaans', 'lokers.loker_id_perusahaan', '=', 'perusahaans.id')
+            ->join('jenis_lokers', 'lokers.loker_id_jnsloker', '=', 'jenis_lokers.id')
+            ->select('jenis_lokers.jenis_loker_nm', 'perusahaans.perusahaan_foto', 'perusahaans.perusahaan_nm', 'perusahaans.perusahaan_kota', 'lokers.*', DB::raw('(SELECT COUNT(*) FROM lamars WHERE lamars.lamar_id_loker = lokers.id AND lamars.lamar_status != 0 AND lamars.lamar_status != 6) AS jumlah_pelamar'))
+            ->get();
+        // dd($lokers);
+        // Output the results
+        // foreach ($lokers as $loker) {
+        //     echo $loker->id . ' - ' . $loker->nama . ' - Jumlah Pelamar: ' . $loker->jumlah_pelamar . '<br>';
+        // }
+        // dd($lokers);
+        // $jurusans  = Jurusan::all();
+
+        // foreach ($lamars as $key => $loker) {
+        //     $lamars[$key]->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $lamars[$key]->loker_kd_jurusan))->get();
+        // }
+        $data = (object)[
+            "title" => "Lamar Perusahaan",
+            'page' => 'Lamar Perusahaan',
+        ];
+        // dd($lamars);
+        $title = $data->title;
+        return view($this->view . 'perusahaan.data', compact('lamars', 'routes', 'data', 'title'));
+    }
+
+    function detail_lowonganPerusahaan(Loker $loker, Request $req)
     {
         $routes = (object)[
             'index' => $this->route,
             'add' => $this->route . 'create',
         ];
         $data = (object)[
-            "title" => "Lamar",
-            'page' => 'Lamar',
+            "title" => "Lamar Perusahaan",
+            'page' => 'Lamar Perusahaan',
         ];
         $perusahaan = Perusahaan::where('id', $loker->loker_id_perusahaan)->get()->first();
         $title = $data->title;
-        $lamars = DB::table("lamars")
-            ->join("mahasiswas", "lamars.lamar_NIM", "=", "mahasiswas.mhs_NIM")
-            ->join("berkas", "mahasiswas.mhs_NIM", "=", "berkas.berkas_NIM")
-            ->select("lamars.*", "mahasiswas.mhs_nm", "berkas.id as id_berkas", "mahasiswas.id as id_mahasiswa")
-            ->where("lamars.lamar_id_loker", $loker->id)
-            ->get();
-        // dd($data);
-        return view($this->view . 'detail', compact('lamars', 'perusahaan', 'routes', 'data', 'title', 'loker'));
-    }
 
-    function detail_lowongan2(Loker $loker)
-    {
-        $data = [
-            "rsLowongan" => $loker,
-            "dtLamar" => DB::table("lamar")
-                ->join("mahasiswas", "lamar.lamar_NIM", "=", "mahasiswas.mhs_NIM")
+        if ($req->status) {
+            $lamars = DB::table("lamars")
+                ->join("mahasiswas", "lamars.lamar_NIM", "=", "mahasiswas.mhs_NIM")
                 ->join("berkas", "mahasiswas.mhs_NIM", "=", "berkas.berkas_NIM")
-                ->select("lamar.*", "mahasiswas.name", "berkas.id as id_berkas", "mahasiswas.id as id_mahasiswa")
-                ->where("lamar.id_lowongan", $loker->id)
-                ->get(),
-            "title" => "Lamar",
-            "page" => "Lamar",
-        ];
+                ->select("lamars.*", "mahasiswas.mhs_nm", "berkas.id as id_berkas", "mahasiswas.id as id_mahasiswa")
+                ->where("lamars.lamar_id_loker", $loker->id)
+                ->where('lamars.lamar_status', '=', $req->status)
+                ->get();
+        } else {
+            $lamars = DB::table("lamars")
+                ->join("mahasiswas", "lamars.lamar_NIM", "=", "mahasiswas.mhs_NIM")
+                ->join("berkas", "mahasiswas.mhs_NIM", "=", "berkas.berkas_NIM")
+                ->select("lamars.*", "mahasiswas.mhs_nm", "berkas.id as id_berkas", "mahasiswas.id as id_mahasiswa")
+                ->where("lamars.lamar_id_loker", $loker->id)
+                ->where('lamars.lamar_status', '!=', 0)
+                ->where('lamars.lamar_status', '!=', 6)
+                ->get();
+        }
 
-        return view("lamar.detail", $data);
-    }
+        // dd($lamars);
 
-    function update_status(Lamar $lamar, Request $request)
-    {
-        $lamar->fill($request->all());
-        $lamar->save();
+        $loker->jurusans = Jurusan::whereIn('jurusan_kd', explode(',', $loker->loker_kd_jurusan))->get();
 
-        return back();
+        $loker->jenisloker = JenisLoker::where('id', $loker->loker_id_jnsloker)->get()->first();
+        // dd($loker->jenisloker->jenis_loker_nm);
+        return view($this->view . 'perusahaan.detail', compact('lamars', 'perusahaan', 'routes', 'data', 'title', 'loker'));
     }
 }

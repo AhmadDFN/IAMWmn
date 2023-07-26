@@ -51,7 +51,11 @@ class PerusahaanController extends Controller
     {
         // dd($request->all());
         perusahaan::create($request->all());
-        return redirect()->route('perusahaan.index');
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Dibuat."
+        ];
+        return redirect()->route('perusahaan.index')->with('notification', $mess);
     }
 
     /**
@@ -112,8 +116,11 @@ class PerusahaanController extends Controller
     {
         $perusahaan->fill(($request->all()));
         $perusahaan->save();
-
-        return redirect()->route('perusahaan.index');
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Diperbarui."
+        ];
+        return redirect()->route('perusahaan.index')->with('notification', $mess);
     }
 
     /**
@@ -122,6 +129,10 @@ class PerusahaanController extends Controller
     public function destroy(Perusahaan $perusahaan)
     {
         $perusahaan->delete();
-        return redirect()->route('perusahaan.index');
+        $mess = [
+            "type" => "success",
+            "text" => "Berhasil Dihapus."
+        ];
+        return redirect()->route('perusahaan.index')->with('notification', $mess);
     }
 }

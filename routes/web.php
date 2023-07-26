@@ -40,29 +40,32 @@ Route::get('/test', function () {
 Route::get('/kota/{id_prov?}', [kotaController::class, 'getKotaByProvinsi'])->name('kota');
 
 Route::group(["middleware" => "auth"], function () {
-    /** User Controller */
-    Route::get('home/', [mahasiswa\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('home/myprofile', [mahasiswa\DashboardController::class, 'profilku'])->name('edit.mahasiswa');
-    Route::put('home/myprofile/update', [mahasiswa\DashboardController::class, 'update'])->name('update.mahasiswa');
-    Route::resource('home/mahasiswa', mahasiswa\MahasiswaController::class)->except([
-        'create', 'show'
-    ]);;
-    Route::resource('home/perusahaan', mahasiswa\PerusahaanController::class)->except([
-        'create', 'store', 'update', 'destroy'
-    ]);
-    Route::resource('home/jenisloker', mahasiswa\JenisLokerController::class)->except([
-        'create', 'store', 'update', 'destroy'
-    ]);
-    Route::resource('home/loker', mahasiswa\LokerController::class)->except([
-        'create', 'store', 'update', 'destroy'
-    ]);
-    Route::get('home/lokerku', [mahasiswa\LokerController::class, 'lokerku']);
-    Route::get("home/loker/{loker}/submit", [mahasiswa\LokerController::class, "lamarkerja"]);
-    Route::resource('home/lamar', mahasiswa\LamarController::class);
 
+    Route::group(["middleware" => "roleMahasiswa"], function () {
+        /** Mahasiswa Controller */
+        Route::get('home/', [mahasiswa\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('home/myprofile', [mahasiswa\DashboardController::class, 'profilku'])->name('edit.mahasiswa');
+        Route::put('home/myprofile/update', [mahasiswa\DashboardController::class, 'update'])->name('update.mahasiswa');
+        Route::resource('home/mahasiswa', mahasiswa\MahasiswaController::class)->except([
+            'create', 'show'
+        ]);;
+        Route::resource('home/perusahaan', mahasiswa\PerusahaanController::class)->except([
+            'create', 'store', 'update', 'destroy'
+        ]);
+        Route::resource('home/jenisloker', mahasiswa\JenisLokerController::class)->except([
+            'create', 'store', 'update', 'destroy'
+        ]);
+        Route::resource('home/loker', mahasiswa\LokerController::class)->except([
+            'create', 'store', 'update', 'destroy'
+        ]);
+        Route::get('home/lokerku', [mahasiswa\LokerController::class, 'lokerku']);
+        Route::get("home/loker/{loker}/submit", [mahasiswa\LokerController::class, "lamarkerja"]);
+        Route::resource('home/lamar', mahasiswa\LamarController::class);
+    });
 
-
-
+    Route::group(["middleware" => "rolePerusahaan"], function () {
+        // Perusahaan Controller
+    });
 
     Route::group(["middleware" => "roleAdmin"], function () {
         /** Admin Controller */
@@ -72,6 +75,7 @@ Route::group(["middleware" => "auth"], function () {
 
         Route::get('verif', [admin\VerifController::class, 'index'])->name('verif');
         Route::get("verif/{mahasiswa}/acc", [admin\VerifController::class, "update_status"]);
+        Route::get("mahasiswa/{mahasiswa}/berkas/tampil", [admin\MahasiswaController::class, "pemberkasan"]);
         Route::resource('mahasiswa', admin\MahasiswaController::class);
         Route::resource('perusahaan', admin\PerusahaanController::class);
         Route::get("mahasiswa/{mahasiswa}/berkas/acc", [admin\BerkasController::class, "BerkasNew"])->name('berkas_acc');
@@ -79,9 +83,14 @@ Route::group(["middleware" => "auth"], function () {
         Route::resource('jenisloker', admin\JenisLokerController::class);
         Route::resource('jurusan', admin\JurusanController::class);
         Route::resource('loker', admin\LokerController::class);
+        Route::get("lamar/update/{id_loker}/{status}", [admin\LamarController::class, "update_all"]);
         Route::get("lamar/{loker}/detail", [admin\LamarController::class, "detail_lowongan"]);
+        Route::get("lamar/{loker}/detail/accept", [admin\LamarController::class, "detail_lowongan_accept"]);
+        Route::get("lamar/{loker}/detail/denied", [admin\LamarController::class, "detail_lowongan_denied"]);
         Route::get("lamar/{lamar}/status/{lamar_status}", [LamarController::class, "update_status"]);
         Route::get('lamar/histori', [admin\LamarController::class, 'histori']);
+        Route::get('lamar/perusahaan', [admin\LamarController::class, 'indexPerusahaan']);
+        Route::get("lamar/{loker}/detail/perusahaan/{status?}", [admin\LamarController::class, "detail_lowonganPerusahaan"]);
         Route::resource('lamar', admin\LamarController::class);
         Route::resource('user', admin\UserController::class);
     });

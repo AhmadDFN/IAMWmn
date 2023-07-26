@@ -24,6 +24,7 @@
                             <th scope="col">Nama Mahasiswa</th>
                             <th scope="col">Perusahaan</th>
                             <th scope="col">Tanggal - Jam</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -35,6 +36,30 @@
                                 <td>{{ @$lamar->mhs_nm }}</td>
                                 <td>{{ @$lamar->perusahaan_nm }}</td>
                                 <td>{{ @$lamar->created_at }}</td>
+                                <td
+                                    class="{{ ($lamar->lamar_status == 0
+                                            ? 'bg-warning text-black'
+                                            : $lamar->lamar_status == 0)
+                                        ? 'bg-warning text-black'
+                                        : ($lamar->lamar_status == 1
+                                            ? 'bg-primary text-white'
+                                            : ($lamar->lamar_status == 2
+                                                ? 'bg-danger text-white'
+                                                : ($lamar->lamar_status == 6
+                                                    ? 'bg-danger text-white'
+                                                    : 'bg-success text-white'))) }}">
+                                    {{ ($lamar->lamar_status == 0
+                                            ? 'Menunggu'
+                                            : $lamar->lamar_status == 0)
+                                        ? 'Menunggu'
+                                        : ($lamar->lamar_status == 1
+                                            ? 'Interview'
+                                            : (($lamar->lamar_status == 2
+                                                    ? 'Ditolak'
+                                                    : $lamar->lamar_status == 6)
+                                                ? 'Ditolak'
+                                                : 'Diterima')) }}
+                                </td>
                                 <td>
                                     <a class="btn btn-sm btn-primary" href="{{ url('lamar/' . @$lamar->id) }}">Detail</a>
                                 </td>

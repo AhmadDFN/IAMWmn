@@ -1,7 +1,7 @@
 {{-- CDN --}}
 
 <link rel="icon" href="{{ asset('img/favicon.png') }}">
-<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <!-- Google Web Fonts -->
 <link href="{{ asset('font/opensans.css') }}" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,9 +11,6 @@
 {{--  <link href="{{asset('css/all.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/fontawesome.min.css')}}" rel="stylesheet">
 <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">  --}}
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <!-- Icon Font Stylesheet -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -26,7 +23,6 @@
 <link href="{{ asset('css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('css/buttons.bootstrap5.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet" />
-
 
 
 {{--  dtTable CDN  --}}
@@ -42,7 +38,7 @@
 {{-- Link Local --}}
 
 <!-- Favicon -->
-{{--  <link href="{{ asset('img/favicon.ico') }}" rel="icon">  --}}
+<link href="{{ asset('img/favicon.ico') }}" rel="icon">
 
 <!-- Libraries Stylesheet -->
 <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
@@ -61,11 +57,23 @@
 {{--  Font Awesome  --}}
 <script src="https://kit.fontawesome.com/8831bef135.js" crossorigin="anonymous"></script>
 
-
-
 {{--  Custom CSS --}}
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-<link rel="stylesheet" href="{{ asset('css/tambahan.css') }}">
+
+<style>
+    .dark-bg {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .btn-white {
+        color: #fff;
+    }
+
+    .swal2-title {
+        color: #FFF
+    }
+</style>

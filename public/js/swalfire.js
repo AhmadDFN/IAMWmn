@@ -42,7 +42,32 @@ function confirmLogout() {
     }).then((result) => {
         if (result.isConfirmed) {
             // Lanjutkan dengan proses logout di sini
-            window.location.href = "auth/logout";
+            window.location.href = "/auth/logout";
+        }
+    });
+    return false; // Hindari aksi logout langsung dari tautan
+}
+// LOGOUT CONFIRMATION
+function confirmLowongan(id) {
+    Swal.fire({
+        title: "Konfirmasi",
+        text: "Apakah Anda ingin melamar lowongan?",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Batal",
+        customClass: {
+            container: "dark-bg",
+            popup: "dark-bg",
+            content: "dark-bg",
+            confirmButton: "btn btn-primary",
+            cancelButton: "btn btn-secondary",
+        },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Lanjutkan dengan proses logout di sini
+            window.location.href = "/home/loker/" + id + "/submit";
         }
     });
     return false; // Hindari aksi logout langsung dari tautan

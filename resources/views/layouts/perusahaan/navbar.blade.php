@@ -23,8 +23,8 @@
                 <span class="d-none d-lg-inline-flex">{{ @Auth::user()->name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                <a href="{{ route('edit.mahasiswa') }}" class="dropdown-item">My Account</a>
-                <a href="{{ url('home/mahasiswa') }}" class="dropdown-item">Data Diri</a>
+                <a href="{{ route('edit.perusahaan') }}" class="dropdown-item">My Account</a>
+                <a href="{{ url('perusahaan/data') }}" class="dropdown-item">Data Diri</a>
                 <a href="#" class="dropdown-item" onclick="return confirmLogout()">Log Out</a>
             </div>
         </div>

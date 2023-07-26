@@ -43,7 +43,7 @@
                                 </td>
                                 <td>{{ $item->jenis_loker_nm }}</td>
                                 <td class="text-center">
-                                    <a href={{ url('lamar/' . @$item->id . '/detail') }}>
+                                    <a href={{ url('lamar/' . @$item->id . '/detail/perusahaan') }}>
                                         {{ $item->jumlah_pelamar }}
                                     </a>
                                 </td>

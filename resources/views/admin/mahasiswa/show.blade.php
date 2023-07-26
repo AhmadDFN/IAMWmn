@@ -85,29 +85,45 @@
             <div class="col-12">
                 <div class="table-responsive">
                     <table id="dtTableshow" class="table compact table-dark dtTable">
-                        <thead>
-                            <tr>
-                                <th scope="col">NIM</th>
-                                <th scope="col">Kode</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Jenis Loker</th>
-                                <th scope="col">Act</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($lamars as $item)
+                        @if ($lamars->count() > 0)
+                            <thead>
                                 <tr>
-                                    <td>{{ $item->lamar_NIM }}</td>
-                                    <td>{{ $item->lamar_kd }}</td>
-                                    <td>{{ $item->lamar_nm }}</td>
-                                    <td>{{ $item->perusahaan_nm }}</td>
-                                    <td>
-                                        <a href="{{ url('/lamar/' . $item->id) }}"><i
-                                                class="text-success fas fa-eye"></i></a><br>
+                                    <th scope="col">NIM</th>
+                                    <th scope="col">Kode</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Jenis Loker</th>
+                                    <th scope="col">Act</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($lamars as $item)
+                                    <tr>
+                                        <td>{{ $item->lamar_NIM }}</td>
+                                        <td>{{ $item->lamar_kd }}</td>
+                                        <td>{{ $item->lamar_nm }}</td>
+                                        <td>{{ $item->perusahaan_nm }}</td>
+                                        <td>
+                                            <a href="{{ url('/lamar/' . $item->id) }}"><i
+                                                    class="text-success fas fa-eye"></i></a><br>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        @else
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="text-center pt-3"><b>
+                                            <p>- BELUM ADA LAMARAN -</p>
+                                        </b>
                                     </td>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            </tbody>
+                        @endif
                     </table>
                 </div>
             </div>

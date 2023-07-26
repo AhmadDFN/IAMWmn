@@ -58,30 +58,28 @@
                     class="fa fa-building me-2"></i>Perusahaan</a>
             <div class="nav-item dropdown">
                 <a href="#"
-                    class="nav-link dropdown-toggle {{ ((($title == 'Loker' ? 'active' : $title == 'Lamar') ? 'active' : $title == 'Jenis Loker') ? 'active' : $title == 'Histori Lamaran') ? 'active' : '' }}"
+                    class="nav-link dropdown-toggle {{ (($title == 'Loker' ? 'active' : $title == 'Lamar') ? 'active' : $title == 'Lamar Perusahaan') ? 'active' : '' }}"
                     data-bs-toggle="dropdown"><i class="fa fa-briefcase me-2"></i>Pekerjaan</a>
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('loker') }}"
                         class="dropdown-item {{ $title == 'Loker' ? 'active' : '' }}">Lowongan</a>
                     <a href="{{ url('lamar') }}"
-                        class="dropdown-item {{ $title == 'Lamar' ? 'active' : '' }}">Lamar</a>
+                        class="dropdown-item {{ $title == 'Lamar' ? 'active' : '' }}">Lamaran Admin</a>
+                    <a href="{{ url('lamar/perusahaan') }}"
+                        class="dropdown-item {{ $title == 'Lamar Perusahaan' ? 'active' : '' }}">Lamaran Perusahaan</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link dropdown-toggle {{ ($title == 'Jenis Loker' ? 'active' : $title == 'Histori Lamaran') ? 'active' : '' }}"
+                    data-bs-toggle="dropdown"><i class="fa fa-clipboard me-2"></i>Lamaran Loker</a>
+                <div class="dropdown-menu bg-transparent border-0">
                     <a href="{{ url('lamar/histori') }}"
                         class="dropdown-item {{ $title == 'Histori Lamaran' ? 'active' : '' }}">Record Lamar</a>
                     <a href="{{ url('jenisloker') }}"
                         class="dropdown-item {{ $title == 'Jenis Loker' ? 'active' : '' }}">Jenis Loker</a>
                 </div>
             </div>
-            {{--  <a href="{{ url('jenisloker') }}"
-                class="nav-item nav-link {{ $title == 'Jenis Loker' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Jenis Loker</a>
-            <a href="{{ url('lamar') }}" class="nav-item nav-link {{ $title == 'Lamar' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Lamar</a>
-            <a href="{{ url('loker') }}" class="nav-item nav-link {{ $title == 'Loker' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Lowongan</a>  --}}
-            {{--  <a href="{{ url('user') }}" class="nav-item nav-link {{ $title == 'User' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>User</a>  --}}
-            {{--  <a href="{{ url('verif') }}" class="nav-item nav-link {{ $title == 'Verif' ? 'active' : '' }}"><i
-                    class="fa fa-laptop me-2"></i>Verif Akun</a>  --}}
             <div class="nav-item dropdown">
                 <a href="#"
                     class="nav-link dropdown-toggle {{ ($title == 'User' ? 'active' : $title == 'Verif') ? 'active' : '' }}"
