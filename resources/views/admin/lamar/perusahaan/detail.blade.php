@@ -56,6 +56,8 @@
                         <h4 class="card-title">KANDIDAT</h4>
                     </div>
                     <div class="col">
+                        <a class="btn btn-secondary float-end ms-1 me-1"
+                            href="{{ url('lamar/' . @$loker->id . '/detail/perusahaan') }}" role="button">View All</a>
                         <a class="btn btn-warning float-end ms-1 me-1"
                             href="{{ url('lamar/' . @$loker->id . '/detail/perusahaan/5') }}" role="button">Menunggu</a>
                         <a class="btn btn-primary float-end ms-1 me-1"
