@@ -24,7 +24,6 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                 <a href="{{ route('edit.perusahaan') }}" class="dropdown-item">My Account</a>
-                <a href="{{ url('perusahaan/data') }}" class="dropdown-item">Data Diri</a>
                 <a href="#" class="dropdown-item" onclick="return confirmLogout()">Log Out</a>
             </div>
         </div>

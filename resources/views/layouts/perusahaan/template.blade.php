@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta content="" name="description">
     <title>@yield('title') | BOPI UNIVERSITY - MADIUN</title>
 
-    @include('layouts.mhs.sc_head')
+    @include('layouts.perusahaan.sc_head')
 </head>
 
 <body>
@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- Spinner End -->
 
-        @include('layouts.mhs.sidebar')
+        @include('layouts.perusahaan.sidebar')
         @if (session('mess'))
             <div class="col-sm-4">
                 <div class="d-flex align-items-center justify-content-between p-4">
@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @endif
         <!-- Content Start -->
         <div class="content">
-            @include('layouts.mhs.navbar')
+            @include('layouts.perusahaan.navbar')
             {{--  Header Start  --}}
             <div class="content-header">
                 <div class="container-fluid pt-4 px-4">
@@ -97,7 +97,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i
                 class="bi bi-arrow-up-short"></i></a>
     </div>
-    @include('layouts.mhs.sc_footer')
+    @if (session('notification'))
+        <div class="notification-glass bg-{{ session('notification.type') }}" id="notification">
+            <div class="notification-content">
+                {{ session('notification.text') }}
+            </div>
+        </div>
+    @endif
+    @include('layouts.perusahaan.sc_footer')
 
 </body>
 

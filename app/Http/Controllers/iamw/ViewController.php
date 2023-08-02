@@ -45,7 +45,7 @@ class ViewController extends Controller
                 $dashboard = "admin";
                 break;
             case "Perusahaan":
-                $dashboard = "perusahaan";
+                $dashboard = "perusahaan/dashboard";
                 break;
             case "Mahasiswa":
                 $dashboard = "home";

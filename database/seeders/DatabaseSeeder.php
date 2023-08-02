@@ -73,6 +73,10 @@ class DatabaseSeeder extends Seeder
             ->where('mhs_foto', 'LIKE', 'public/%')
             ->update(['mhs_foto' => DB::raw("REPLACE(mhs_foto, 'public/', '')")]);
 
+        DB::table('users')
+            ->where('foto', 'LIKE', 'public/%')
+            ->update(['foto' => DB::raw("REPLACE(foto, 'public/', '')")]);
+
         DB::table('mahasiswas')
             ->whereNotNull('mhs_kota')
             ->update(['mhs_kota' => DB::raw("CONCAT('KOTA ', mhs_kota)")]);

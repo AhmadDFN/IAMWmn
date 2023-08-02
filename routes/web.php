@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\iamw;
 use App\Http\Controllers\mahasiswa;
+use App\Http\Controllers\perusahaan;
 use App\Http\Controllers\admin;
 use App\Http\Controllers\admin\LamarController;
 use Illuminate\Support\Facades\Route;
@@ -64,7 +65,18 @@ Route::group(["middleware" => "auth"], function () {
     });
 
     Route::group(["middleware" => "rolePerusahaan"], function () {
-        // Perusahaan Controller
+        /** Perusahaan Controller */
+        Route::get('perusahaan/dashboard', [perusahaan\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('perusahaan/myprofile', [perusahaan\DashboardController::class, 'profilku'])->name('edit.perusahaan');
+        Route::put('perusahaan/myprofile/update', [perusahaan\DashboardController::class, 'update'])->name('update.perusahaan');
+        Route::get('perusahaan/myprofile', [perusahaan\DashboardController::class, 'profilku'])->name('edit.perusahaan');
+        Route::put('perusahaan/myprofile/update', [perusahaan\DashboardController::class, 'update'])->name('update.perusahaan');
+
+        Route::get('perusahaan/lamar', [perusahaan\LamarController::class, 'indexPerusahaan']);
+        Route::get("perusahaan/lamar/{lamar}/status/{lamar_status}", [perusahaan\LamarController::class, "update_status"]);
+        Route::get("perusahaan/lamar/{loker}/detail/{status?}", [perusahaan\LamarController::class, "detail_lowonganPerusahaan"]);
+        Route::get("perusahaan/mahasiswa/{mahasiswa}/berkas/tampil", [perusahaan\LamarController::class, "pemberkasan"]);
+        Route::resource('perusahaan/loker', perusahaan\LokerController::class);
     });
 
     Route::group(["middleware" => "roleAdmin"], function () {
@@ -87,7 +99,7 @@ Route::group(["middleware" => "auth"], function () {
         Route::get("lamar/{loker}/detail", [admin\LamarController::class, "detail_lowongan"]);
         Route::get("lamar/{loker}/detail/accept", [admin\LamarController::class, "detail_lowongan_accept"]);
         Route::get("lamar/{loker}/detail/denied", [admin\LamarController::class, "detail_lowongan_denied"]);
-        Route::get("lamar/{lamar}/status/{lamar_status}", [LamarController::class, "update_status"]);
+        Route::get("lamar/{lamar}/status/{lamar_status}", [admin\LamarController::class, "update_status"]);
         Route::get('lamar/histori', [admin\LamarController::class, 'histori']);
         Route::get('lamar/perusahaan', [admin\LamarController::class, 'indexPerusahaan']);
         Route::get("lamar/{loker}/detail/perusahaan/{status?}", [admin\LamarController::class, "detail_lowonganPerusahaan"]);

@@ -58,7 +58,7 @@ class IndexController extends Controller
             ],
             'perusahaan_home' => (object)[
                 'view' => 'perusahaan.home',
-                'route' => 'perusahaan/'
+                'route' => 'perusahaan/dashboard'
             ],
             'about' => (object)[
                 'view' => 'about',

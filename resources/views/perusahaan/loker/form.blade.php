@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.perusahaan.template')
 
 @section('title', $data->title)
 @section('page-title', $data->page)
