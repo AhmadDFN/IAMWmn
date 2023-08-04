@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Lamar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -54,7 +55,11 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
+        $number = $lamars->count() + 1;
+
+        $lamars[$number] = Lamar::where("lamar_NIM", Auth::user()->reff)->count();
         // dd($lamars);
+
         $lokeract = Loker::where('loker_status', 1)->get();
         $mhsact = Mahasiswa::where('mhs_th_masuk', date("Y"))->get();
         // dd($mhsact);

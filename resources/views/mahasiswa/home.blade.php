@@ -14,7 +14,7 @@
     <!-- Sale & Revenue Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-            <div class="col-sm-4 col-xl-4">
+            <div class="col-sm-6 col-xl-6">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-area fa-3x text-primary"></i>
                     <div class="ms-3">
@@ -23,48 +23,30 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-xl-4">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Loker {{ @$mahasiswa->jurusan_nm }}</p>
-                        <h1 class="mb-0">{{ @$lokerjur->count() }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-xl-4">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-area fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Perusahaan</p>
-                        <h1 class="mb-0">{{ @$perusahaans->count() }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-xl-4">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Loker {{ @$mahasiswa->jurusan_nm }}</p>
-                        <h1 class="mb-0">{{ @$lokerjur->count() }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-xl-4">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <i class="fa fa-chart-area fa-3x text-primary"></i>
-                    <div class="ms-3">
-                        <p class="mb-2">Mahasiswa Tahunini</p>
-                        <h1 class="mb-0">{{ @$mhsact->count() }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-xl-4">
+            <div class="col-sm-6 col-xl-6">
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">loker Aktif</p>
                         <h1 class="mb-0">{{ @$lokeract->count() }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-6">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Loker {{ @$mahasiswa->jurusan_nm }}</p>
+                        <h1 class="mb-0">{{ @$lokerjur->count() }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-6">
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-line fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Lamaran Aktif</p>
+                        <h1 class="mb-0">{{ @$lamars[6] }}</h1>
                     </div>
                 </div>
             </div>

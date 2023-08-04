@@ -43,8 +43,8 @@
                 <h6 class="mb-0">Lowongan Kerja</h6>
                 <a href="{{ url('perusahaan/loker') }}">Show All</a>
             </div>
-            <div class="table-responsive">
-                <table class="table text-start align-middle table-bordered table-hover mb-0">
+            <div class="table-responsive p-0" style="max-height: 500px">
+                <table class="table text-start align-middle table-bordered table-hover mb-0 compact table-head-fixed">
                     <thead>
                         <tr class="text-white">
                             <th scope="col">No</th>
@@ -86,8 +86,8 @@
                 <h6 class="mb-0">Pelamar</h6>
                 <a href="{{ url('perusahaan/lamar') }}">Show All</a>
             </div>
-            <div class="table-responsive">
-                <table class="table text-start align-middle table-bordered table-hover mb-0">
+            <div class="table-responsive p-0" style="max-height: 500px">
+                <table class="table text-start align-middle table-bordered table-hover mb-0 compact table-head-fixed">
                     <thead>
                         <tr class="text-white">
                             <th scope="col">No</th>
