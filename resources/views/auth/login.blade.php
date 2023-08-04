@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Login</title>
-    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    <link rel="icon" href="{{ asset('img/bopi.png') }}">
     <!-- Google Font: Source Sans Pro -->
     <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">-->
     <!-- Font Awesome -->
@@ -34,7 +34,8 @@
                 <h2>Sign in</h2>
                 <br>
                 <a href="{{ url('/') }}" style="text-align:center;">
-                    <img src="{{ asset('img/logo_wearnes.png') }}" alt="" style="width: 70%">
+                    <img src="{{ asset('img/bopi.png') }}" alt=""
+                        style="width: 50%; margin-top: -20px;margin-bottom:-50px;">
                 </a>
                 <div class="inputbox">
                     <input type="text" name="email" required="required" autocomplete="chrome-off"

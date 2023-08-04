@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container-fluid px-md-4	">
-        <a class="navbar-brand" style="width:25%" href="{{ url('/') }}"><img class="img" style="width:50%"
-                src="{{ asset('img/iamw/IAMW_logo.png') }}" alt=""></a>
+        <a class="navbar-brand" style="width:25%" href="{{ url('/') }}"><img class="img"
+                style="width:40%;height:100px;" src="{{ asset('img/bopi.png') }}" alt="BOPI"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
             aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu

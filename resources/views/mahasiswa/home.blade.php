@@ -27,8 +27,8 @@
                 <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-chart-pie fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Loker {{ @$mahasiswa->jurusan_nm }}</p>
-                        <h1 class="mb-0">{{ @$lokerjur->count() }}</h1>
+                        <p class="mb-2">loker Aktif</p>
+                        <h1 class="mb-0">{{ @$lokeract->count() }}</h1>
                     </div>
                 </div>
             </div>
