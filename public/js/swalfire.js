@@ -51,7 +51,7 @@ function confirmLogout() {
 function confirmLowongan(id) {
     Swal.fire({
         title: "Konfirmasi",
-        text: "Apakah Anda ingin melamar lowongan?",
+        text: "Apakah Anda ingin melamar pekerjaan?",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",

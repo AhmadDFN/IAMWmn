@@ -21,7 +21,7 @@ class PerusahaanController extends Controller
     {
         $data = [
             "title" => "Perusahaan",
-            'page' => 'DataPerusahaan Colabs Bopi Madiun',
+            'page' => 'Data Perusahaan - Perusahaan Bopi Madiun',
             "perusahaans" => Perusahaan::All()
         ];
 
