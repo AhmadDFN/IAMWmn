@@ -19,10 +19,10 @@ class LamarSeeder extends Seeder
         $mahasiswas = Mahasiswa::all();
         $lokers = Loker::all();
         foreach ($mahasiswas as $mahasiswa) {
-            $randomno = rand(1, 8);
+            $randomno = rand(1, 11);
             if ($randomno != 1) {
                 foreach ($lokers as $loker) {
-                    $randomper = rand(1, 8);
+                    $randomper = rand(1, 11);
                     // if ($mahasiswa->mhs_kd_jurusan == $loker->loker_kd_jurusan) {
                     if (strpos($mahasiswa->mhs_kd_jurusan, $loker->loker_kd_jurusan) !== false) {
                         if ($randomper != 1) {

@@ -72,7 +72,7 @@ class DashboardController extends Controller
         ];
 
         $title = $data->title;
-        // dd($dash1);
+        // dd($lamars->count());
         // dd(Auth::user());
         return view($this->view, compact('lokerjur', 'data', 'title', 'mahasiswa', 'perusahaans', 'lokers', 'lokeract', 'mhsact', 'lamars'));
     }

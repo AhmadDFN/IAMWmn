@@ -14,7 +14,7 @@ class MahasiswaSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i < 101; $i++) {
+        for ($i = 1; $i < 25; $i++) {
             $faker = fake('id_ID');
             $th_masuk = $faker->randomElement(["2020", "2021", "2022", "2023"]);
             $kd_jurusan = $faker->randomElement(["310", "320", "330", "340", "350", "360"]);

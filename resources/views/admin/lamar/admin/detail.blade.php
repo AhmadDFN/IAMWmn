@@ -76,7 +76,7 @@
                                 <th scope="col">Tanggal Lamar</th>
                                 <th scope="col">Berkas</th>
                                 <th scope="col">Status</th>
-                                <th scope="col" width="18.5%" class="text-center">Action</th>
+                                <th scope="col" width="19.5%" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>

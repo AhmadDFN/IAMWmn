@@ -46,7 +46,7 @@
                     <i class="fa fa-chart-line fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Lamaran Aktif</p>
-                        <h1 class="mb-0">{{ @$lamars[6] }}</h1>
+                        <h1 class="mb-0">{{ @$lamars[$lamars->count()] }}</h1>
                     </div>
                 </div>
             </div>

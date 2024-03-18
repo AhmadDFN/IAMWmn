@@ -34,6 +34,7 @@ Route::post("auth/register", [IndexController::class, "register"]);
 Route::get('admin/send-email/{mahasiswa}', [admin\VerifController::class, 'test_email'])->name('testemail');
 Route::get('admin/send-email/{mahasiswa}/{token}/{nim}', [admin\VerifController::class, 'send_email'])->name('sendemail');
 Route::get("verif/email/{mahasiswa}/acc/{token}", [admin\VerifController::class, "email_update"]);
+
 // Kota - Provinsi
 Route::get('/test', function () {
     return view("admin.verif.verif");
